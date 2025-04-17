@@ -1,27 +1,32 @@
 {
-    "api_model": "deepseek-chat",
-    "api_base": "https://api.deepseek.com",
+    "api_model": "qwen-max",
+    "api_base": "https://dashscope.aliyuncs.com/compatible-mode/v1",
     "task_type": "meta",
     "task_idx": 0,
     "agent_num": 1,
     "dig_needed": false,
     "max_task_num": 0,
-    "task_goal": "After placing the saddle on the horse and riding it, dismount, and the saddle will remain in your inventory.",
+    "task_goal": "With the mangrove_roots and bone_meal located in the chest, first position the mangrove_roots at (8, -60, 10), and then apply the bone_meal to facilitate its growth.",
     "task_scenario": "interact",
     "evaluation_arg": {
-        "target": "horse",
-        "x": 0,
-        "y": 0,
-        "z": 0,
+        "target": "bone_meal",
+        "x": 8,
+        "y": -60,
+        "z": 10,
         "facing": "",
-        "item_position": "inventory",
-        "tool": "saddle",
-        "action": "saddle",
+        "item_position": "chest",
+        "tool": "bone_meal",
+        "action": "bone_meal",
         "step": 1,
-        "other_arg": []
+        "other_arg": [
+            {
+                "base_block": "podzol",
+                "crops": "mangrove_roots"
+            }
+        ]
     },
     "document_file": "",
     "host": "127.0.0.1",
     "port": 25565,
-    "task_name": "interact_saddle_id3_012414"
+    "task_name": "interact_bone_meal_id39_022314"
 }

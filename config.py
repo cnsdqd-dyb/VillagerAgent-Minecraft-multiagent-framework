@@ -32,19 +32,19 @@ api_key_list = json.load(open("API_KEY_LIST", "r"))["AGENT_KEY"]
 #     "api_key_list": api_key_list,
 #     "api_key": random.choice(api_key_list)
 # }
-# llm_config = {
-#     "api_key": api_key_list[0],
-#     "api_base": "https://dashscope.aliyuncs.com/compatible-mode/v1",
-#     "api_model": "qwen-max",
-#     "api_key_list": api_key_list
-# }
-
-llm_config ={
+llm_config = {
     "api_key": api_key_list[0],
-    "api_base": "https://api.deepseek.com",
-    "api_model": "deepseek-chat",
-    "api_key_list":api_key_list
+    "api_base": "https://dashscope.aliyuncs.com/compatible-mode/v1",
+    "api_model": "qwen-max",
+    "api_key_list": api_key_list
 }
+
+# llm_config ={
+#     "api_key": api_key_list[0],
+#     "api_base": "https://api.deepseek.com",
+#     "api_model": "deepseek-chat",
+#     "api_key_list":api_key_list
+# }
 
 # llm_config = {
 #     "api_key": "sk-villageragent",
@@ -209,7 +209,7 @@ def generate_task_goal(task_scenario, arg_dict):
     template_prompt = template_prompt.replace("the inventory", "your inventory")
 
     task_goal = template_prompt
-    if random.randint(1, 5) == 1: # 有小概率直接用原始的prompt
+    if random.randint(1, 8) == 1: # 有小概率直接用原始的prompt
         task_goal = template_prompt
     else:
         template_prompt = "Original Sentence: " + template_prompt
@@ -276,10 +276,10 @@ def generate_config(task, api_model, host, port, agent_num=2):
     elif task == "meta":
         item_position_weight = [67, 33]
         for j in tqdm.tqdm(range(0, args.meta_task_num)):
-            # random_task = random.choices(["dig", "craft", "place", "useitem", "move", "interact"], [7, 16, 7, 1, 2, 67])[0]
-            random_task = random.choices(["craft", "place", "move", "interact"], [16, 7, 2, 75])[0]
+            random_task = random.choices(["dig", "craft", "place", "useitem", "move", "interact"], [7, 16, 7, 1, 2, 67])[0]
+            # random_task = random.choices(["craft", "place", "move", "interact"], [16, 7, 2, 75])[0]
 
-            random_task = "interact"
+            # random_task = "interact"
 
 
             if random_task == "dig":
@@ -607,7 +607,7 @@ def generate_config(task, api_model, host, port, agent_num=2):
                         elif action == "bone_meal":
                             crops_seeds_in_dirt = ["bamboo", "wheat_seeds", "beetroot_seeds", "melon_seeds", "pumpkin_seeds", "carrot", "potato", "nether_wart"]
                             crops_on_sand = ["bamboo", "sugar_cane"]
-                            tree_saplings = ["oak_sapling", "spruce_sapling", "birch_sapling", "acacia_sapling", "jungle_sapling", "dark_oak_sapling", "mangrove_sapling"]
+                            tree_saplings = ["oak_sapling", "spruce_sapling", "birch_sapling", "acacia_sapling", "jungle_sapling", "dark_oak_sapling"]
                             crops_on_grass = ["tall_grass", "rose_bush", "peony", "lilac", "sunflower"]
                             crops_on_farmland = ["wheat", "beetroot", "carrot", "potato"]
 
@@ -1019,12 +1019,12 @@ def generate_config(task, api_model, host, port, agent_num=2):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument("--task", type=str, default="construction", help="task type")
-    parser.add_argument("--api_model", type=str, default="deepseek-chat", help="api model")
+    parser.add_argument("--task", type=str, default="meta", help="task type")
+    parser.add_argument("--api_model", type=str, default="qwen-max", help="api model")
     parser.add_argument("--host", type=str, default="10.214.180.148", help="host")
     parser.add_argument("--port", type=int, default=25565, help="port")
     parser.add_argument("--agent_num", type=int, default=1, help="agent number")
-    parser.add_argument("--meta_task_num", type=int, default=500, help="meta task number")
+    parser.add_argument("--meta_task_num", type=int, default=100, help="meta task number")
     args = parser.parse_args()
 
     api_model = args.api_model.replace("-", "_").replace(".", "_").replace(" ", "_").replace("/", "_")

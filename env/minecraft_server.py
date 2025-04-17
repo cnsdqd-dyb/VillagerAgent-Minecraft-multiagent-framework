@@ -1566,6 +1566,7 @@ def handle(this):
     if status_data["status"] == "loaded" and info_bot.bot_init:
         info_bot.follow()
         info_bot.update_blocks()
+        info_bot.bot_init = False
 
     # if info_bot.existing_time % 10 == 0:
     #     new_events = info_bot.get_action_description_new()

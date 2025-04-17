@@ -56,3 +56,5 @@ rl_env/tasks/*
 node_modules/*
 100_meta.json
 filtered_tasks.json
+
+dm_info_compression/*

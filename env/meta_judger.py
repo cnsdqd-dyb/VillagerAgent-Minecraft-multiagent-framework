@@ -75,12 +75,11 @@ if not os.path.exists("result"):
 last_time = time.time()
 start_time = None
 
-max_action_time = 290
-max_time = 440
+max_action_time = 90
+max_time = 180
 
 environment_set_time = 10
 info_count = 0
-feed_num = 10
 arg_host = args.host
 arg_port = args.port
 # evaluation_arg 
@@ -258,7 +257,7 @@ def handleViewer(*args):
 
     global max_time
     if arg_dict["item_position"] == "chest":
-        max_time += 40
+        max_time += 60
 
     clear_w = 31
     clear_h = 6
@@ -328,8 +327,9 @@ def handleViewer(*args):
     bot.chat(f"/fill {orx} {ory} {orz} {orx + room_width + wall_width} {ory} {orz + room_width + wall_width} grass_block")
     time.sleep(.2)
     # 生成一个内部空间width*width*height，五面玻璃一面草方块的封闭空间
-    
-    bot.chat("/clear @e[distance=..10,type=player,gamemode=survival]")
+    bot.chat(f"/gamemode survival {agent_name}")
+    time.sleep(.2)
+    bot.chat("/clear @a[gamemode=survival]")
     time.sleep(.2)
     bot.chat("/kill @e[type=!minecraft:player]")
     time.sleep(.2)
@@ -348,8 +348,6 @@ def handleViewer(*args):
 
     sur_y = get_surface_y(orx + room_width // 2 + 1, orz + 4)
     bot.chat(f"/tp {agent_name} {orx + room_width // 2 + 1} {sur_y} {orz + 4} 0 0")
-    time.sleep(.2)
-    bot.chat(f"/gamemode survival {agent_name}")
     time.sleep(.2)
 
     global arg_host, arg_port
@@ -481,7 +479,9 @@ def handleViewer(*args):
             x, y, z = arg_dict["x"], arg_dict["y"], arg_dict["z"]
             bot.chat(f"/fill {x-2} {y} {z-2} {x+2} {y} {z+2} grass_block")
             bot.chat(f"/fill {x-1} {y} {z-1} {x+1} {y} {z+1} water")
-            bot.chat(f"/setblock {x} {y} {z} {base_block}")
+            # bot.chat(f"/setblock {x} {y} {z} {base_block}")
+            bot.chat(f"/fill {x-1} {y} {z} {x+1} {y} {z} {base_block}")
+            bot.chat(f"/fill {x} {y} {z-1} {x} {y} {z+1} {base_block}")
             tool = aligned_item_name(arg_dict["tool"])
             if arg_dict["item_position"] == "inventory":
                 bot.chat(f"/give {agent_name} {tool} 1")
@@ -496,13 +496,15 @@ def handleViewer(*args):
             bot.chat(f"/setblock {x} {y} {z} air")
             bot.chat(f"/fill {x-2} {y-1} {z-2} {x+2} {y-1} {z+2} grass_block")
             bot.chat(f"/fill {x-1} {y-1} {z-1} {x+1} {y-1} {z+1} water")
-            bot.chat(f"/setblock {x} {y-1} {z} {base_block}")
+            # bot.chat(f"/setblock {x} {y} {z} {base_block}")
+            bot.chat(f"/fill {x-1} {y-1} {z} {x+1} {y-1} {z} {base_block}")
+            bot.chat(f"/fill {x} {y-1} {z-1} {x} {y-1} {z+1} {base_block}")
             if arg_dict["item_position"] == "inventory":
                 bot.chat(f"/give {agent_name} {arg_dict['tool']} 1")
                 time.sleep(.2)
-                bot.chat(f"/give {agent_name} {crop} {random.randint(1, 2)}")
+                bot.chat(f"/give {agent_name} {crop} {1}")
             elif arg_dict["item_position"] == "chest":
-                set_chest([(arg_dict['x'], arg_dict['y'], arg_dict['z'])], [{"name": arg_dict['tool'], "count": 1}, {"name": crop, "count": random.randint(1, 2)}], 3)
+                set_chest([(arg_dict['x'], arg_dict['y'], arg_dict['z'])], [{"name": arg_dict['tool'], "count": 1}, {"name": crop, "count": 1}], 3)
 
         elif arg_dict["action"] == "minecart":
             x, y, z = arg_dict["x"], arg_dict["y"], arg_dict["z"]
@@ -606,7 +608,7 @@ def handleViewer(*args):
             target = aligned_item_name(arg_dict["target"])
             bot.chat(f"/summon {target} {orx + room_width // 2 + 1} {ory + 4} {orz + 3}")
             if arg_dict["item_position"] == "inventory":
-                bot.chat(f"/give {agent_name} {arg_dict['tool']} {feed_num}")
+                bot.chat(f"/give {agent_name} {arg_dict['tool']} {1}")
             elif arg_dict["item_position"] == "chest":
                 set_chest([], [{"name": arg_dict['tool'], "count": 1}], 3)
             else:
@@ -1071,11 +1073,14 @@ def handleChat(_, message, messagePosition, jsonMsg, sender, *args):
                     if now_time - start_time  > environment_set_time:
                         inventory = data.get("Inventory", [])  
                         feed_item = aligned_item_name(arg_dict["tool"])
-                        score = 100
+                        have_seed = False
                         for item in inventory:
                             if aligned_item_name(item['id']) == feed_item:
-                                if int(item['Count'][:-1]) == feed_num:
-                                    score = 0
+                                score = 50
+                                have_seed = True
+                        if score == 50 and not have_seed:
+                            score = 100
+
             elif config["task_scenario"] == "interact" and arg_dict["action"] == "shear":
                 sheared = data.get("Sheared", "0b")
                 if int(sheared[:-1]):
@@ -1094,22 +1099,24 @@ def handleChat(_, message, messagePosition, jsonMsg, sender, *args):
             if config["task_scenario"] == "interact" and arg_dict["action"] == "bone_meal":
                 # bot.chat("bone meal")
                 inventory = data.get("Inventory", [])
-                score = 100
+                have_bone = False
                 for item in inventory:
-                    if aligned_item_name(item['id']) == "bone_meal":
-                        score = 0
+                    if aligned_item_name(item['id']) == feed_item:
+                        score = 50
+                        have_bone = True
+                if score == 50 and not have_bone:
+                    score = 100
 
             if config["task_scenario"] == "interact" and arg_dict["action"] == "till":
                 # bot.chat("bone meal")
                 inventory = data.get("Inventory", [])
-                hit = False
                 crop = aligned_item_name(arg_dict["other_arg"][0]['crops'])
+                have_crop = False
                 for item in inventory:
                     if aligned_item_name(item['id']) == crop:
-                        hit = True
-                if score == 0 and hit:
-                    score = 50
-                if score == 50 and not hit:
+                        score = 50
+                        have_crop = True
+                if score == 50 and not have_crop:
                     score = 100
             
             if config["task_scenario"] == "interact" and arg_dict["action"] in ["minecart", "boat", "saddle"]:

@@ -47,7 +47,7 @@ agent_prompt_w_emoji = '''
 *** The minecraft knowledge card ***
 {{minecraft_knowledge_card}}
 *** The emojis and murmur ***
-I am acking as {{agent_name}}. A {{personality}} agent. I {{traits}}.
+I am acting as {{agent_name}}. A {{personality}} agent. I {{traits}}.
 Sometimes I say something like: {{example}} ... , Keep this style but don't repeat this content.
 Action funcion can input emojis and murmurs, you can use them to express your feelings or thoughts sometimes.
 emojis like:
@@ -74,7 +74,7 @@ idle_prompt_w_emoji = '''
 *** The minecraft knowledge card ***
 {{minecraft_knowledge_card}}
 *** The emojis and murmur ***
-I am acking as {{agent_name}}. A {{personality}} agent. I {{traits}}.
+I am acting as {{agent_name}}. A {{personality}} agent. I {{traits}}.
 Sometimes I say something like: {{example}} ... , Keep this style but don't repeat this content.
 Action funcion can input emojis and murmurs, you can use them to express your feelings or thoughts sometimes.
 emojis like:
@@ -103,7 +103,7 @@ agent_prompt_wo_emoji = '''
 *** The minecraft knowledge card ***
 {{minecraft_knowledge_card}}
 *** The emojis and murmur ***
-I am acking as {{agent_name}}. A {{personality}} agent. I {{traits}}.
+I am acting as {{agent_name}}. A {{personality}} agent. I {{traits}}.
 Sometimes I say something like: {{example}} ... , Keep this style but don't repeat this content.
 Action funcion can input emojis and murmurs, you can use them to express your feelings or thoughts sometimes.
 But this time, you can not use any emoji because the system can not support it.
@@ -126,7 +126,7 @@ idle_prompt_wo_emoji = '''
 *** The minecraft knowledge card ***
 {{minecraft_knowledge_card}}
 *** The emojis and murmur ***
-I am acking as {{agent_name}}. A {{personality}} agent. I {{traits}}.
+I am acting as {{agent_name}}. A {{personality}} agent. I {{traits}}.
 Sometimes I say something like: {{example}} ... , Keep this style but don't repeat this content.
 Action funcion can input emojis and murmurs, you can use them to express your feelings or thoughts sometimes.
 But this time, you can not use any emoji because the system can not support it.

@@ -1,11 +1,12 @@
 import time
+import langchain
+# langchain.debug = True
 from langchain.agents import tool, initialize_agent, AgentType
 from langchain.callbacks import get_openai_callback
 from langchain.load.dump import dumps
 from langchain_core.callbacks.base import BaseCallbackManager
 from langchain_core.callbacks.base import BaseCallbackHandler
 from langchain_core.outputs import LLMResult
-
 
 import json
 import requests
@@ -91,6 +92,7 @@ class LLMHandler(BaseCallbackHandler):
         self.chain_input = []
 
     def on_chain_start(self, serialized, inputs, *, run_id, parent_run_id = None, tags = None, metadata = None, **kwargs):
+        # print("x"*30 + "chain_start called" + 'x'*30)
         self.seralized_input.append(serialized)
         self.chain_input.append(inputs)
 
@@ -100,12 +102,16 @@ class LLMHandler(BaseCallbackHandler):
         prompts,
         **kwargs,
     ):
+        print("x"*30 + "llm_start called" + 'x'*30)
+        
         self.seralized_input.append(serialized)
         self.chain_input.append(prompts)
         
     def on_llm_end(self, llm_result: LLMResult, **kwargs):
+        print("x"*30 + "llm_end called" + 'x'*30)
+
         self.llm_out.append(llm_result.llm_output)
-    
+
 class Agent():
     '''
     Agent is the basic class for the agent in the Minecraft environment.
@@ -886,7 +892,7 @@ class Agent():
         # return the (action, observation), details.
         assert len(self.api_key_list) > 0, "Please set the api_key_list in Agent class."
 
-        if 'qwen' in self.model:
+        if 'qwen' or "default" in self.model:
             from langchain_community.chat_models.tongyi import ChatTongyi
             self.llm = ChatTongyi(model=self.model, temperature=0, max_tokens=256, dashscope_api_key=random.choice(Agent.api_key_list), base_url=Agent.base_url)
         elif "deepseek" in self.model:
@@ -901,6 +907,9 @@ class Agent():
         elif "glm" in self.model:
             from zhipu import ChatZhipuAI
             self.llm = ChatZhipuAI(model_name=self.model, temperature=0.01, api_key=random.choice(Agent.api_key_list))
+        elif "default" in self.model:
+            from openai import OpenAI
+            self.llm = OpenAI(model=self.model, openai_api_key=random.choice(Agent.api_key_list), base_url=Agent.base_url)
         
         for act, obs in zip(actions, observations):
             instruction += f"\n{act['log']}\n{obs}"
@@ -913,10 +922,10 @@ class Agent():
         
         if recommended_tools == []:
             recommended_tools = self.all_tools if len(tools) == 0 else tools
+        llmhandler = LLMHandler()
 
         while max_try_turn > 0:
             random.shuffle(self.tools)
-            llmhandler = LLMHandler()
             agent = initialize_agent(
                 tools=recommended_tools,
                 llm=self.llm,
@@ -995,6 +1004,9 @@ class Agent():
             from zhipu import ChatZhipuAI
             self.llm = ChatZhipuAI(model_name=self.model, temperature=0.01, api_key=random.choice(Agent.api_key_list))
         elif "deepseek" in self.model:
+            from langchain.chat_models import ChatOpenAI
+            self.llm = ChatOpenAI(model=self.model, temperature=0,  max_tokens=256, openai_api_key=random.choice(Agent.api_key_list), base_url=Agent.base_url)
+        elif "default" in self.model:
             from langchain.chat_models import ChatOpenAI
             self.llm = ChatOpenAI(model=self.model, temperature=0,  max_tokens=256, openai_api_key=random.choice(Agent.api_key_list), base_url=Agent.base_url)
         else:
@@ -1076,6 +1088,15 @@ class Agent():
             action_list.append({"action": step[0]["kwargs"], "feedback": step[1]})
         final_answer = response["output"]
         # save the action_list and final_answer
+
+
+        # print("=== LLM Interaction Log ===")
+        # for i, (prompt, llm_output) in enumerate(zip(llmhandler.chain_input, llmhandler.llm_out)):
+        #     print(f"Step {i + 1}:")
+        #     print(f"Prompt: {prompt}")
+        #     print(f"LLM Output: {llm_output}")
+        #     print("-" * 40)
+        # print("========= End ========")
 
         with open(f"data/history/{hash(response['input'])}.json", "w") as f:
             json.dump({"input": response["input"], "action_list": action_list, "final_answer": final_answer}, f,

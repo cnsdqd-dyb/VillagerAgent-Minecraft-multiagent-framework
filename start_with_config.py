@@ -23,12 +23,16 @@ def run(api_model: str, api_base: str, task_type: str, task_idx: int, agent_num:
 
     api_key_list = json.load(open("API_KEY_LIST", "r"))["AGENT_KEY"]
 
-    # Agent.base_url = "https://dashscope.aliyuncs.com/compatible-mode/v1"
-    # Agent.model = "qwen-max"
-    Agent.base_url = "https://api.deepseek.com/v1"
-    Agent.model = "deepseek-chat"
+    # Agent.base_url = "https://api.deepseek.com/v1"
+    # Agent.model = "deepseek-chat"
+
+    Agent.base_url = "https://dashscope.aliyuncs.com/compatible-mode/v1"
+    Agent.model = "qwen-max"
     Agent.api_key_list = api_key_list
 
+    # Agent.base_url = "http://10.112.59.240:59757/v1"
+    # Agent.model = "default"
+    # Agent.api_key_list = ["sk-VillagerTuning"]
 
     # 设置env
     if task_type == "construction":
@@ -106,21 +110,24 @@ def run(api_model: str, api_base: str, task_type: str, task_idx: int, agent_num:
         start_time = time.time()
 
         # 设置llm
+        # llm_config = {
+        #     "api_key": api_key_list[0],
+        #     "api_base": "https://api.deepseek.com/v1",
+        #     "api_model": "deepseek-chat",
+        #     "api_key_list": api_key_list
+        # }
+
         llm_config = {
             "api_key": api_key_list[0],
-            "api_base": "https://api.deepseek.com/v1",
-            "api_model": "deepseek-chat",
+            "api_base": "https://dashscope.aliyuncs.com/compatible-mode/v1",
+            "api_model": "qwen-max",
             "api_key_list": api_key_list
         }
+
         tm_llm_config = llm_config
         dm_llm_config = llm_config
         base_llm_config = llm_config
-        # llm_config = {
-        #     "api_key": api_key_list[0],
-        #     "api_base": "https://dashscope.aliyuncs.com/compatible-mode/v1",
-        #     "api_model": "qwen-max",
-        #     "api_key_list": api_key_list
-        # }
+
 
         # tm_llm_config = {
         #     "api_key": api_key_list[0],
@@ -143,10 +150,10 @@ def run(api_model: str, api_base: str, task_type: str, task_idx: int, agent_num:
         #     "api_key_list": api_key_list
         # }
         # base_llm_config = {
-        #     "api_key": "sk-villagertuning",
-        #     "api_base": "http://0.0.0.0:8000/v1",
-        #     "api_model": "/home/yubo/LLaMA-Factory/saves/llama3-8b/freeze/sft",
-        #     "api_key_list": ["sk-villagertuning"]
+        #     "api_key": "sk-VillagerTuning",
+        #     "api_base": "http://10.112.59.240:59757/v1",
+        #     "api_model": "default",
+        #     "api_key_list": ["sk-VillagerTuning"]
         # }
 
 
@@ -168,9 +175,9 @@ def run(api_model: str, api_base: str, task_type: str, task_idx: int, agent_num:
 
 
 if __name__ == "__main__":
-    # with open("meta_test_config.json", "r") as f:
+    with open("meta_test_config.json", "r") as f:
     # with open("/home/yubo/VillagerAgent-Minecraft-multiagent-framework/test_config.json", "r") as f:
-    with open("deepseek_chat_launch_config_meta.json", "r") as f:
+    # with open("qwen_max_launch_config_meta.json", "r") as f:
         launch_config = json.load(f)
     # shuffle 
     # launch_config = random.sample(launch_config, len(launch_config))
