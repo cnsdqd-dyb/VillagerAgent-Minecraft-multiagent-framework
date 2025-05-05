@@ -527,7 +527,7 @@ def handleViewer(*args):
     time.sleep(.1)
     bot.chat(f'/fill -5 {y_b} -4 -5 {y_b + 4} 4 minecraft:air')
     time.sleep(.1)
-    bot.chat(f'/fill -2 {y_b} 4 -2 {y_b + 4} -4 minecraft:stone_bricks')
+    bot.chat(f'/fill -2 {y_b} 4 -2 {y_b + 4} -4 minecraft:stone_bricks') 
     time.sleep(.1)
     bot.chat(f'/fill -2 {y_b} 4 -5 {y_b + 4} 4 minecraft:stone_bricks')
     time.sleep(.1)
@@ -536,7 +536,10 @@ def handleViewer(*args):
     bot.chat(f'/fill -2 {y_b + 4} -4 -5 {y_b + 4} 4 minecraft:glass')
     time.sleep(.1)
     bot.chat(f'/clear @e[distance=..10,type=minecraft:player]')
-
+    time.sleep(.1)
+    bot.chat(f'/execute as @a[gamemode=survival] run give @s dirt 15')
+    time.sleep(.1)
+    bot.chat(f'/execute as @a[gamemode=survival] run give @s ladder 15')
 
     t = threading.Thread(target=core, args=(select_idx,))
     t.start()
@@ -585,9 +588,9 @@ def handleViewer(*args):
                 # 给出结束信号和写入文件
                 if not os.path.exists(os.path.join("result", task_name)):
                     os.mkdir(os.path.join("result", task_name))
-                else:
-                    shutil.rmtree(os.path.join("result", task_name))
-                    os.mkdir(os.path.join("result", task_name))
+                # else:
+                #     shutil.rmtree(os.path.join("result", task_name))
+                #     os.mkdir(os.path.join("result", task_name))
                 with open(os.path.join(os.path.join("result", task_name), "score.json"), "w") as f:
                     json.dump({
                         "block_hit_rate": block_hit_rate,
@@ -609,9 +612,9 @@ def handleViewer(*args):
                 # 给出结束信号和写入文件
                 if not os.path.exists(os.path.join("result", task_name)):
                     os.mkdir(os.path.join("result", task_name))
-                else:
-                    shutil.rmtree(os.path.join("result", task_name))
-                    os.mkdir(os.path.join("result", task_name))
+                # else:
+                #     shutil.rmtree(os.path.join("result", task_name))
+                #     os.mkdir(os.path.join("result", task_name))
                 with open(os.path.join(os.path.join("result", task_name), "score.json"), "w") as f:
                     json.dump({
                         "block_hit_rate": block_hit_rate,
@@ -635,9 +638,9 @@ def handleViewer(*args):
                 # 给出结束信号和写入文件
                 if not os.path.exists(os.path.join("result", task_name)):
                     os.mkdir(os.path.join("result", task_name))
-                else:
-                    shutil.rmtree(os.path.join("result", task_name))
-                    os.mkdir(os.path.join("result", task_name))
+                # else:
+                #     shutil.rmtree(os.path.join("result", task_name))
+                #     os.mkdir(os.path.join("result", task_name))
                 with open(os.path.join(os.path.join("result", task_name), "score.json"), "w") as f:
                     json.dump({
                         "block_hit_rate": block_hit_rate,
@@ -661,9 +664,9 @@ def handleViewer(*args):
                 # 给出结束信号和写入文件
                 if not os.path.exists(os.path.join("result", task_name)):
                     os.mkdir(os.path.join("result", task_name))
-                else:
-                    shutil.rmtree(os.path.join("result", task_name))
-                    os.mkdir(os.path.join("result", task_name))
+                # else:
+                #     shutil.rmtree(os.path.join("result", task_name))
+                #     os.mkdir(os.path.join("result", task_name))
                 with open(os.path.join(os.path.join("result", task_name), "score.json"), "w") as f:
                     json.dump({
                         "block_hit_rate": block_hit_rate,

@@ -1,32 +1,27 @@
 {
-    "api_model": "qwen-max",
+    "api_model": "qwen_max",
     "api_base": "https://dashscope.aliyuncs.com/compatible-mode/v1",
-    "task_type": "meta",
-    "task_idx": 0,
-    "agent_num": 1,
+    "task_type": "farming",
+    "task_idx": 20,
+    "agent_num": 2,
     "dig_needed": false,
     "max_task_num": 0,
-    "task_goal": "With the mangrove_roots and bone_meal located in the chest, first position the mangrove_roots at (8, -60, 10), and then apply the bone_meal to facilitate its growth.",
-    "task_scenario": "interact",
+    "task_goal": "You are on a farm where you need to collaborate to make a cake. Some ingredients are contained within chests, and if the ingredients are not in the chests, you may need to work together to acquire them. Crafting table is placed to craft items",
+    "task_scenario": "craft",
     "evaluation_arg": {
-        "target": "bone_meal",
+        "target": "rabbit_stew",
         "x": 8,
         "y": -60,
-        "z": 10,
+        "z": 8,
         "facing": "",
-        "item_position": "chest",
-        "tool": "bone_meal",
-        "action": "bone_meal",
+        "item_position": "inventory",
+        "tool": "",
+        "action": "",
         "step": 1,
-        "other_arg": [
-            {
-                "base_block": "podzol",
-                "crops": "mangrove_roots"
-            }
-        ]
+        "other_arg": []
     },
-    "document_file": "",
+    "document_file": "data\\recipe_hint.json",
     "host": "127.0.0.1",
     "port": 25565,
-    "task_name": "interact_bone_meal_id39_022314"
+    "task_name": "qwen_max_farming_task20_2p_042120"
 }

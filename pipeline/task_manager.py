@@ -195,14 +195,12 @@ class TaskManager:
             system_prompt = PART_DECOMPOSE_SYSTEM_PROMPT
             user_prompt = format_string(PART_DECOMPOSE_USER_PROMPT, {"task": {"description": description, 
                                                                      "meta-data": content},
-                                                            "agent_ability": self.agent_describe,
                                                             "env": env_description,
-                                                            "num": random.randint(1, 2)})
+                                                            "num": len(self.agent_list)})
         elif self.manage_method == "merge":
             system_prompt = DECOMPOSE_SYSTEM_PROMPT
             user_prompt = format_string(DECOMPOSE_USER_PROMPT, {"task": {"description": description, 
                                                                         "meta-data": content},
-                                                                "agent_ability": self.agent_describe,
                                                                 "env": env_description})
         else:
             self.logger.error("Task Manager Method Error.")
@@ -515,12 +513,11 @@ class TaskManager:
         system_prompt = REDECOMPOSE_SYSTEM_PROMPT
         user_prompt = format_string(REDECOMPOSE_USER_PROMPT, {"task": {"description": self.task_description, 
                                                                      "meta-data": self.task_document},
-                                                            "agent_ability": self.agent_describe,
                                                             "env": env_description, 
                                                             "agent_state": [self.dm.query_history(agent.name) for agent in self.agent_list], 
                                                             "failure_previous_subtask": self.fail_trace_description,
                                                             "success_previous_subtask": self.task_trace_description,
-                                                            "num": random.randint(1, 2)})
+                                                            "num": len(self.agent_list)})
     
 
 

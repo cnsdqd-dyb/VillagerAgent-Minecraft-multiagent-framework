@@ -400,9 +400,9 @@ if __name__ == '__main__':
                     # 给出结束信号和写入文件
                     if not os.path.exists(os.path.join("result", task_name)):
                         os.mkdir(os.path.join("result", task_name))
-                    else:
-                        shutil.rmtree(os.path.join("result", task_name))
-                        os.mkdir(os.path.join("result", task_name))
+                    # else:
+                    #     shutil.rmtree(os.path.join("result", task_name))
+                    #     os.mkdir(os.path.join("result", task_name))
                     with open(os.path.join(os.path.join("result", task_name), "score.json"), "w") as f:
                         json.dump({
                             "score": score,
@@ -420,9 +420,9 @@ if __name__ == '__main__':
                     efficiency = 1
                     if not os.path.exists(os.path.join("result", task_name)):
                         os.mkdir(os.path.join("result", task_name))
-                    else:
-                        shutil.rmtree(os.path.join("result", task_name))
-                        os.mkdir(os.path.join("result", task_name))
+                    # else:
+                    #     shutil.rmtree(os.path.join("result", task_name))
+                    #     os.mkdir(os.path.join("result", task_name))
                     with open(os.path.join(os.path.join("result", task_name), "score.json"), "w") as f:
                         json.dump({
                             "score": score,
@@ -444,9 +444,9 @@ if __name__ == '__main__':
                         efficiency = max_action_time / action_time
                     if not os.path.exists(os.path.join("result", task_name)):
                         os.mkdir(os.path.join("result", task_name))
-                    else:
-                        shutil.rmtree(os.path.join("result", task_name))
-                        os.mkdir(os.path.join("result", task_name))
+                    # else:
+                    #     shutil.rmtree(os.path.join("result", task_name))
+                    #     os.mkdir(os.path.join("result", task_name))
                     with open(os.path.join(os.path.join("result", task_name), "score.json"), "w") as f:
                         json.dump({
                             "score": score,
@@ -462,7 +462,7 @@ if __name__ == '__main__':
 
                 
 
-            if now_time - last_time > 5:
+            if now_time - last_time > 20:
                 name_list = get_player_name()
                 for name in name_list:
                     bot.chat(f"/data get entity {name}")

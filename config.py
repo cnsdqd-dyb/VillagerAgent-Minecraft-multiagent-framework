@@ -224,7 +224,7 @@ def generate_config(task, api_model, host, port, agent_num=2):
 
     config_list = []
     if task == "construction":
-        for i in range(0,100):
+        for i in range(5,6):
             task_goal = select_task_goal(task)
             config = template.copy()
             config["api_model"] = api_model
@@ -239,7 +239,7 @@ def generate_config(task, api_model, host, port, agent_num=2):
             config_list.append(config)
 
     elif task == "farming":
-        for i in range(0,1):
+        for i in range(20,21):
             if i <= 35:
                 task_goal = select_task_goal("farming_cake")
             else:

@@ -78,10 +78,6 @@ the environment information around:
 The high-level task:
 {{task}}
 
-
-Agent ability: (This is just telling you what the agent can do in one step, subtask should be harder than one step)
-{{agent_ability}}
-"""
 Your response should exclusively include the identified sub-task or the next step intended for the agent to execute.
 So, {{num}} subtasks is the maximum number of subtasks you can give.
 Response should contain a list of subtask-structure JSON.
@@ -125,9 +121,6 @@ success previous subtask tracking:
 
 failure previous subtask tracking:
 {{failure_previous_subtask}}
-
-Agent ability: (This is just telling you what the agent can do in one step, subtask should be harder than one step)
-{{agent_ability}}
 
 The high-level task
 {{task}}

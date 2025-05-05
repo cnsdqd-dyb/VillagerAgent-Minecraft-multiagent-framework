@@ -89,7 +89,7 @@ def run(api_model: str, api_base: str, task_type: str, task_idx: int, agent_num:
                       Agent.handoverBlock]
         env.agent_register(agent_tool=agent_tool, agent_number=1, name_list=[name_list[2]])
     else:
-        action = document["action"]
+        action = document.get("action", None)
         if action == "chat" or action == "handover":
             env.agent_register(agent_tool=agent_tool, agent_number=agent_num+1, name_list=name_list[:agent_num+1])
         else:
@@ -165,8 +165,9 @@ def run(api_model: str, api_base: str, task_type: str, task_idx: int, agent_num:
 
         # response = ctrl.agent_list[0].llm.few_shot_generate_thoughts(system_prompt="", example_prompt="hi")
         # print(response)
-        if document == {}:
-            document = json.load((open(document_file))) if os.path.exists(document_file) else {}
+            
+        if os.path.exists(document_file):
+            document["recipe"] = json.load((open(document_file)))
         tm.init_task(description=task_goal, document=document)
 
         ctrl.run()
@@ -188,9 +189,10 @@ if __name__ == "__main__":
             continue
         print(f"task {i+1}/{len(launch_config)} start")
         print("config:", config)
-        if config["task_type"] == "meta":
-            with open(".cache/meta_setting.json", "w") as f:
-               json.dump(config, f, indent=4)
+        with open(".cache/meta_setting.json", "w") as f:
+            json.dump(config, f, indent=4)
+        if config["task_type"] != "meta":
+            config.pop("evaluation_arg", None) # 避免evaluation_arg的相关信息影响执行
         with open(".cache/load_status.cache", "w") as f:
             json.dump({"status": "start"}, f, indent=4)
         if os.path.exists(".cache/heart_beat.cache"):
