@@ -1,0 +1,6 @@
+[
+  {
+    "instruction": "",
+    "input": "Example 1: **Task: **\r\n - Collaborate to place blocks according to the blueprint `minecraft/templates/nether_fossils_fossil_3`.\r\n - Use the materials from the chest at[-4, -60, 0]. The other chest in the factory with tools is not needed for this task.\r\n \r\n Example 2: **Task:**  \r\n- Work together to catch at least 10 fish (a mix of cod and salmon) using the fishing rods and bait from the chest.  \r\n- Ensure the caught fish are stored in a second chest placed at [121, 64, -200]."
+  }
+]
