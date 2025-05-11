@@ -1,0 +1,15 @@
+{
+    "blocks": [
+    {"type": "rectangle", "from": [-2, 0, 10], "to": [2, 0, 14], "name": "farmland"},
+    {"type": "line", "from": [-3, 1, 9], "to": [-3, 1, 15], "name": "oak_fence"},
+    {"type": "line", "from": [3, 1, 9], "to": [3, 1, 15], "name": "oak_fence"},
+    {"type": "line", "from": [-3, 1, 9], "to": [3, 1, 9], "name": "oak_fence"},
+    {"type": "line", "from": [-3, 1, 15], "to": [3, 1, 15], "name": "oak_fence"},
+    {"position": [-5, 0, 10], "name": "chest", "facing": "north", "items": [{"name": "wheat_seeds", "count": 64}]},
+    {"position": [5, 0, 15], "name": "chest", "facing": "north", "items": [{"name": "bucket", "count": 3}]},
+    {"position": [0, 0, 18], "name": "chest", "facing": "north", "items": [{"name": "redstone", "count": 16}, {"name": "piston", "count": 4}, {"name": "lever", "count": 1}]},
+    {"position": [0, 1, 10], "name": "lever", "facing": "north"},
+    {"position": [0, 1, 14], "name": "chest", "facing": "north"}
+    ],
+    "entities": []
+    }
