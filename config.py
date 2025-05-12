@@ -239,7 +239,7 @@ def generate_config(task, api_model, host, port, agent_num=2):
             config_list.append(config)
 
     elif task == "farming":
-        for i in range(20,21):
+        for i in range(10,11):
             if i <= 35:
                 task_goal = select_task_goal("farming_cake")
             else:

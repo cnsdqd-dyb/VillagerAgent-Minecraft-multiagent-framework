@@ -43,6 +43,8 @@ def run(api_model: str, api_base: str, task_type: str, task_idx: int, agent_num:
         env = VillagerBench(env_type=env_type.puzzle, task_id=task_idx, dig_needed=False, host=host, port=port, max_task_num=max_task_num, task_name=task_name, _virtual_debug=False)
     elif task_type == "meta":
         env = VillagerBench(env_type=env_type.meta, task_id=task_idx, dig_needed=False, host=host, port=port, max_task_num=max_task_num, task_name=task_name, _virtual_debug=False)
+    elif task_type == "gen":
+        env = VillagerBench(env_type=env_type.gen, task_id=task_idx, dig_needed=False, host=host, port=port, max_task_num=max_task_num, task_name=task_name, _virtual_debug=False)
     else:
         raise NotImplementedError
 
@@ -57,7 +59,7 @@ def run(api_model: str, api_base: str, task_type: str, task_idx: int, agent_num:
     elif task_type == "puzzle":
         agent_tool = [Agent.placeBlock, Agent.fetchContainerContents, Agent.MineBlock, Agent.scanNearbyEntities, Agent.equipItem,
                       Agent.navigateTo, Agent.withdrawItem, Agent.ToggleAction, Agent.handoverBlock]
-    elif task_type == "meta":
+    elif task_type == "meta" or task_type == "gen":
         agent_tool = [Agent.scanNearbyEntities, Agent.navigateTo, Agent.attackTarget, Agent.useItemOnEntity, Agent.useItemOnBlock,
                       Agent.MineBlock, Agent.placeBlock, Agent.equipItem, Agent.handoverBlock, Agent.SmeltingCooking, Agent.withdrawItem, 
                       Agent.storeItem, Agent.craftBlock, Agent.eat, Agent.fetchContainerContents, Agent.wake, Agent.talkTo, Agent.waitForFeedback,

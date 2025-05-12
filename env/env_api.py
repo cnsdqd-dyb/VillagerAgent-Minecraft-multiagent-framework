@@ -1617,7 +1617,8 @@ def dig_at(bot, pathfinder, Vec3, pos):
                 return f"cannot dig, no block at {pos}", False
 
         except Exception as e:
-            bot.chat(f'dig_at error: {e}')
+            if len(str(e)) < 200:
+                bot.chat(f'dig_at error: {e}')
             max_retry -= 1
             random_offset = [random.randint(-4, 4), random.randint(-4, 4)]
             move_to(pathfinder, bot, Vec3, 2, Vec3(pos[0] + random_offset[0], pos[1], pos[2] + random_offset[1]))
@@ -1644,7 +1645,7 @@ async def attack(bot, envs_info, mcData, mobName=None):
                 entities = get_entity_by('name', envs_info, mobName, bot.entity.username)
                 if len(entities) > 0:
                     entity = entities[0]
-                    bot.chat(f"Fount {mobName} nearby")
+                    bot.chat(f"Found {mobName} nearby")
                 else:
                     return f"did not find {mobName} nearby", False
             except Exception as e:

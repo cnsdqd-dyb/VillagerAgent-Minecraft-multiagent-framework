@@ -17,6 +17,7 @@ import threading
 from functools import wraps
 import os
 import random
+import platform
 
 def timeit(func):
     @wraps(func)
@@ -27,6 +28,10 @@ def timeit(func):
         agent_name = kwargs["player_name"] # 第一个参数是 agent_name
         emotion = kwargs.get("emotion", [])
         murmur = kwargs.get("murmur", "")
+
+        system_type = platform.system().lower()
+        if system_type != "linux":
+            emotion = []
 
         url = Agent.get_url_prefix()[agent_name] + "/post_emojimurmur"
         data = {

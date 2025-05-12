@@ -18,6 +18,7 @@ class env_type:
     auto = 3
 
     meta = 10
+    gen = 13
 
 class VillagerBench:
     '''
@@ -310,6 +311,9 @@ class VillagerBench:
         elif self.env_type == env_type.meta:
             subprocess.Popen(["python", "env/meta_judger.py", "--idx", str(self.task_id), "--host", self.host, "--port" , str(self.port), "--agent_num", str(len(self.agent_pool)), "--agent_names", agent_names_str, "--task_name", self.task_name], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
             self.logger.debug(f"python env/meta_judger.py --idx {self.task_id} --host {self.host} --port {self.port} --agent_num {len(self.agent_pool)} --agent_names {agent_names_str} --task_name {self.task_name}")
+        elif self.env_type == env_type.gen:
+            subprocess.Popen(["python", "env/llm_gen_judger.py", "--host", self.host, "--port" , str(self.port), "--agent_num", str(len(self.agent_pool)), "--agent_names", agent_names_str, "--task_name", self.task_name], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+            self.logger.debug(f"python env/llm_gen_judger.py --host {self.host} --port {self.port} --agent_num {len(self.agent_pool)} --agent_names {agent_names_str} --task_name {self.task_name}")
         elif self.env_type == env_type.none:
             self.logger.info("no env type specified, only agent will be launched")
             return

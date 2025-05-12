@@ -77,7 +77,7 @@ def log_activity(bot):
                 # bot.chat(f"{bot.username} Error in task: {func.__name__} - {str(e)}")
                 # raise e
                 global bot
-                bot.chat(f"/tellraw {bot.username} Status Error in task: {func.__name__}: Try to restart the bot")
+                # bot.chat(f"/tellraw {bot.username} Status Error in task: {func.__name__}: Try to restart the bot")
                 bot = mineflayer.createBot({
                     "host": args.host,
                     "port": args.port,
@@ -300,7 +300,7 @@ def dismantle():
             bot.chat(f"/setblock {x} {y} {z} air")
             bot.chat(f"/give @s dirt 1")
             # bot.chat(f"/give @s ladder 1")
-        bot.chat(f"setblock {x} {y} {z} air {bot.blockAt(Vec3(x, y, z)).name}")
+        bot.chat(f"/setblock {x} {y} {z} air {bot.blockAt(Vec3(x, y, z)).name}")
         move_to(pathfinder, bot, Vec3, 3, Vec3(x, y, z+1))
         time.sleep(.1)
     events = info_bot.get_action_description_new()
@@ -1044,7 +1044,7 @@ def emojimurmur():
         emoji = ""
     msg = f"{bot.entity.username} {emoji} {murmur}"
     info_bot.update_emojimurmur(emoji, murmur)
-    bot.chat(f'/tellraw @a {json.dumps([{"text": msg, "color": "yellow"}])}')
+    # bot.chat(f'/tellraw @a {json.dumps([{"text": msg, "color": "yellow"}])}')
     return jsonify({'message': msg, 'status': True})
 
 @app.route('/post_talk_to', methods=['POST'])
@@ -1297,7 +1297,7 @@ def handleViewer(*args):
     bot.chat('/clear @s')
     bot.chat('/give @s dirt 20')
     # bot.chat('/give @s saddle 1')
-    bot.chat(f'/summon armor_stand ~ ~1.8 ~ {{CustomName:\'{{\"text\":\"😊\"}}\',CustomNameVisible:1,Invisible:1,Marker:1,NoGravity:1,Tags:["{bot.entity.username}"]}}')
+    # bot.chat(f'/summon armor_stand ~ ~1.8 ~ {{CustomName:\'{{\"text\":\"😊\"}}\',CustomNameVisible:1,Invisible:1,Marker:1,NoGravity:1,Tags:["{bot.entity.username}"]}}')
     info_bot.bot_init = True
     time.sleep(.1)
 
@@ -1348,25 +1348,27 @@ def handleViewer(*args):
                 # TEST: type: chat, message: hello
                 if "type" in message:
                     if message["type"] == "chat":
-                        bot.chat(message["message"])
+                        pass
+                        # bot.chat(message["message"])
                 # TEST: type: whisper, message: hello
                 if "type" in message:
                     if message["type"] == "whisper":
-                        bot.whisper(username, message["message"])
+                        pass
+                        # bot.whisper(username, message["message"])
                 # TEST: type: info
                 if "type" in message:
                     if message["type"] == "info":
                         current_info = get_envs_info2str(bot, RENDER_DISTANCE=32, same_entity_num=3)
-                        bot.chat(current_info)
+                        # bot.chat(current_info)
             # TEST: type: help
             except:
                 bot.chat("I cannot understand the message")
                 # remind the user of the correct format
-                bot.chat("The correct format is: TEST: type: move, x: 1, y: 2, z: 3")
-                bot.chat("The correct format is: TEST: type: chat, message: hello")
-                bot.chat("The correct format is: TEST: type: whisper, message: hello")
-                bot.chat("The correct format is: TEST: type: info")
-                bot.chat("The correct format is: TEST: type: help")
+                # bot.chat("The correct format is: TEST: type: move, x: 1, y: 2, z: 3")
+                # bot.chat("The correct format is: TEST: type: chat, message: hello")
+                # bot.chat("The correct format is: TEST: type: whisper, message: hello")
+                # bot.chat("The correct format is: TEST: type: info")
+                # bot.chat("The correct format is: TEST: type: help")
         else:
             info_bot.add_event("msg", info_bot.existing_time, f"I received a message from {username}: {message}", True)
 
@@ -1598,12 +1600,13 @@ class Bot():
         return [block[1] for block in list_blocks]
 
     def follow(self):
-        bot.chat(f'/tp @e[type=armor_stand,tag={bot.entity.username}] ~ ~1.8 ~')
+        # bot.chat(f'/tp @e[type=armor_stand,tag={bot.entity.username}] ~ ~1.8 ~')
+        pass
 
     def update_emojimurmur(self, emoji=[], murmur="Emmm..."):
         text_with_emoji = f"{bot.entity.username} {emoji} {murmur}"
         # /data merge entity @e[type=armor_stand,tag=yubo,limit=1] {CustomName:'{"text":"新的名字"}'}
-        bot.chat(f'/data merge entity @e[type=armor_stand,tag={bot.entity.username},limit=1] {{"CustomName":"{{\\"text\\":\\"{text_with_emoji}\\"}}","CustomNameVisible":1,"Invisible":1,"Marker":1,"NoGravity":1,"Tags":["{bot.entity.username}"]}}')
+        # bot.chat(f'/data merge entity @e[type=armor_stand,tag={bot.entity.username},limit=1] {{"CustomName":"{{\\"text\\":\\"{text_with_emoji}\\"}}","CustomNameVisible":1,"Invisible":1,"Marker":1,"NoGravity":1,"Tags":["{bot.entity.username}"]}}')
 
     def is_sleeping(self):
         return self.sleeping

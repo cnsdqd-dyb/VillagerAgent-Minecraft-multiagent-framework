@@ -469,6 +469,8 @@ if __name__ == '__main__':
                     if name not in own_dict.keys():
                         own_dict[name] = []
                 last_time = now_time
+                bot.chat(f"score: {score}")
+                bot.chat(f"cooperation: {cooperation}")
 
 
     @On(bot, 'messagestr')
@@ -603,5 +605,4 @@ if __name__ == '__main__':
                         inventory[i] = {"name": name, "count": count}
 
                 score, cooperation = calculate_score(agent_name, inventory)
-                bot.chat(f"score: {score}")
-                bot.chat(f"cooperation: {cooperation}")
+

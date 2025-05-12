@@ -1,27 +1,121 @@
 {
-    "api_model": "qwen_max",
+    "api_model": "qwen-max",
     "api_base": "https://dashscope.aliyuncs.com/compatible-mode/v1",
-    "task_type": "farming",
-    "task_idx": 20,
+    "task_type": "gen",
+    "task_idx": 10,
     "agent_num": 2,
     "dig_needed": false,
-    "max_task_num": 0,
-    "task_goal": "You are on a farm where you need to collaborate to make a cake. Some ingredients are contained within chests, and if the ingredients are not in the chests, you may need to work together to acquire them. Crafting table is placed to craft items",
-    "task_scenario": "craft",
-    "evaluation_arg": {
-        "target": "rabbit_stew",
-        "x": 8,
-        "y": -60,
-        "z": 8,
-        "facing": "",
-        "item_position": "inventory",
-        "tool": "",
-        "action": "",
-        "step": 1,
-        "other_arg": []
+    "task_goal": "Walk around",
+    "blueprint": {
+        "blocks": [
+            {
+                "type": "rectangle",
+                "from ": [
+                    -11,
+                    -1,
+                    0
+                ],
+                "to": [
+                    11,
+                    -1,
+                    25
+                ],
+                "name": "grass_block"
+            },
+            {
+                "type": "rectangle",
+                "from ": [
+                    1,
+                    -1,
+                    8
+                ],
+                "to": [
+                    5,
+                    3,
+                    12
+                ],
+                "name": "oak_planks"
+            },
+            {
+                "type": "rectangle",
+                "from ": [
+                    -5,
+                    -1,
+                    8
+                ],
+                "to": [
+                    -1,
+                    3,
+                    12
+                ],
+                "name": "oak_planks"
+            },
+            {
+                "type": "line",
+                "from ": [
+                    3,
+                    -1,
+                    10
+                ],
+                "to": [
+                    3,
+                    2,
+                    10
+                ],
+                "name": "oak_log"
+            },
+            {
+                "position": [
+                    3,
+                    3,
+                    10
+                ],
+                "name": "water"
+            },
+            {
+                "position": [
+                    5,
+                    -1,
+                    12
+                ],
+                "name": "chest",
+                "facing": "north",
+                "items": [
+                    {
+                        "name": "dirt",
+                        "count": 25
+                    },
+                    {
+                        "name": "wheat_seeds",
+                        "count": 25
+                    }
+                ]
+            },
+            {
+                "type": "rectangle",
+                "from ": [
+                    4,
+                    -1,
+                    11
+                ],
+                "to": [
+                    6,
+                    2,
+                    13
+                ],
+                "name": "oak_planks"
+            },
+            {
+                "position": [
+                    0,
+                    15,
+                    0
+                ],
+                "name": "daylight_detector"
+            }
+        ]
     },
-    "document_file": "data\\recipe_hint.json",
     "host": "127.0.0.1",
     "port": 25565,
-    "task_name": "qwen_max_farming_task20_2p_042120"
+    "task_name": "gen_test"
 }
