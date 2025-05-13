@@ -21,7 +21,7 @@ I want you act as a Prompt Creator.
 Your goal is to draw inspiration from the #Given Prompt# to create a brand new prompt.
 The new prompt shall be coarse-grained task for multi-agent systems, preferably meeting both the simplicity in description and complexity in dependency.
 This new prompt do not have to belong to the same domain as the #Given Prompt# but shall remain in the minecraft.
-Do note that the x, y, z coordinates shall be restricted in the range: min_x, min_y, min_z = -11, 0, 0; max_x, max_y, max_z = 11, 15, 25
+Do note that the x, y, z coordinates shall be restricted in the range: min_x, min_y, min_z = -10, 0, 1; max_x, max_y, max_z = 10, 15, 24
 The LENGTH and complexity of the #Created Prompt# should be similar to that of the #Given Prompt#.
 The #Created Prompt# must be reasonable and must be understood and responded by humans.
 It would be better if the new task involves intense collaborations and division of labor between agents. Meanwhile the task shall not be too difficult or big.
@@ -39,12 +39,13 @@ The #Augmented Task Output# must be reasonable and must be understood and respon
 blueprint_base_instruction = '''
 I want you to act as an **environment designer in Minecraft**. Your goal is to **create the environment necessary for a given task**, serving as the foundation for agents to complete the task. You will receive a **#Background#**, which provides context for the task. Please do the following: 1. **Identify** which parts of the background describe the **environment** that needs to be built now, and which parts describe the **building(s)** required later by the task (those buildings do **not** need to be built at this stage).
  2. **Design the initial environment** accordingly, making sure it satisfies the specified constraints.
+ 3. If you want to place trees, you can express it like this: {"type": "tree", "position ": [x, y, z], "name": "oak"}. (you can choose from oak, birch, spruce, jungle, acacia, dark_oak)
 **Constraints**:
- * Coordinate boundaries: `min_x, min_y, min_z = -10, 1, 1` `max_x, max_y, max_z = 10, 14, 24`
+ * Coordinate boundaries: `min_x, min_y, min_z = -10, 0, 1` `max_x, max_y, max_z = 10, 15, 24`
  * **Flat ground is at y = -1 (already filled by grass_block)**.
- * Don't forget to surround the water with other blocks if you need to place water blocks (e.g. if there is a river in the setting).
- * Be careful **not** to overwrite already placed blocks.
- * The tools and materials needed for the task shall all be included in the box.
+ * Don't forget to surround the water with solid blocks if you need to place water blocks (e.g. if there is a lake in the setting), or place the water blocks at y = -1.
+ * Do be careful **not** to overwrite already placed blocks!
+ * The tools and materials needed for the task shall all be included in the chest. Do **not** place any block on the chest or it will be unable to open.
  * Blocks can be placed **individually** or as a **line** or a **rectangle**.
  * The output for the designed environment must follow the **JSON format shown in the #Example#** section.
 Please refer to the **#Example#** section for how to format the output as a JSON structure.
@@ -92,6 +93,8 @@ concreting_examples = [
 
 example_string = """{
 "blocks": [
+// Oak tree
+{"type": "tree", "position ": [7, 0, 13], "name": "oak"},
 // Oak plank floor (workspace base)
 {"type": "rectangle", "from ": [-1, 0, 11], "to": [1, 0, 13], "name": "oak_planks"},
 // Left oak log pillar
@@ -112,7 +115,7 @@ example_string = """{
 {"position": [-1, 0, 20], "name": "chest", "facing": "north", "items": [{"name": "fishing_rod", "count": 2}]},
 // Chest with caught fish
 {"position": [1, 0, 20], "name": "chest", "facing": "north", "items": [{"name": "cod", "count": 6}, {"name": "salmon", "count": 4}]}
-]
+],
 "entities": [
 // Fish in the water
 {"position": [0, 1, 16], "name": "cod"},
@@ -156,6 +159,7 @@ def createVABreadthPrompt(instruction):
         instruction)
     # prompt += "No blueprints in your generated task\r\n"
     prompt += "#Created Prompt#:\r\n"
+    print("prompt:", prompt)
     return prompt
 
 def createVAVolumePrompt(input):
@@ -227,12 +231,14 @@ def remove_json_comments(json_str):
         lines.append(line)
     return '\n'.join(lines)
 
-def save_dict_from_string(raw_str, filename):
+def str2json(raw_str):
     # 1. 提取最外层 {...} 内容
     json_block = extract_outermost_braces_content(raw_str)
     if not json_block:
         print("错误：未找到完整的花括号内容块")
-        return False
+        print("原始字符串:")
+        print(raw_str)
+        return "\{ERROR\}"
     
     # 2. 移除注释
     clean_json_str = remove_json_comments(json_block)
@@ -240,11 +246,14 @@ def save_dict_from_string(raw_str, filename):
     # 3. 解析为字典
     try:
         data_dict = json.loads(clean_json_str)
+        return data_dict
     except json.JSONDecodeError as e:
         print(f"JSON解析错误: {e}")
         print("有问题的JSON内容:")
         print(clean_json_str)
-        return False
+        return "\{ERROR\}"
+
+def save_dict(data_dict, filename):
     
     # 4. Check if the file already exists, if so, load the data in the file into "history_{filename}"
     try:
@@ -291,7 +300,7 @@ def gen_task(times = 1):
 
         evol_prompts.append(createVABreadthPrompt(instruction))
 
-        print("evol_prompts:", evol_prompts)
+        # print("evol_prompts:", evol_prompts)
 
         selected_evol_prompt = random.choice(evol_prompts)
 
@@ -309,28 +318,88 @@ def concreting_task(task_list):
         instruction = cur_obj['instruction'].strip()
         prompt["input"] = instruction
         evol_prompts = createVAVolumePrompt(prompt)
+        print("evol_prompts:", evol_prompts)
         selected_evol_prompt = evol_prompts
         evol_instruction = llm.few_shot_generate_thoughts(system_prompt="You are a helpful assistant", example_prompt=selected_evol_prompt)
         evol_objs.append({"instruction": evol_instruction})
     
-    print("evol_objs:", evol_objs)
+    # print("evol_objs:", evol_objs)
     
     return evol_objs
 
-def create_blueprint(concreted_task, times = 1):
+'''
+saved file shall be like:
+{
+    "api_model": "deepseek_chat",
+    "api_base": "https://api.deepseek.com",
+    "task_type": "meta",
+    "task_idx": 0,
+    "agent_num": 1,
+    "dig_needed": false,
+    "max_task_num": 0,
+    "task_goal": "The iron_sword, which is in your inventory, should be used to attack the chicken.",
+    "task_scenario": "interact",
+    "evaluation_arg": {
+    ...
+    },
+    "document_file": "",
+    "host": "127.0.0.1",
+    "port": 25565,
+    "task_name": "interact_attack_id77_011822",
+    "blueprint": {...}
+}
+'''
+
+def create_task_file( task_sim, task_idx, task_name, blueprint, task_goal, agent_num=1, dig_needed=False, max_task_num=0, task_scenario="Unknown", evaluation_arg={}, port=25565, host="127.0.0.1", api_base="https://api.deepseek.com", api_model="deepseek_chat", task_type="meta"):
+    task_file = {
+        "api_model": api_model,
+        "api_base": api_base,
+        "task_type": task_type,
+        "task_idx": task_idx,
+        "agent_num": agent_num,
+        "dig_needed": dig_needed,
+        "max_task_num": max_task_num,
+        "task_goal": task_goal,
+        "task_scenario": task_scenario,
+        "evaluation_arg": evaluation_arg,
+        "document_file": "",
+        "host": host,
+        "port": port,
+        "task_name": task_name,
+        "simplified_task": task_sim,
+        "blueprint": blueprint
+    }
+    return task_file
+
+def create_blueprint(concreted_task, times = 1, sim_task=None):
     blueprint_prompt = []
     for i in range(times):
         cur_obj = random.choice(concreted_task)
         instruction = cur_obj["instruction"]
         blueprint_prompt.append(createBlueprintPrompt(instruction))
         selected_evol_prompt = blueprint_prompt[-1]
+        print("selected_evol_prompt:", selected_evol_prompt)
         evol_instruction = llm.few_shot_generate_thoughts(system_prompt="You are a helpful assistant", example_prompt=selected_evol_prompt)
         #TODO: blueprints.json之后应该调整成类似config.json那样的，包含给judger生成环境的信息和给TM任务描述的信息
         print("blueprint:", evol_instruction)
-        save_dict_from_string(evol_instruction, 'blueprints.json')
+        task_idx = i
+        task_name = "multi_agent_task_{}".format(random.randint(0, 10000))
+        task_goal = concreted_task
+        sim_task_ = sim_task
+        blueprint_json = str2json(evol_instruction)
+
+        config_dict = create_task_file(
+            task_sim=sim_task_,
+            task_idx=task_idx,
+            task_name=task_name,
+            blueprint=blueprint_json,
+            task_goal=task_goal
+        )
+
+        save_dict(config_dict, 'config.json')
 
 
 if __name__ == "__main__":
     task = gen_task(1)
     concreted_task = concreting_task(task)
-    create_blueprint(concreted_task, 1)
+    create_blueprint(concreted_task, 1, task)

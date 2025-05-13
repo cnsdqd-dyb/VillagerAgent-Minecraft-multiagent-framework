@@ -108,6 +108,14 @@ if __name__ == '__main__':
                     bot.chat(
                         f'/fill {x_0} {y_0} {z_0} {x_1} {y_1} {z_1} {b["name"]}')
                     continue
+                elif b.get("type") == "tree":
+                    # tree: 用于生成树木。
+                    # 例如：/tree oak 1 2 3
+                    x, y, z = b["position"][0] + x_bias, b["position"][1] + \
+                        y_bias, b["position"][2] + z_bias
+                    bot.chat(
+                        f'/place feature {b["name"]} {x} {y} {z}')
+                    continue
 
                 time.sleep(.1)
                 x, y, z = b["position"][0] + x_bias, b["position"][1] + \
@@ -161,8 +169,9 @@ if __name__ == '__main__':
 
         # render 函数是这段代码中用于动态生成 Minecraft 建筑结构的核心函数，它负责根据任务配置（task_data）在游戏世界中渲染各种建筑、方块和实体。
         def render(data: dict, x_bias, y_bias, z_bias):
-            with open("blueprints.json", "r") as f:
+            with open("config.json", "r") as f:
                 blue_prints = json.load(f)
+                blue_prints = blue_prints["blueprint"]
             c = {"position": [
                 5,
                 0,

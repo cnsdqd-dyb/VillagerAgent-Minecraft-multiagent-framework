@@ -1,0 +1,248 @@
+{
+    "api_model": "deepseek_chat",
+    "api_base": "https://api.deepseek.com",
+    "task_type": "meta",
+    "task_idx": 0,
+    "agent_num": 1,
+    "dig_needed": false,
+    "max_task_num": 0,
+    "task_goal": [
+        {
+            "instruction": "**Environment:**  \n- The designated area for the farm is a flat, grassy plain bordered by oak trees to the north and a small river to the east. The storage chest at [-3, 1, 20] is located under a wooden awning made of spruce planks and fences. Nearby, a crafting table and a furnace are available for use.  \n- The coordinates for the farm (x = [-5, 5], y = [1, 3], z = [5, 15]) are marked by stone boundary markers at each corner.  \n\n**Interactive-Items:**  \n- **Storage Chest**: [-3, 1, 20] (contains wood, redstone, hoppers, seeds, and basic tools)  \n- **Crafting Table**: [-2, 1, 20]  \n- **Furnace**: [-1, 1, 20] (facing south)  \n\n**Task:**  \n- Work together to construct and activate a redstone-powered automatic wheat farm within the designated area.  \n- Gather materials (wood, redstone, hoppers, and seeds) from the storage chest at [-3, 1, 20].  \n- Build a 5x5 tilled farmland plot centered at [0, 1, 10] and plant wheat seeds.  \n- Design and connect a redstone mechanism using dispensers and water buckets to automate harvesting.  \n- Ensure the harvested wheat is collected in a chest placed at [2, 1, 12] and test the system by growing and harvesting at least 3 batches of wheat.  \n\n**Actions available:**  \n- Agents can use the crafting table and furnace to prepare materials.  \n- Agents must collaborate on redstone wiring, with at least two agents working together for complex connections.  \n- Agents can till soil, plant seeds, and activate the redstone mechanism.  \n- Agents must ensure all materials are sourced only from the provided chest.  \n\n**Constraints:**  \n- The farm must fit within the coordinates: x = [-5, 5], y = [1, 3], z = [5, 15].  \n- All materials must be sourced only from the provided chest.  \n- The system must be tested with at least 3 successful harvests."
+        }
+    ],
+    "task_scenario": "Unknown",
+    "evaluation_arg": {},
+    "document_file": "",
+    "host": "127.0.0.1",
+    "port": 25565,
+    "task_name": "multi_agent_task_819",
+    "simplified_task": [
+        {
+            "instruction": "**Task:**  \n\n- Work together to construct and activate a redstone-powered automatic wheat farm within the designated area.  \n- Gather materials (wood, redstone, hoppers, and seeds) from the storage chest at [-3, 1, 20].  \n- Build a 5x5 tilled farmland plot centered at [0, 1, 10] and plant wheat seeds.  \n- Design and connect a redstone mechanism using dispensers and water buckets to automate harvesting.  \n- Ensure the harvested wheat is collected in a chest placed at [2, 1, 12] and test the system by growing and harvesting at least 3 batches of wheat.  \n\n**Constraints:**  \n- The farm must fit within the coordinates: x = [-5, 5], y = [1, 3], z = [5, 15].  \n- At least two agents must collaborate on the redstone wiring to ensure proper functionality.  \n- All materials must be sourced only from the provided chest."
+        }
+    ],
+    "blueprint": {
+        "blocks": [
+            {
+                "type": "tree",
+                "position": [
+                    -8,
+                    0,
+                    10
+                ],
+                "name": "oak"
+            },
+            {
+                "type": "tree",
+                "position": [
+                    -5,
+                    0,
+                    10
+                ],
+                "name": "oak"
+            },
+            {
+                "type": "tree",
+                "position": [
+                    -2,
+                    0,
+                    10
+                ],
+                "name": "oak"
+            },
+            {
+                "type": "tree",
+                "position": [
+                    1,
+                    0,
+                    10
+                ],
+                "name": "oak"
+            },
+            {
+                "type": "tree",
+                "position": [
+                    4,
+                    0,
+                    10
+                ],
+                "name": "oak"
+            },
+            {
+                "type": "tree",
+                "position": [
+                    7,
+                    0,
+                    10
+                ],
+                "name": "oak"
+            },
+            {
+                "type": "line",
+                "from": [
+                    10,
+                    -1,
+                    5
+                ],
+                "to": [
+                    10,
+                    -1,
+                    15
+                ],
+                "name": "water"
+            },
+            {
+                "type": "line",
+                "from": [
+                    9,
+                    0,
+                    5
+                ],
+                "to": [
+                    9,
+                    0,
+                    15
+                ],
+                "name": "grass_block"
+            },
+            {
+                "position": [
+                    -5,
+                    0,
+                    5
+                ],
+                "name": "stone"
+            },
+            {
+                "position": [
+                    -5,
+                    0,
+                    15
+                ],
+                "name": "stone"
+            },
+            {
+                "position": [
+                    5,
+                    0,
+                    5
+                ],
+                "name": "stone"
+            },
+            {
+                "position": [
+                    5,
+                    0,
+                    15
+                ],
+                "name": "stone"
+            },
+            {
+                "type": "rectangle",
+                "from": [
+                    -4,
+                    1,
+                    19
+                ],
+                "to": [
+                    -2,
+                    1,
+                    21
+                ],
+                "name": "spruce_planks"
+            },
+            {
+                "type": "line",
+                "from": [
+                    -4,
+                    2,
+                    19
+                ],
+                "to": [
+                    -4,
+                    2,
+                    21
+                ],
+                "name": "spruce_fence"
+            },
+            {
+                "type": "line",
+                "from": [
+                    -2,
+                    2,
+                    19
+                ],
+                "to": [
+                    -2,
+                    2,
+                    21
+                ],
+                "name": "spruce_fence"
+            },
+            {
+                "type": "rectangle",
+                "from": [
+                    -4,
+                    2,
+                    19
+                ],
+                "to": [
+                    -2,
+                    2,
+                    21
+                ],
+                "name": "spruce_slab"
+            },
+            {
+                "position": [
+                    -3,
+                    1,
+                    20
+                ],
+                "name": "chest",
+                "facing": "north",
+                "items": [
+                    {
+                        "name": "oak_planks",
+                        "count": 32
+                    },
+                    {
+                        "name": "redstone",
+                        "count": 16
+                    },
+                    {
+                        "name": "hopper",
+                        "count": 4
+                    },
+                    {
+                        "name": "wheat_seeds",
+                        "count": 16
+                    },
+                    {
+                        "name": "wooden_hoe",
+                        "count": 1
+                    }
+                ]
+            },
+            {
+                "position": [
+                    -2,
+                    1,
+                    20
+                ],
+                "name": "crafting_table"
+            },
+            {
+                "position": [
+                    -1,
+                    1,
+                    20
+                ],
+                "name": "furnace",
+                "facing": "south"
+            }
+        ],
+        "entities": []
+    }
+}
