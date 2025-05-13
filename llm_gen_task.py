@@ -9,10 +9,14 @@ random.seed(a=None, version=2)
 
 breadth_base_instruction = '''
 I want you act as a Prompt Creator.
-Your goal is to draw inspiration from the #Given Prompt# to create a brand new prompt.
-This new prompt should belong to the same domain as the #Given Prompt# but be even more rare.
-The LENGTH and complexity of the #Created Prompt# should be similar to that of the #Given Prompt#.
-The #Created Prompt# must be reasonable and must be understood and responded by humans.
+#Given Prompt# to create a brand new prompt.
+Your goal is to draw inspiration from the
+#Given Prompt# but be even more rare.
+This new prompt should belong to the same domain as the
+#Created Prompt# should be similar to that of the #Given Prompt#.
+The LENGTH and complexity of the
+#Created Prompt# must be reasonable and must be understood and responded by humans.
+The
 '#Given Prompt#', '#Created Prompt#', 'given prompt' and 'created prompt' are not allowed to appear in #Created Prompt#
 '''
 
@@ -20,54 +24,72 @@ VA_base_instruction = '''
 I want you act as a Prompt Creator.
 Your goal is to draw inspiration from the #Given Prompt# to create a brand new prompt.
 The new prompt shall be coarse-grained task for multi-agent systems, preferably meeting both the simplicity in description and complexity in dependency.
-This new prompt do not have to belong to the same domain as the #Given Prompt# but shall remain in the minecraft.
-Do note that the x, y, z coordinates shall be restricted in the range: min_x, min_y, min_z = -10, 0, 1; max_x, max_y, max_z = 10, 15, 24
+This new prompt do **NOT** have to belong to the same domain as the #Given Prompt# but shall remain in the minecraft.
+Do note that the x, y, z coordinates shall be restricted in the range: min_x, min_y, min_z = -10, 0, 1; max_x, max_y, max_z = 10, 15, 24.
 The LENGTH and complexity of the #Created Prompt# should be similar to that of the #Given Prompt#.
 The #Created Prompt# must be reasonable and must be understood and responded by humans.
+Blocks can not float in the air, and the axis of height is y.
 It would be better if the new task involves intense collaborations and division of labor between agents. Meanwhile the task shall not be too difficult or big.
 '#Given Prompt#', '#Created Prompt#', 'given prompt' and 'created prompt' are not allowed to appear in #Created Prompt#
 '''
 
 VA_Volume_base_instruction = '''
 I want you act as a Task Designer.
-Your goal is to learn the format from the pairs of #Given Simple Task# and #Given Augmented Task#, and use it to augment the given #Simple Task Input# into #Augmented Task Output#.
+Your goal is to learn the format from the pairs of #Given Simple Task# and #Given Augmented Task#, and try to augment the given #Simple Task Input# into #Augmented Task Output#.
 This new augmented task should augment or enrich the content of the given simple task by adding: environment infomation and auxilliary information.
-The #Augmented Task Output# must be reasonable and must be understood and responded by humans.
-'#Given Simple Task#', '#Given Augmented Task#' and '#Simple Task Input#' are not allowed to appear in #Augmented Task Output#
+#Augmented Task Output# must be reasonable and must be understood and responded by humans.
+The '#Augmented Task Output#', '#Given Simple Task#', '#Given Augmented Task#' and '#Simple Task Input#' are not allowed to appear in #Augmented Task Output#
 '''
 
 blueprint_base_instruction = '''
-I want you to act as an **environment designer in Minecraft**. Your goal is to **create the environment necessary for a given task**, serving as the foundation for agents to complete the task. You will receive a **#Background#**, which provides context for the task. Please do the following: 1. **Identify** which parts of the background describe the **environment** that needs to be built now, and which parts describe the **building(s)** required later by the task (those buildings do **not** need to be built at this stage).
- 2. **Design the initial environment** accordingly, making sure it satisfies the specified constraints.
- 3. If you want to place trees, you can express it like this: {"type": "tree", "position ": [x, y, z], "name": "oak"}. (you can choose from oak, birch, spruce, jungle, acacia, dark_oak)
-**Constraints**:
- * Coordinate boundaries: `min_x, min_y, min_z = -10, 0, 1` `max_x, max_y, max_z = 10, 15, 24`
- * **Flat ground is at y = -1 (already filled by grass_block)**.
- * Don't forget to surround the water with solid blocks if you need to place water blocks (e.g. if there is a lake in the setting), or place the water blocks at y = -1.
- * Do be careful **not** to overwrite already placed blocks!
- * The tools and materials needed for the task shall all be included in the chest. Do **not** place any block on the chest or it will be unable to open.
- * Blocks can be placed **individually** or as a **line** or a **rectangle**.
- * The output for the designed environment must follow the **JSON format shown in the #Example#** section.
-Please refer to the **#Example#** section for how to format the output as a JSON structure.
+You are an **environment designer in Minecraft**, responsible for creating the **initial environment** needed for a given task. This environment will serve as the foundation for agents to complete the task.
+You will receive a **#Background#**, which contains both environmental context and potential future building requirements.
+
+### Your tasks:
+1. **Analyze the background**:
+
+   * Identify which parts describe the **environment to be built now**.
+   * Distinguish elements that refer to **future structures** (these buildings do **not** need to be built yet).
+2. **Design the initial environment**:
+
+   * Ensure it satisfies all constraints and matches the described setting.
+3. To place trees, use the following format:
+   ```json
+   {"type": "tree", "position": [x, y, z], "name": "oak"}
+   ```
+   * Tree types: `oak`, `birch`, `spruce`, `jungle`, `acacia`, `dark_oak`
+
+### Constraints:
+* Coordinate boundaries:
+  `min_x, min_y, min_z = -10, 0, 1`
+  `max_x, max_y, max_z = 10, 15, 24`
+* **Flat ground** is at `y = -1` and is pre-filled with `grass_block`.
+* Water blocks must be **surrounded by solid blocks** or placed at `y = -1`.
+* **Do not overwrite** existing blocks.
+* Include all **tools and materials** needed in a **chest**.
+  * **Do not place any block on top of the chest**, or it won't open.
+* Blocks can be placed **individually**, as a **line**, or as a **rectangle**.
+### Output:
+* Format your design as a **JSON object**, following the structure in the **
 '''
 
 all_objs = [
-  "**Task: **\r\n - Collaborate to place blocks according to the blueprint `minecraft/templates/nether_fossils_fossil_3`.\r\n - Use the materials from the chest at[-4, 0, 5]. The other chest in the factory with tools is not needed for this task.\r\n",
-  "**Task:**  \r\n- Work together to catch at least 10 fish (a mix of cod and salmon) using the fishing rods and bait from the chest.  \r\n- Ensure the caught fish are stored in a second chest placed at [10, 0, 20].",
-  "**Task:**  \n- Cooperate to smelt 20 iron ingots using the furnace located at [5, 0, 12].  \n- Retrieve the necessary iron ore from the chest at [5, 0, 10] and fuel (coal) from the chest at [5, 0, 8].  \n- Store the smelted iron ingots in the chest at [5, 0, 14].",
-  "**Task:**  \n- Collaborate to construct a small village well using the materials from the chest at [10, 0, 15]. The well should be 3 blocks deep and 5 blocks wide, with a bucket placed inside for decoration.  \n- One agent must gather water from the nearby lake at [8, 0, 20] using empty buckets, while another agent assembles the well structure using the cobblestone and wooden planks provided.  \n- Ensure all unused materials are returned to the chest upon completion.",
-  "**Task:**  \n\n- Cooperate to defend the village from a zombie raid by building barricades and equipping weapons.  \n- Use the wood and stone materials from the chest at [5, 0, 15] to construct barriers around the village perimeter.  \n- Equip swords and bows from the armory chest at [7, 0, 18] and distribute them among the agents.  \n- Ensure all villagers are safely inside their houses by interacting with doors to close them.  \n- Eliminate at least 15 zombies before they breach the village defenses.",
-  "**Task:**  \n- Collaborate to build a small animal pen near the village at [8, 0, 15].  \n- Gather materials (wooden planks and fences) from the chest at [7, 0, 14] and construct the pen.  \n- Lead at least 3 sheep and 2 cows into the pen using wheat from the chest.  \n- Ensure the animals are safely enclosed and fed before sunset.",
-  "**Task:**  \n- Collaborate to bake 30 loaves of bread using the furnace located at [8, 0, 10].  \n- Harvest wheat from the nearby farm at [8, 0, 15] and collect the necessary fuel (charcoal) from the chest at [8, 0, 8].  \n- Store the baked bread in the chest at [8, 0, 12].  \n- Ensure all agents sleep in the beds at [7, 0, 10] and [9, 0, 10] by nighttime to avoid phantoms.  \n\nThis task requires division of labor (farming, fuel collection, baking, and storage) and coordination to meet the time constraint.",
-  "**Task:**  \n- Work together to prepare a sustainable food source by creating a small fishing pond and cooking the caught fish.  \n- One agent must dig a 4x4 pond at [3, 0, 20] and fill it with water from the nearby river at [5, 0, 22] using buckets.  \n- Another agent should craft fishing rods using sticks and string from the chest at [3, 0, 18] and start fishing in the pond.  \n- A third agent must collect the caught fish, cook them in the furnace at [3, 0, 22] using coal from the chest, and store the cooked fish in the chest at [3, 0, 16].  \n- Ensure all tools and unused materials are returned to their respective chests after completion.",
-  "**Task:**  \n\n- Work together to organize a nighttime fishing competition by the lake at [5, 0, 20].  \n- One agent must craft fishing rods using sticks from the nearby forest and string from spiders (summon 3 spiders if needed).  \n- Another agent should gather food supplies (bread or fish) from the village storage at [10, 0, 10] and set up a campfire near the lake.  \n- A third agent must ensure safety by lighting up the area with torches and keeping hostile mobs away (eliminate any creepers or skeletons that spawn).  \n- The competition begins at nightfall (set time to 18000) and ends after catching at least 10 fish collectively.  \n- All agents must sleep in beds placed near the campfire once the competition is over (set time to sunrise afterward).",
-  "**Task:**  \n- Collaborate to build a small bridge across the river located near [0, 0, 5].  \n- Gather the required materials (wooden planks and sticks) from the chest at [5, 0, 2].  \n- Construct the bridge with a width of at least 3 blocks and a length sufficient to span the river.  \n- Place a sign at each end of the bridge with the text \"Safe Crossing\" to mark the path.",
-  "**Task:**  \n- Work together to brew 10 potions of healing using the brewing stand located at [3, 0, 20].  \n- Retrieve the necessary nether wart from the chest at [3, 0, 18] and glowstone dust from the chest at [3, 0, 22].  \n- Fill glass bottles with water from the nearby cauldron at [6, 0, 20] before brewing.  \n- Store the finished potions in the chest at [3, 0, 24].  \n\n**Roles:**  \n- One agent must collect water using glass bottles.  \n- Another agent must handle the brewing process by adding nether wart and glowstone dust.  \n- A third agent should organize and store the potions once brewed.  \n- Ensure all unused materials are returned to their respective chests upon completion."
+    "**Task: **\r\n - Collaborate to place blocks according to the blueprint `minecraft/templates/nether_fossils_fossil_3`.\r\n - Use the materials from the chest at[-4, 0, 5]. The other chest in the factory with tools is not needed for this task.\r\n",
+    "**Task:**  \r\n- Work together to catch at least 10 fish (a mix of cod and salmon) using the fishing rods and bait from the chest.  \r\n- Ensure the caught fish are stored in a second chest placed at [10, 0, 20].",
+    "**Task:**  \n- Cooperate to smelt 20 iron ingots using the furnace located at [5, 0, 12].  \n- Retrieve the necessary iron ore from the chest at [5, 0, 10] and fuel (coal) from the chest at [5, 0, 8].  \n- Store the smelted iron ingots in the chest at [5, 0, 14].",
+    "**Task:**  \n- Collaborate to construct a small village well using the materials from the chest at [10, 0, 15]. The well should be 3 blocks deep and 5 blocks wide, with a bucket placed inside for decoration.  \n- One agent must gather water from the nearby lake at [8, 0, 20] using empty buckets, while another agent assembles the well structure using the cobblestone and wooden planks provided.  \n- Ensure all unused materials are returned to the chest upon completion.",
+    "**Task:**  \n\n- Cooperate to defend the village from a zombie raid by building barricades and equipping weapons.  \n- Use the wood and stone materials from the chest at [5, 0, 15] to construct barriers around the village perimeter.  \n- Equip swords and bows from the armory chest at [7, 0, 18] and distribute them among the agents.  \n- Ensure all villagers are safely inside their houses by interacting with doors to close them.  \n- Eliminate at least 15 zombies before they breach the village defenses.",
+    "**Task:**  \n- Collaborate to build a small animal pen near the village at [8, 0, 15].  \n- Gather materials (wooden planks and fences) from the chest at [7, 0, 14] and construct the pen.  \n- Lead at least 3 sheep and 2 cows into the pen using wheat from the chest.  \n- Ensure the animals are safely enclosed and fed before sunset.",
+    "**Task:**  \n- Collaborate to bake 30 loaves of bread using the furnace located at [8, 0, 10].  \n- Harvest wheat from the nearby farm at [8, 0, 15] and collect the necessary fuel (charcoal) from the chest at [8, 0, 8].  \n- Store the baked bread in the chest at [8, 0, 12].  \n- Ensure all agents sleep in the beds at [7, 0, 10] and [9, 0, 10] by nighttime to avoid phantoms.  \n\nThis task requires division of labor (farming, fuel collection, baking, and storage) and coordination to meet the time constraint.",
+    "**Task:**  \n- Work together to prepare a sustainable food source by creating a small fishing pond and cooking the caught fish.  \n- One agent must dig a 4x4 pond at [3, 0, 20] and fill it with water from the nearby river at [5, 0, 22] using buckets.  \n- Another agent should craft fishing rods using sticks and string from the chest at [3, 0, 18] and start fishing in the pond.  \n- A third agent must collect the caught fish, cook them in the furnace at [3, 0, 22] using coal from the chest, and store the cooked fish in the chest at [3, 0, 16].  \n- Ensure all tools and unused materials are returned to their respective chests after completion.",
+    "**Task:**  \n\n- Work together to organize a nighttime fishing competition by the lake at [5, 0, 20].  \n- One agent must craft fishing rods using sticks from the nearby forest and string from spiders (summon 3 spiders if needed).  \n- Another agent should gather food supplies (bread or fish) from the village storage at [10, 0, 10] and set up a campfire near the lake.  \n- A third agent must ensure safety by lighting up the area with torches and keeping hostile mobs away (eliminate any creepers or skeletons that spawn).  \n- The competition begins at nightfall (set time to 18000) and ends after catching at least 10 fish collectively.  \n- All agents must sleep in beds placed near the campfire once the competition is over (set time to sunrise afterward).",
+    "**Task:**  \n- Collaborate to build a small bridge across the river located near [0, 0, 5].  \n- Gather the required materials (wooden planks and sticks) from the chest at [5, 0, 2].  \n- Construct the bridge with a width of at least 3 blocks and a length sufficient to span the river.  \n- Place a sign at each end of the bridge with the text \"Safe Crossing\" to mark the path.",
+    "**Task:**  \n- Work together to brew 10 potions of healing using the brewing stand located at [3, 0, 20].  \n- Retrieve the necessary nether wart from the chest at [3, 0, 18] and glowstone dust from the chest at [3, 0, 22].  \n- Fill glass bottles with water from the nearby cauldron at [6, 0, 20] before brewing.  \n- Store the finished potions in the chest at [3, 0, 24].  \n\n**Roles:**  \n- One agent must collect water using glass bottles.  \n- Another agent must handle the brewing process by adding nether wart and glowstone dust.  \n- A third agent should organize and store the potions once brewed.  \n- Ensure all unused materials are returned to their respective chests upon completion."
 ]
 
 action_list = [
     "Agent can talk with other agents, you need to specify the agent name and the topic.",
-    "Agent can move to a specific location, you need to specify the location near 0, -60, 0.",
+    "Agent can move to a specific location, you need to specify the location near 0, 0, 0.",
     "Agent can equip items, you need to specify the item name and the agent name, or put the item in the chest and remind the agent to equip it.",
     "Agent can craft items, you need to specify the item name and give materials to the agent or put the item in the chest or set the item in the environment.",
     "Agent can interact with doors, buttons, levers, pressure plates, and trapdoors. You need to set them and let the agent interact with them.",
@@ -85,8 +107,8 @@ action_list = [
 instruction_actions = "You can use or not to use the following actions to create the multi-agent task. And the actions related to this task can include but not limited to the following actions:\r\n"
 
 concreting_examples = [
-    {'simple': "**Task:**\n- Collaborate to place blocks according to the blueprint `minecraft/templates/nether_fossils_fossil_3`.\n- Use the materials from the chest at [-4, 1, 10]. The other chest in the factory with tools is not needed for this task.",
-                'augmentation': "**Interactive-Items:**\n- **Oak Sign**: [-3, 3, 10] (facing west)\n\n**Environment:**\n- The area around [-4, 2, 11] includes a structure made of stone bricks, spruce planks, and sandstone. There is a chest and a furnace facing west, and a spruce fence to the east. The ground is primarily dirt and grass blocks.\n- The blueprint provided is for `minecraft/templates/nether_fossils_fossil_3`.\n\n**Task:**\n- Collaborate to place blocks according to the blueprint `minecraft/templates/nether_fossils_fossil_3`.\n- Use the materials from the chest at [-4, 1, 10]. The other chest in the factory with tools is not needed for this task.\nSign info: \nminecraft/templates/nether_fossils_fossil_3"},
+    {'simple': "**Task:**\n- Collaborate to place blocks according to the blueprint `minecraft/templates/nether_fossils_fossil_3`.\n- Use the materials from the chest at [-4, 0, 10]. The other chest in the factory with tools is not needed for this task.",
+     'augmentation': "**Interactive-Items:**\n- **Oak Sign**: [-3, 0, 10] (facing west)\n\n**Environment:**\n- The area around [-4, 0, 11] includes a structure made of stone bricks, spruce planks, and sandstone. There is a chest and a furnace facing west, and a spruce fence to the east. The ground is primarily dirt and grass blocks.\n- The blueprint provided is for `minecraft/templates/nether_fossils_fossil_3`.\n\n**Task:**\n- Collaborate to place blocks according to the blueprint `minecraft/templates/nether_fossils_fossil_3`.\n- Use the materials from the chest at [-4, 0, 10]. The other chest in the factory with tools is not needed for this task.\nSign info: \nminecraft/templates/nether_fossils_fossil_3"},
     {'simple': "**Task:** \n- Work together to catch at least 10 fish (a mix of cod and salmon) using the fishing rods and bait from the chest. \n- Ensure the caught fish are stored in a second chest placed at [6, 0, 20]. \n- Avoid disturbing a nearby school of tropical fish swimming around [7, 0, 18].",
      'augmentation': "**Environment:** \n- A coastal area at [5, 0, 20] features a small wooden dock made of oak planks and fences, extending into the ocean. A chest containing fishing rods and bait is placed at [5, 0, 21]. The water is populated with cod and salmon. \n\n**Task:** \n- Work together to catch at least 10 fish (a mix of cod and salmon) using the fishing rods and bait from the chest. \n- Ensure the caught fish are stored in a second chest placed at [6, 0, 20]. \n- Avoid disturbing a nearby school of tropical fish swimming around [7, 0, 18]. \n\n**Actions available:** \n- Agents can use fishing rods to catch fish. \n- Agents can move along the dock or swim in designated areas. \n- Agents can transfer caught fish to the storage chest. \n- Agents must avoid scaring away the tropical fish."}
 ]
@@ -96,25 +118,30 @@ example_string = """{
 // Oak tree
 {"type": "tree", "position ": [7, 0, 13], "name": "oak"},
 // Oak plank floor (workspace base)
-{"type": "rectangle", "from ": [-1, 0, 11], "to": [1, 0, 13], "name": "oak_planks"},
+{"type": "rectangle", "from ": [-1, 0, 11],
+    "to": [1, 0, 13], "name": "oak_planks"},
 // Left oak log pillar
 {"type": "line", "from ": [-1, 1, 11], "to": [-1, 2, 11], "name": "oak_log"},
 // Right oak log pillar
 {"type": "line", "from ": [1, 1, 11], "to": [1, 2, 11], "name": "oak_log"},
 // Roof over the structure
-{"type": "rectangle", "from ": [-1, 3, 11], "to": [1, 3, 13], "name": "oak_planks"},
+{"type": "rectangle", "from ": [-1, 3, 11],
+    "to": [1, 3, 13], "name": "oak_planks"},
 // Crafting table at center
 {"position": [0, 0, 12], "name": "crafting_table"},
 // Log pile simulating wood storage
-{"type": "rectangle", "from ": [5, 0, 10], "to": [7, 0, 12], "name": "oak_log"},
+{"type": "rectangle", "from ": [5, 0, 10],
+    "to": [7, 0, 12], "name": "oak_log"},
 // Cobweb for making fishing rods
 {"position": [7, 0, 8], "name": "cobweb"},
 // Path to pond area
 {"type": "line", "from ": [0, 0, 15], "to": [0, 0, 20], "name": "oak_planks"},
 // Chest with fishing rods
-{"position": [-1, 0, 20], "name": "chest", "facing": "north", "items": [{"name": "fishing_rod", "count": 2}]},
+{"position": [-1, 0, 20], "name": "chest", "facing": "north",
+    "items": [{"name": "fishing_rod", "count": 2}]},
 // Chest with caught fish
-{"position": [1, 0, 20], "name": "chest", "facing": "north", "items": [{"name": "cod", "count": 6}, {"name": "salmon", "count": 4}]}
+{"position": [1, 0, 20], "name": "chest", "facing": "north", "items": [
+    {"name": "cod", "count": 6}, {"name": "salmon", "count": 4}]}
 ],
 "entities": [
 // Fish in the water
@@ -124,27 +151,111 @@ example_string = """{
 ]
 }"""
 
+example_string = """
+{
+  "blocks": [
+    {
+      // Place an oak tree at position (3, 0, 5)
+      "type": "tree",
+      "position": [3, 0, 5],
+      "name": "oak"
+    },
+    {
+      // Place a oak_log at position (6, 0, 15)
+      "position": [6, 0, 15],
+      "name": "oak_log"
+    },
+    {
+      // Create a vertical water channel at y = -1 (underground level), so water doesn't spill
+      "type": "rectangle",
+      "from": [4, -1, 7],
+      "to": [4, -1, 9],
+      "name": "water"
+    },
+    {
+      // Create a horizontal line of oak planks from (1, 0, 15) to (1, 0, 20)
+      "type": "line",
+      "from ": [1, 0, 15],
+      "to": [1, 0, 20],
+      "name": "oak_planks"
+    },
+    {
+      // Create a rectangular patch of grass blocks for planting or decoration
+      "type": "rectangle",
+      "from": [0, 0, 10],
+      "to": [4, 0, 14],
+      "name": "grass_block"
+    },
+    {
+      // Place a chest at (2, 0, 12) facing north, containing seeds and hoes
+      "position": [2, 0, 12],
+      "name": "chest",
+      "facing": "north",
+      "items": [
+        {
+          // 16 wheat seeds for planting
+          "name": "wheat_seeds",
+          "count": 16
+        },
+        {
+          // 2 iron hoes for tilling soil
+          "name": "iron_hoe",
+          "count": 2
+        }
+      ]
+    },
+    {
+      // Place an empty chest at (0, 0, 14) facing north, possibly for future use
+      "position": [1, 0, 14],
+      "name": "chest",
+      "facing": "north",
+      "items": []
+    },
+    {
+      // Place a crafting table at position (-2, 0, 20)
+      "position": [-2, 0, 20],
+      "name": "crafting_table"
+    },
+    {
+      // Place a sign at (1, 0, 12) facing north with task instructions
+      "position": [1, 0, 12],
+      "name": "oak_sign",
+      "facing": "north",
+      "text": "Wheat Farm Setup: Till soil, plant seeds, build water channel from river."
+    }
+  ],
+  // No entities (e.g., animals, villagers) are included in the environment
+  "entities": [
+// Fish in the water
+{"position": [4, -1, 8], "name": "cod"},
+{"position": [4, -1, 9], "name": "salmon"},
+]
+}
+"""
+
 api_key_list = json.load(open("API_KEY_LIST", "r"))["AGENT_KEY"]
-# llm_config = {
-#     "api_key": api_key_list[0],
-#     "api_base": "https://dashscope.aliyuncs.com/compatible-mode/v1",
-#     "api_model": "qwen-max",
-#     "api_key_list": api_key_list
-# }
 llm_config = {
     "api_key": api_key_list[0],
-    # "api_base": "https://api.deepseek.com/chat/completions",
-    "api_base": "https://api.deepseek.com/v1",
-    "api_model": "deepseek-chat",
+    "api_base": "https://dashscope.aliyuncs.com/compatible-mode/v1",
+    "api_model": "qwen-max",
     "api_key_list": api_key_list
 }
+# llm_config = {
+#     "api_key": api_key_list[0],
+#     # "api_base": "https://api.deepseek.com/chat/completions",
+#     "api_base": "https://api.deepseek.com/v1",
+#     "api_model": "deepseek-chat",
+#     "api_key_list": api_key_list
+# }
 llm = init_language_model(llm_config)
+
 
 def createBreadthPrompt(instruction):
     prompt = breadth_base_instruction
     prompt += "#Given Prompt#: \r\n {} \r\n".format(instruction)
     prompt += "#Created Prompt#:\r\n"
     return prompt
+
 
 def createVABreadthPrompt(instruction):
     # randomly select 3 actions from action_list
@@ -161,6 +272,7 @@ def createVABreadthPrompt(instruction):
     prompt += "#Created Prompt#:\r\n"
     print("prompt:", prompt)
     return prompt
+
 
 def createVAVolumePrompt(input):
     prompt = VA_Volume_base_instruction
@@ -179,6 +291,7 @@ def createVAVolumePrompt(input):
     prompt += "#Augmented Task Output#: \r\n"
     return prompt
 
+
 def createBlueprintPrompt(background, example=example_string):
     prompt = blueprint_base_instruction
     # prompt = large_scale_instruction
@@ -193,6 +306,7 @@ def createBlueprintPrompt(background, example=example_string):
     prompt += "#Designed Building#:\r\n"
     return prompt
 
+
 def extract_outermost_braces_content(text):
     """
     提取第一个最外层的完整 {...} 内容，确保括号正确匹配
@@ -201,10 +315,10 @@ def extract_outermost_braces_content(text):
     start_index = text.find('{')
     if start_index == -1:
         return None
-    
+
     brace_depth = 1
     current_index = start_index + 1
-    
+
     while current_index < len(text) and brace_depth > 0:
         char = text[current_index]
         if char == '{':
@@ -212,11 +326,12 @@ def extract_outermost_braces_content(text):
         elif char == '}':
             brace_depth -= 1
         current_index += 1
-    
+
     if brace_depth == 0:
         return text[start_index:current_index]
     else:
         return None  # 括号不匹配
+
 
 def remove_json_comments(json_str):
     """移除JSON字符串中的注释（//开头或行内）"""
@@ -231,6 +346,7 @@ def remove_json_comments(json_str):
         lines.append(line)
     return '\n'.join(lines)
 
+
 def str2json(raw_str):
     # 1. 提取最外层 {...} 内容
     json_block = extract_outermost_braces_content(raw_str)
@@ -239,10 +355,10 @@ def str2json(raw_str):
         print("原始字符串:")
         print(raw_str)
         return "\{ERROR\}"
-    
+
     # 2. 移除注释
     clean_json_str = remove_json_comments(json_block)
-    
+
     # 3. 解析为字典
     try:
         data_dict = json.loads(clean_json_str)
@@ -253,8 +369,9 @@ def str2json(raw_str):
         print(clean_json_str)
         return "\{ERROR\}"
 
+
 def save_dict(data_dict, filename):
-    
+
     # 4. Check if the file already exists, if so, load the data in the file into "history_{filename}"
     try:
         with open(filename, 'r', encoding='utf-8') as f:
@@ -262,7 +379,7 @@ def save_dict(data_dict, filename):
     except (FileNotFoundError, json.JSONDecodeError):
         existing_data = []
     # merge the existing data with the file "history_{filename}"
-    
+
     try:
         with open("history"+filename, 'r', encoding='utf-8') as f:
             history_data = json.load(f)
@@ -274,8 +391,7 @@ def save_dict(data_dict, filename):
         history_data.append(data_dict)
         # append the evol_objs to the alpaca_data_cleaned.json file
         json.dump(history_data, f, indent=4, ensure_ascii=False)
-    
-    
+
     # 5. 保存到文件
     try:
         with open(filename, 'w', encoding='utf-8') as f:
@@ -286,7 +402,8 @@ def save_dict(data_dict, filename):
         print(f"文件保存失败: {e}")
         return False
 
-def gen_task(times = 1):
+
+def gen_task(times=1):
     evol_objs = []
 
     for i in range(times):
@@ -304,10 +421,12 @@ def gen_task(times = 1):
 
         selected_evol_prompt = random.choice(evol_prompts)
 
-        evol_instruction = llm.few_shot_generate_thoughts(system_prompt="You are a helpful assistant", example_prompt=selected_evol_prompt)
+        evol_instruction = llm.few_shot_generate_thoughts(
+            system_prompt="You are a helpful assistant", example_prompt=selected_evol_prompt)
         evol_objs.append({"instruction": evol_instruction})
 
     return evol_objs
+
 
 def concreting_task(task_list):
     evol_objs = []
@@ -320,12 +439,14 @@ def concreting_task(task_list):
         evol_prompts = createVAVolumePrompt(prompt)
         print("evol_prompts:", evol_prompts)
         selected_evol_prompt = evol_prompts
-        evol_instruction = llm.few_shot_generate_thoughts(system_prompt="You are a helpful assistant", example_prompt=selected_evol_prompt)
+        evol_instruction = llm.few_shot_generate_thoughts(
+            system_prompt="You are a helpful assistant", example_prompt=selected_evol_prompt)
         evol_objs.append({"instruction": evol_instruction})
-    
+
     # print("evol_objs:", evol_objs)
-    
+
     return evol_objs
+
 
 '''
 saved file shall be like:
@@ -350,7 +471,8 @@ saved file shall be like:
 }
 '''
 
-def create_task_file( task_sim, task_idx, task_name, blueprint, task_goal, agent_num=1, dig_needed=False, max_task_num=0, task_scenario="Unknown", evaluation_arg={}, port=25565, host="127.0.0.1", api_base="https://api.deepseek.com", api_model="deepseek_chat", task_type="meta"):
+
+def create_task_file(task_sim, task_idx, task_name, blueprint, task_goal, agent_num=1, dig_needed=False, max_task_num=0, task_scenario="Unknown", evaluation_arg={}, port=25565, host="127.0.0.1", api_base="https://api.deepseek.com", api_model="deepseek_chat", task_type="meta"):
     task_file = {
         "api_model": api_model,
         "api_base": api_base,
@@ -371,7 +493,8 @@ def create_task_file( task_sim, task_idx, task_name, blueprint, task_goal, agent
     }
     return task_file
 
-def create_blueprint(concreted_task, times = 1, sim_task=None):
+
+def create_blueprint(concreted_task, times=1, sim_task=None):
     blueprint_prompt = []
     for i in range(times):
         cur_obj = random.choice(concreted_task)
@@ -379,8 +502,9 @@ def create_blueprint(concreted_task, times = 1, sim_task=None):
         blueprint_prompt.append(createBlueprintPrompt(instruction))
         selected_evol_prompt = blueprint_prompt[-1]
         print("selected_evol_prompt:", selected_evol_prompt)
-        evol_instruction = llm.few_shot_generate_thoughts(system_prompt="You are a helpful assistant", example_prompt=selected_evol_prompt)
-        #TODO: blueprints.json之后应该调整成类似config.json那样的，包含给judger生成环境的信息和给TM任务描述的信息
+        evol_instruction = llm.few_shot_generate_thoughts(
+            system_prompt="You are a helpful assistant", example_prompt=selected_evol_prompt)
+        # TODO: blueprints.json之后应该调整成类似config.json那样的，包含给judger生成环境的信息和给TM任务描述的信息
         print("blueprint:", evol_instruction)
         task_idx = i
         task_name = "multi_agent_task_{}".format(random.randint(0, 10000))

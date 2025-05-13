@@ -18,7 +18,6 @@ from javascript import require, On
 # python build_test.py --idx 0 --host 10.214.180.148 --port 25565 --task_name test
 
 
-
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('--idx', type=int, default=0,
@@ -99,9 +98,9 @@ if __name__ == '__main__':
                 # if it has a key called "type" and the value is "line":
                 if b.get("type") == "line" or b.get("type") == "rectangle":
                     x_0, y_0, z_0 = b["from"][0] + x_bias, b["from"][1] + \
-                         y_bias, b["from"][2] + z_bias
+                        y_bias, b["from"][2] + z_bias
                     x_1, y_1, z_1 = b["to"][0] + x_bias, b["to"][1] + \
-                         y_bias, b["to"][2] + z_bias
+                        y_bias, b["to"][2] + z_bias
                     # 这里的-1非常奇怪，是程序的bug吗？
                     # fill: 用于填充一个区域。
                     # 例如：/fill 1 2 3 4 5 6 stone
@@ -209,6 +208,14 @@ if __name__ == '__main__':
                 f"test 2")
             print("clear done")
             time.sleep(1)
+
+            bot.chat(
+                f"/fill {x_b + min_x} -61 {z_b + min_z} {x_b + max_x} -61 {z_b + max_z} grass_block")
+            time.sleep(.1)
+            # call the render function to build the structures as specified by the task_data
+            print("rendering...")
+            render(task_data, x_b, y_b, z_b)
+
             # build the glass boundary which specifies the experiment area
             bot.chat(
                 f"/fill {x_b + min_x} {y_b + min_y} {z_b + min_z} {x_b + max_x} {y_b + max_y} {z_b + min_z} glass")
@@ -222,12 +229,7 @@ if __name__ == '__main__':
             bot.chat(
                 f"/fill {x_b + max_x} {y_b + min_y} {z_b + min_z} {x_b + max_x} {y_b + max_y} {z_b + max_z} glass")
             time.sleep(.1)
-            bot.chat(
-                f"/fill {x_b + min_x} -61 {z_b + min_z} {x_b + max_x} -61 {z_b + max_z} grass_block")
-            time.sleep(.1)
-            # call the render function to build the structures as specified by the task_data
-            print("rendering...")
-            render(task_data, x_b, y_b, z_b)
+
             print("render done")
 
             # judger bot will be in spectator mode
