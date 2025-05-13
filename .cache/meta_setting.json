@@ -2,120 +2,135 @@
     "api_model": "qwen-max",
     "api_base": "https://dashscope.aliyuncs.com/compatible-mode/v1",
     "task_type": "gen",
-    "task_idx": 10,
+    "task_idx": 1,
     "agent_num": 2,
     "dig_needed": false,
-    "task_goal": "Walk around",
+    "task_goal": "- Collaborate to build a small, sustainable farm within the given coordinates. The farm should include a 5x5 plot of farmland, a water source, and a storage chest for harvested crops.\n\n- **Agent 1 (Farmer):**\n  - Dig a 5x5 area at [5, 0, 15] and till the soil to create farmland.\n  - Place a water source block in the center of the farmland at [7, 0, 15].\n  - Plant wheat seeds in the tilled soil. The seeds can be found in the chest at [5, 0, 18].\n\n- **Agent 2 (Harvester):**\n  - Once the wheat has grown, harvest it and place the harvested wheat in the chest at [5, 0, 16].\n  - Replant the harvested wheat seeds to ensure continuous growth.\n\n- **Agent 3 (Supplier):**\n  - Collect water from the nearby river at [8, 0, 20] using empty buckets from the chest at [5, 0, 18].\n  - Ensure the water source block in the center of the farmland is always full.\n  - If the water source dries up, refill it with the collected water.\n\n- **Agent 4 (Guard):**\n  - Patrol the perimeter of the farm to protect it from any hostile mobs that might try to destroy the crops.\n  - Use the provided wooden sword from the chest at [5, 0, 18] to defend the farm.\n\n- **Additional Instructions:**\n  - All agents must coordinate their actions to ensure the farm is continuously productive.\n  - Return all unused materials and tools to the chest at [5, 0, 18] after each task is completed.\n  - The farm should be maintained for at least 3 Minecraft days to ensure its sustainability.",
     "blueprint": {
         "blocks": [
             {
-                "type": "rectangle",
-                "from ": [
-                    -11,
-                    -1,
-                    0
-                ],
-                "to": [
-                    11,
-                    -1,
-                    25
-                ],
-                "name": "grass_block"
-            },
-            {
-                "type": "rectangle",
-                "from ": [
-                    1,
-                    -1,
-                    8
-                ],
-                "to": [
-                    5,
-                    3,
-                    12
-                ],
-                "name": "oak_planks"
-            },
-            {
-                "type": "rectangle",
-                "from ": [
-                    -5,
-                    -1,
-                    8
-                ],
-                "to": [
-                    -1,
-                    3,
-                    12
-                ],
-                "name": "oak_planks"
-            },
-            {
-                "type": "line",
-                "from ": [
-                    3,
-                    -1,
-                    10
-                ],
-                "to": [
-                    3,
-                    2,
-                    10
-                ],
-                "name": "oak_log"
-            },
-            {
+                "type": "tree",
                 "position": [
                     3,
-                    3,
-                    10
+                    0,
+                    5
+                ],
+                "name": "oak"
+            },
+            {
+                "type": "rectangle",
+                "from": [
+                    4,
+                    -1,
+                    7
+                ],
+                "to": [
+                    4,
+                    -1,
+                    9
                 ],
                 "name": "water"
             },
             {
+                "type": "line",
+                "from": [
+                    1,
+                    0,
+                    15
+                ],
+                "to": [
+                    1,
+                    0,
+                    20
+                ],
+                "name": "oak_planks"
+            },
+            {
+                "type": "rectangle",
+                "from": [
+                    0,
+                    0,
+                    10
+                ],
+                "to": [
+                    4,
+                    0,
+                    14
+                ],
+                "name": "grass_block"
+            },
+            {
                 "position": [
                     5,
-                    -1,
-                    12
+                    0,
+                    18
                 ],
                 "name": "chest",
                 "facing": "north",
                 "items": [
                     {
-                        "name": "dirt",
-                        "count": 25
+                        "name": "wheat_seeds",
+                        "count": 16
                     },
                     {
-                        "name": "wheat_seeds",
-                        "count": 25
+                        "name": "bucket",
+                        "count": 2
+                    },
+                    {
+                        "name": "wooden_sword",
+                        "count": 1
                     }
                 ]
             },
             {
-                "type": "rectangle",
-                "from ": [
-                    4,
-                    -1,
-                    11
+                "position": [
+                    5,
+                    0,
+                    16
                 ],
-                "to": [
-                    6,
-                    2,
-                    13
-                ],
-                "name": "oak_planks"
+                "name": "chest",
+                "facing": "north",
+                "items": []
             },
             {
                 "position": [
-                    0,
-                    15,
-                    0
+                    -2,
+                    1,
+                    20
                 ],
-                "name": "daylight_detector"
+                "name": "crafting_table"
+            },
+            {
+                "position": [
+                    1,
+                    0,
+                    12
+                ],
+                "name": "oak_sign",
+                "facing": "north",
+                "text": "Wheat Farm Setup: Till soil, plant seeds, build water channel from river."
+            }
+        ],
+        "entities": [
+            {
+                "position": [
+                    4,
+                    -1,
+                    8
+                ],
+                "name": "cod"
+            },
+            {
+                "position": [
+                    4,
+                    -1,
+                    9
+                ],
+                "name": "salmon"
             }
         ]
     },
     "host": "127.0.0.1",
     "port": 25565,
-    "task_name": "gen_test"
+    "task_name": "gen_1_2p"
 }

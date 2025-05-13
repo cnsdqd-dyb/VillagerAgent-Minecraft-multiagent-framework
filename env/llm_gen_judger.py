@@ -79,53 +79,58 @@ def handleViewer(*args):
         for b in blocks:
             # if it has a key called "type" and the value is "line":
             if b.get("type") == "line" or b.get("type") == "rectangle":
-                x_0, y_0, z_0 = b["from "][0] + x_bias, b["from "][1] + y_bias, b["from "][2] + z_bias
+                x_0, y_0, z_0 = b["from"][0] + x_bias, b["from"][1] + y_bias, b["from"][2] + z_bias
                 x_1, y_1, z_1 = b["to"][0] + x_bias, b["to"][1] + y_bias, b["to"][2] + z_bias
                 # fill: 用于填充一个区域。
                 # 例如：/fill 1 2 3 4 5 6 stone
                 bot.chat(f'/fill {x_0} {y_0} {z_0} {x_1} {y_1} {z_1} {b["name"]}')
                 time.sleep(.1)
-                continue
-
-            time.sleep(.1)
-            x, y, z = b["position"][0] + x_bias, b["position"][1] + y_bias, b["position"][2] + z_bias
-
-            parameter = {}
-            for key in b.keys():
-                # this is for other parameters, like facing, etc. they are not compulsory so we need to check if they exist
-                if key != "position" and key != "name" and key != "items":
-                    parameter[key] = b[key]
-            if len(parameter) == 0:
-                bot.chat(f'/setblock {x} {y} {z} {b["name"]}')
+            
+            elif b.get("type") == "tree":
+                # tree: 用于生成树木。
+                # 例如：/tree oak 1 2 3
+                x, y, z = b["position"][0] + x_bias, b["position"][1] + \
+                    y_bias, b["position"][2] + z_bias
+                bot.chat(f'/place feature {b["name"]} {x} {y} {z}')
+                time.sleep(.1)
+                
             else:
-                # if there are other parameters like facing, text, etc.
-                # example: /setblock 1 2 3 stone[facing=west]
-                parameter_str = ""
-                for i, key in enumerate(parameter.keys()):
-                    if i != 0:
-                        parameter_str += ","
-                    parameter_str += f"{key}={parameter[key]}"
-                bot.chat(
-                    f'/setblock {x} {y} {z} {b["name"]}[{parameter_str}]')
+                x, y, z = b["position"][0] + x_bias, b["position"][1] + y_bias, b["position"][2] + z_bias
 
-            # if the block is a chest, we need to set the items in it
-            if b["name"] == "chest":
-                items = b.get("items", [])
-                next_slot = 0
-                for i, item in enumerate(items):
-                    item_name = item["name"]
-                    item_count = item["count"]
-                    if item_name == "milk_bucket" or item_name == "bucket":
-                        for j in range(item_count):
-                            # item	用于修改方块或实体的物品栏。
-                            # 替换方块（箱子、熔炉等）或实体（玩家或生物）物品栏内的物品。
-                            bot.chat(
-                                f'/item replace block {x} {y} {z} container.{next_slot} with {item_name}')
+                parameter = {}
+                for key in b.keys():
+                    # this is for other parameters, like facing, etc. they are not compulsory so we need to check if they exist
+                    if key != "position" and key != "name" and key != "items":
+                        parameter[key] = b[key]
+                if len(parameter) == 0:
+                    bot.chat(f'/setblock {x} {y} {z} {b["name"]}')
+                else:
+                    # if there are other parameters like facing, text, etc.
+                    # example: /setblock 1 2 3 stone[facing=west]
+                    parameter_str = ""
+                    for i, key in enumerate(parameter.keys()):
+                        if i != 0:
+                            parameter_str += ","
+                        parameter_str += f"{key}={parameter[key]}"
+                    bot.chat(
+                        f'/setblock {x} {y} {z} {b["name"]}[{parameter_str}]')
+
+                # if the block is a chest, we need to set the items in it
+                if b["name"] == "chest":
+                    items = b.get("items", [])
+                    next_slot = 0
+                    for i, item in enumerate(items):
+                        item_name = item["name"]
+                        item_count = item["count"]
+                        if item_name == "milk_bucket" or item_name == "bucket":
+                            for j in range(item_count):
+                                # item	用于修改方块或实体的物品栏。
+                                # 替换方块（箱子、熔炉等）或实体（玩家或生物）物品栏内的物品。
+                                bot.chat(f'/item replace block {x} {y} {z} container.{next_slot} with {item_name}')
+                                next_slot += 1
+                        else:
+                            bot.chat(f'/item replace block {x} {y} {z} container.{next_slot} with {item_name} {item_count}')
                             next_slot += 1
-                    else:
-                        bot.chat(
-                            f'/item replace block {x} {y} {z} container.{next_slot} with {item_name} {item_count}')
-                        next_slot += 1
 
             # 生成环境中的实体
         entities = data.get("entities", [])
