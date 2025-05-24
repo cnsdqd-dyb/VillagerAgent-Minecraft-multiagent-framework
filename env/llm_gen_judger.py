@@ -3,8 +3,9 @@ import platform
 import os
 from utils import *
 import argparse
+import random
 
-# python env/buid_test.py --host 127.0.0.1 --port 25565 
+# python env/llm_gen_judger.py --host 127.0.0.1 --port 25565 --agent_num 2 --agent_names Alice,Bob --task_name gen_1_2p
 system_type = platform.system().lower()
 
 parser = argparse.ArgumentParser()
@@ -46,9 +47,10 @@ bot.loadPlugin(collectBlock.plugin)
 bot.loadPlugin(pvp)
 bot.loadPlugin(minecraftHawkEye)
 
-#TODO: cache
-with open(".cache/meta_setting.json", "r") as f:
-    blueprint = json.load(f)["blueprint"]
+with open("qwen-max_gen_config.json", "r") as f:
+    blueprint = json.load(f)[0]["blueprint"]
+# with open(".cache/meta_setting.json", "r") as f:
+#      blueprint = json.load(f)["blueprint"]
 
 ### reset the environments
 with open("data/score.json", "w") as f:
@@ -69,16 +71,18 @@ max_x, max_y, max_z = 11, 15, 25
 
 start_time = None
 last_time = None
-max_time = 300
+max_time = 700
 
 @On(bot, 'spawn')
 def handleViewer(*args):   
+    
     def render_structure(data: dict, x_bias, y_bias, z_bias):
 
-        blocks = data.get("blocks", [])
+        blocks, entities = blueprint["blocks"], blueprint["entities"]
+
         for b in blocks:
-            # if it has a key called "type" and the value is "line":
-            if b.get("type") == "line" or b.get("type") == "rectangle":
+            # if it has a key called "type" and the value is "cube":
+            if b.get("type") == "cube":
                 x_0, y_0, z_0 = b["from"][0] + x_bias, b["from"][1] + y_bias, b["from"][2] + z_bias
                 x_1, y_1, z_1 = b["to"][0] + x_bias, b["to"][1] + y_bias, b["to"][2] + z_bias
                 # fill: 用于填充一个区域。
@@ -89,32 +93,41 @@ def handleViewer(*args):
             elif b.get("type") == "tree":
                 # tree: 用于生成树木。
                 # 例如：/tree oak 1 2 3
-                x, y, z = b["position"][0] + x_bias, b["position"][1] + \
-                    y_bias, b["position"][2] + z_bias
+                x, y, z = b["position"][0] + x_bias, b["position"][1] + y_bias, b["position"][2] + z_bias
                 bot.chat(f'/place feature {b["name"]} {x} {y} {z}')
                 time.sleep(.1)
                 
-            else:
+            elif b.get("type") == "single":
                 x, y, z = b["position"][0] + x_bias, b["position"][1] + y_bias, b["position"][2] + z_bias
 
                 parameter = {}
                 for key in b.keys():
                     # this is for other parameters, like facing, etc. they are not compulsory so we need to check if they exist
-                    if key != "position" and key != "name" and key != "items":
+                    if all(key != default_key for default_key in ["position", "name", "items", "type"]):
                         parameter[key] = b[key]
                 if len(parameter) == 0:
                     bot.chat(f'/setblock {x} {y} {z} {b["name"]}')
+                    # print(f'/setblock {x} {y} {z} {b["name"]}')
                 else:
                     # if there are other parameters like facing, text, etc.
                     # example: /setblock 1 2 3 stone[facing=west]
                     parameter_str = ""
+                    if "text" in parameter.keys():
+                        text = parameter["text"]
+                        parameter.pop("text")
+                    else:
+                        text = None
                     for i, key in enumerate(parameter.keys()):
                         if i != 0:
                             parameter_str += ","
                         parameter_str += f"{key}={parameter[key]}"
-                    bot.chat(
-                        f'/setblock {x} {y} {z} {b["name"]}[{parameter_str}]')
-
+                    if text is None:
+                        bot.chat(f'/setblock {x} {y} {z} {b["name"]}[{parameter_str}]')
+                        # print(f'/setblock {x} {y} {z} {b["name"]}[{parameter_str}]')
+                    else:
+                        bot.chat(f"/setblock {x} {y} {z} {b['name']}[{parameter_str}]{{Text1:'{{\"text\":\"{text}\"}}'}}")
+                        # print(f"/setblock {x} {y} {z} {b['name']}[{parameter_str}]{{Text1:'{{\"text\":\"{text}\"}}'}}")
+                        
                 # if the block is a chest, we need to set the items in it
                 if b["name"] == "chest":
                     items = b.get("items", [])
@@ -132,8 +145,9 @@ def handleViewer(*args):
                             bot.chat(f'/item replace block {x} {y} {z} container.{next_slot} with {item_name} {item_count}')
                             next_slot += 1
 
+            else:
+                bot.chat("/tellraw @a {\"text\":\"INVALID BLOCK TYPE!\", \"color\":\"red\"}")
             # 生成环境中的实体
-        entities = data.get("entities", [])
         for e in entities:
             time.sleep(.1)
             x, y, z = e["position"][0] + x_bias, e["position"][1] + y_bias, e["position"][2] + z_bias
