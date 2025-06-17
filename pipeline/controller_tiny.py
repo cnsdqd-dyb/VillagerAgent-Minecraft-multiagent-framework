@@ -196,14 +196,13 @@ class GlobalController:
         return None
     
     def update_feedback(self, task, agent, detail):
-        
         task.status = Task.success if agent.reflect(task, detail) else Task.failure
+        # task.status = Task.success
         self.set_task_status(task.id, task.status, detail)
 
         for agent in self.agent_list:
             if self.assignment.get(agent.name) == task.id:
                 self.assignment.pop(agent.name)
-
         self.logger.info(
             f"task {task.description} has been executed, the result is {task.status}")
         self.task_manager.feedback_task(self.get_task_by_id(task.id))

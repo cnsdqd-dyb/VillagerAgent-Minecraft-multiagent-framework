@@ -4,6 +4,7 @@ import logging
 import colorlog
 import os
 import yaml
+import sys
 from langchain.docstore.document import Document
 from langchain.embeddings.openai import OpenAIEmbeddings
 from langchain.text_splitter import RecursiveCharacterTextSplitter
@@ -249,10 +250,10 @@ def init_logger(name: str, level=logging.ERROR, dump=False, silent=False):
                 pass
 
         return empty_logger()
-    # 创建一个logger
+    
     logger = logging.getLogger(name)
     logger.propagate = False
-    logger.setLevel(level)  # 设置日志级别
+    logger.setLevel(level)
 
     # 定义handler的输出格式
     log_formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
@@ -267,23 +268,28 @@ def init_logger(name: str, level=logging.ERROR, dump=False, silent=False):
         }
     )
 
-    # 创建一个handler，用于输出到控制台
-    console_handler = logging.StreamHandler()
+    console_handler = logging.StreamHandler(
+        # 强制使用UTF-8编码，解决Windows下GBK编码问题
+        stream=open(sys.stdout.fileno(), 'w', encoding='utf-8', closefd=False)
+    )
     console_handler.setLevel(level)
     console_handler.setFormatter(color_formatter)
     logger.addHandler(console_handler)
 
-    # 创建一个handler，用于写入日志文件
     if dump:
         if not os.path.exists("logs"):
             os.mkdir("logs")
         file_name = f"logs/{name}.log"
-        file_handler = logging.FileHandler(file_name)
+        file_handler = logging.FileHandler(
+            file_name, 
+            encoding='utf-8'  # 明确指定UTF-8编码
+        )
         file_handler.setLevel(level)
         file_handler.setFormatter(log_formatter)
         logger.addHandler(file_handler)
 
     return logger
+
 
 
 def dict2document(dict: dict, db_name: str):

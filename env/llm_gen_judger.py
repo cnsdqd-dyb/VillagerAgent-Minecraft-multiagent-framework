@@ -47,10 +47,11 @@ bot.loadPlugin(collectBlock.plugin)
 bot.loadPlugin(pvp)
 bot.loadPlugin(minecraftHawkEye)
 
-with open("qwen-max_gen_config.json", "r") as f:
-    blueprint = json.load(f)[0]["blueprint"]
-# with open(".cache/meta_setting.json", "r") as f:
-#      blueprint = json.load(f)["blueprint"]
+# with open("qwen3-235b-a22b_gen_config.json", "r") as f:
+#     config = json.load(f)[0]
+with open(".cache/meta_setting.json", "r") as f:
+    config = json.load(f)
+blueprint = config["blueprint"]
 
 ### reset the environments
 with open("data/score.json", "w") as f:
@@ -72,14 +73,16 @@ max_x, max_y, max_z = 11, 15, 25
 start_time = None
 last_time = None
 max_time = 700
+max_iter = 2
 
 @On(bot, 'spawn')
 def handleViewer(*args):   
     
     def render_structure(data: dict, x_bias, y_bias, z_bias):
 
-        blocks, entities = blueprint["blocks"], blueprint["entities"]
-
+        blocks = blueprint.get("blocks", [])
+        entities = blueprint.get("entities", [])
+        init_items = blueprint.get("items", [])
         for b in blocks:
             # if it has a key called "type" and the value is "cube":
             if b.get("type") == "cube":
@@ -153,6 +156,33 @@ def handleViewer(*args):
             x, y, z = e["position"][0] + x_bias, e["position"][1] + y_bias, e["position"][2] + z_bias
             # summon: 生成一个实体。
             bot.chat(f'/summon {e["name"]} {x} {y} {z}')
+        
+        # strategy = "random" # 决定如何在agent之间分初始资源
+        strategy = "slot_based"
+
+        for i in init_items:
+            cnt = i["count"]
+
+            if strategy == "random":
+                partitions = []
+                remaining = cnt
+                for _ in range(agent_num - 1):
+                    # 随机生成一个数，范围是 [0, remaining]
+                    num = random.randint(0, remaining)
+                    partitions.append(num)
+                    remaining -= num
+                
+                partitions.append(remaining)  # 最后一个数直接取剩余值
+                random.shuffle(partitions)
+                for agent_name, num in zip(agent_names, partitions):
+                    if num > 0:
+                        bot.chat(f"/give {agent_name} {i['name']} {num}") 
+                        time.sleep(.2)
+
+            if strategy == "slot_based":
+                agent_name = random.choice(agent_names)
+                bot.chat(f"/give {agent_name} {i['name']} {cnt}")
+                time.sleep(.2)
 
     # render 函数是这段代码中用于动态生成 Minecraft 建筑结构的核心函数，它负责根据任务配置（task_data）在游戏世界中渲染各种建筑、方块和实体。
     def reset():
@@ -185,7 +215,9 @@ def handleViewer(*args):
         time.sleep(.1)
         bot.chat(f"/fill {x_b + max_x} {y_b + min_y} {z_b + min_z} {x_b + max_x} {y_b + max_y} {z_b + max_z} glass")
         time.sleep(.1)
-        bot.chat(f"/fill {x_b + min_x} -61 {z_b + min_z} {x_b + max_x} -61 {z_b + max_z} grass_block")
+        bot.chat(f"/fill {x_b + min_x} {y_b-1} {z_b + min_z} {x_b + max_x} {y_b-1} {z_b + max_z} grass_block")
+        time.sleep(.1)
+        bot.chat(f"/fill {x_b + min_x} {y_b-3} {z_b + min_z} {x_b + max_x} {y_b-2} {z_b + max_z} dirt")
         time.sleep(.1)
 
         render_structure(blueprint, x_b, y_b, z_b)
@@ -213,7 +245,9 @@ def handleViewer(*args):
 
 @On(bot, "time")
 def handleTime(*args):
-    global start_time, max_time, last_time
+    global start_time, max_time, last_time, max_iter
+    result_root = os.path.join("result", config["task_name"])
+    tm_path = os.path.join(result_root, "TM_history.json")
     if start_time is not None:
         now_time = time.time()
 
@@ -221,6 +255,14 @@ def handleTime(*args):
             bot.chat(f"time: {now_time - start_time}")
             last_time = now_time
 
-        if now_time - start_time > max_time:
-            with open(".cache/load_status.cache", "w") as f:
-                json.dump({"status": "end"}, f, indent=4)
+        # if now_time - start_time > max_time:
+
+            if os.path.exists(tm_path):
+                with open(tm_path, "r") as f:
+                    TM_log = json.load(f)
+
+                if len(TM_log["response"]) >= max_iter:
+                    with open(".cache/load_status.cache", "w") as f:
+                        json.dump({"status": "end"}, f, indent=4)
+                    with open(os.path.join(result_root, "config.json"), "w", encoding='utf-8') as f:
+                        json.dump(config, f, indent=4)

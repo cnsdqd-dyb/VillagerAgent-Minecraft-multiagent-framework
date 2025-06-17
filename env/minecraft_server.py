@@ -10,7 +10,7 @@ import re
 import platform
 
 system_type = platform.system().lower()
-# sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf8')
+# sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
 os.environ["REQ_TIMEOUT"] = "1800000"
 app = Flask(__name__)
 # Pickable = False
@@ -114,7 +114,7 @@ def render_structure():
     id = data.get('id')
     center_pos = data.get('center_pos')
     try:
-        with open("../minecraft/building_blue_print.json", "r") as f:
+        with open("../minecraft/building_blue_print.json", "r", encoding='utf-8') as f:
             structure_list = json.load(f)
         structure = structure_list[id]
         for b in structure["blocks"]:
@@ -332,7 +332,7 @@ def find():
             msg += f"the sign nearby said: {hint}"
         
         if os.path.exists(".cache/env.cache"):
-            with open(".cache/env.cache", "r") as f:
+            with open(".cache/env.cache", "r", encoding='utf-8') as f:
                 cache = json.load(f)
             # 找到距离小于5的cache
             for c in cache:
@@ -546,7 +546,23 @@ def place():
         elif "boat" in item_name.lower().replace(" ", "_"):
             bot.chat(f"/summon minecraft:boat {x} {y+1} {z}")
         elif "bed" in item_name.lower().replace(" ", "_"):
-            bot.chat(f"/setblock {x} {y} {z} {item_name}[part=head]")
+            if facing not in ["W", "E", "S", "N"]:
+                facing = random.choice(["W", "E", "S", "N"])
+            cvt = {"W": "west", "E": "east", "S": "south", "N": "north"}
+            bed_offset = {
+                "W": [1, 0, 0],
+                "E": [-1, 0, 0],
+                "N": [0, 0, 1],
+                "S": [0, 0, -1] 
+            }
+            bot.chat(f"/setblock {x} {y} {z} {item_name}[facing={cvt[facing]},part=head]")
+            bot.chat(f"/setblock {x+bed_offset[facing][0]} {y+bed_offset[facing][1]} {z+bed_offset[facing][2]} {item_name}[facing={cvt[facing]},part=foot]")
+        elif "door" in item_name.lower().replace(" ", "_"):
+            if facing not in ["W", "E", "S", "N"]:
+                facing = random.choice(["W", "E", "S", "N"])
+            cvt = {"W": "west", "E": "east", "S": "south", "N": "north"}
+            bot.chat(f"/setblock {x} {y} {z} {item_name}[facing={cvt[facing]},half=lower]")
+            bot.chat(f"/setblock {x} {y+1} {z} {item_name}[facing={cvt[facing]},half=upper]")
         else:
             if facing in ["W", "E", "S", "N"]:
                 cvt = {"W": "west", "E": "east", "S": "south", "N": "north"}
@@ -643,7 +659,7 @@ def environment():
             msg += f"{event['description']}\n"
     
     if os.path.exists(".cache/env.cache"):
-        with open(".cache/env.cache", "r") as f:
+        with open(".cache/env.cache", "r", encoding='utf-8') as f:
             cache = json.load(f)
         # 找到距离小于5的cache
         for c in cache:
@@ -1563,7 +1579,7 @@ def handleViewer(*args):
 def handle(this):
     # bot.chat("time")
     info_bot.update_time()
-    with open(".cache/load_status.cache", "r") as f:
+    with open(".cache/load_status.cache", "r", encoding='utf-8') as f:
         status_data = json.load(f)
     if status_data["status"] == "loaded" and info_bot.bot_init:
         info_bot.follow()

@@ -217,7 +217,11 @@ class OpenAILanguageModel(AbstractLanguageModel):
         """
         # logger.info("api")
         start_time = time.time()
-        completion = self.client.chat.completions.create(model=model, messages=messages, temperature=temperature)
+
+        if "qwen3" in model:
+            completion = self.client.chat.completions.create(model=model, messages=messages, temperature=temperature, extra_body={"enable_thinking": False})
+        else:
+            completion = self.client.chat.completions.create(model=model, messages=messages, temperature=temperature)
         # logger.warning(completion.choices[0].message.content)
         logger.debug(f"Time taken: {time.time() - start_time}")
         return completion
@@ -244,6 +248,16 @@ class OpenAILanguageModel(AbstractLanguageModel):
                 content += chunk.choices[0].delta.content
         logger.debug(f"Time taken: {time.time() - start_time}")
         return content
+
+    def filter_emoji(self, text: str) -> str:
+        ret_str = []
+        for c in text:
+            try:
+                c.encode('gbk')
+                ret_str.append(c)
+            except UnicodeEncodeError:
+                continue
+        return ''.join(ret_str)
 
     @retry(tries=10, delay=5, backoff=2, max_delay=60)
     def few_shot_generate_thoughts(self, system_prompt: str = "", example_prompt: [str] or str = [], max_tokens=1024,
@@ -287,7 +301,6 @@ class OpenAILanguageModel(AbstractLanguageModel):
 
             # dynamic change timeout by token number
             # messages = self.guard_token_number(messages, api_model, max_tokens)
-
             if stream:
                 content = self.gpt_api_stream(messages, api_model, temperature)
                 # usage_data = {"prompt_tokens": self.num_tokens_from_string(prompt, api_model),
@@ -299,6 +312,10 @@ class OpenAILanguageModel(AbstractLanguageModel):
                 # self.update_token_usage(response.usage.prompt_tokens, response.usage.completion_tokens)
 
                 content = response.choices[0].message.content
+            # print("-"*70)
+            # print(content)
+            # print("-"*70)
+            content = self.filter_emoji(content)
 
             for tag in check_tags:
                 if tag not in content:
@@ -361,7 +378,7 @@ class OpenAILanguageModel(AbstractLanguageModel):
             #     logger.warning(e)
             #     logger.warning(e.__cause__)
             #     raise e
-            
+
     def encode_image(self, image_path):
         with open(image_path, "rb") as image_file:
             return base64.b64encode(image_file.read()).decode('utf-8')

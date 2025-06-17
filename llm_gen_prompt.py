@@ -6,14 +6,15 @@ While it does not need to belong to the same domain as the #Given Task#, it must
 #Created Task# should meet the following requirements:
 - The x, y, z coordinates must strictly fall within the following bounds: min_x = -10, min_y = -1, min_z = 1; max_x = 10, max_y = 5, max_z = 24. Coordinates outside this range are not allowed.
 - Make sure the new task is reasonable and interpretable by humans.
-- Tasks that encourage intensive collaboration are preferred.
+- Tasks that encourage intensive collaboration are preferred, but the difficulty should be much easier than #Given Task#.
 - Provide only a general task specification and avoid explicitly assigning specific tasks to any individual agent.
 - The length of #Created Task# should be within 800 characters.
 - The terms '#Given Task#', '#Created Task#', 'given task', and 'created task' must not appear in the #Created Task#.
+- Do not include anything other than #Created Task# in your output.
 '''
 
 VA_Volume_base_instruction = '''
-I want you to act as a Environment Designer.
+I want you to act as an Environment Designer.
 Your objective is to learn the formatting style from the pairs of #Given Simple Task# and #Given Augmented Task#, and apply this format to transform the provided #Simple Task Input# into an #Augmented Task Output#.
 The purpose of the augmented task is to enrich or expand upon the original simple task by incorporating environment details and auxiliary information.
 The #Augmented Task Output# must be reasonable and interpretable by humans.
@@ -23,7 +24,7 @@ Note: the terms '#Given Simple Task#', '#Given Augmented Task#', and '#Simple Ta
 blueprint_base_instruction = '''
 You are an **environment designer in Minecraft**, responsible for creating the **initial environment** needed for a given task. This environment will serve as the foundation for agents to complete the task.
 
-You will receive a **#Task#** that specifies a goal to be completed collaboratively by multiple agents.
+You will receive a #Task# that specifies a goal to be completed collaboratively by multiple agents.
 
 ### Your tasks:
 
@@ -56,6 +57,45 @@ You will receive a **#Task#** that specifies a goal to be completed collaborativ
 ### Output:
 
 * Format your design as a **JSON object**, following the structure in the **#Example#** section.
+'''
+
+task_goal_prompt = """
+I need you to rewrite the following sentence while keeping its original meaning intact. Your goal is to create sentence variations that are rich in structure and expression. Please follow these guidelines:
+1. Preserve the core meaning of the original sentence.
+2. Keep the word with '_', do not replace them with other words.
+You can diversify the sentence structure by:
+1. Changing the word order or introducing inversion.
+2. Using synonyms or rephrasing.
+3. Switching between active and passive voice.
+4. Incorporating participle phrases or dependent clauses.
+
+Remember, You should still keep the original meaning of the sentence, and avoid making changes that alter the original meaning.
+Make the sentence clear and concise, and avoid unnecessary information.
+You should randomly select only one sentence from your rewritten version and return it.
+Only return the rewritten sentence. Do not include explanations or extra output.
+Original Sentence:
+{{orig_sen}}
+"""
+
+INVENTORY_SYSTEM_PROMPT = '''
+You are a rewriter. Your task is to rewrite the #Given Task# for multi-agent execution.
+You will receive a #Given Task#. This task is designed for multi-agents to complete.
+
+###Your Task:
+1. Identify all items that are initially stored in chests.
+2. Rewrite the task so that these items are instead located in the agents' inventory.
+
+###Important Notice:
+- Distinguish between items that are initially in a chest and those that are meant to be stored in a chest during task execution.
+  *For example, if a task includes "store oak logs in the chest", this is part of the task goal and should not be modified.
+- Only change the location of the items, do not alter the names or counts.
+- Do not change the task content. Keep all unrelated phrasing as close to the original as possible, as long as it remains fluent.
+- Only return the rewritten task description. Do not include explanations or extra output.
+'''
+
+INVENTORY_USER_PROMPT = '''
+#Given Task#:
+{{given_task}}
 '''
 
 instruction_actions = "You may use, but are not limited to, the following actions to create the multi-agent task:"

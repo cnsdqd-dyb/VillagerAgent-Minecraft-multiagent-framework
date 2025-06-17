@@ -19,6 +19,30 @@ import os
 import random
 import platform
 
+env = os.environ.copy()
+env["PYTHONIOENCODING"] = "utf-8"
+
+def filter_emoji(text: str) -> str:
+    ret_str = []
+    for c in text:
+        try:
+            c.encode('gbk')
+            ret_str.append(c)
+        except UnicodeEncodeError:
+            continue
+    return ''.join(ret_str)
+
+def filter_emoji_from_dict(obj):
+    if isinstance(obj, dict):
+        return {k: filter_emoji_from_dict(v) for k, v in obj.items()}
+    elif isinstance(obj, list):
+        return [filter_emoji_from_dict(i) for i in obj]
+    elif isinstance(obj, str):
+        return filter_emoji(obj)
+    else:
+        return obj
+
+
 def timeit(func):
     @wraps(func)
     def wrapper(*args, **kwargs):
@@ -58,7 +82,7 @@ def timeit(func):
                 # action log
                 action_log_path = "data/action_log.json"
                 if os.path.exists(action_log_path):
-                    with open(action_log_path, "r") as f:
+                    with open(action_log_path, "r", encoding='utf-8') as f:
                         action_log = json.load(f)
                 else:
                     action_log = {}
@@ -78,7 +102,7 @@ def timeit(func):
                 })
                 
                 # 写入文件
-                with open(action_log_path, "w") as f:
+                with open(action_log_path, "w", encoding='utf-8') as f:
                     json.dump(action_log, f, indent=4)
                 break
             except Exception as e:
@@ -96,26 +120,40 @@ class LLMHandler(BaseCallbackHandler):
         self.seralized_input = []
         self.chain_input = []
 
-    def on_chain_start(self, serialized, inputs, *, run_id, parent_run_id = None, tags = None, metadata = None, **kwargs):
-        # print("x"*30 + "chain_start called" + 'x'*30)
+    def on_chain_start(self, serialized, inputs, *, run_id, parent_run_id=None, tags=None, metadata=None, **kwargs):
+        cleaned_inputs = {k: filter_emoji(v) if isinstance(v, str) else v for k, v in inputs.items()}
         self.seralized_input.append(serialized)
-        self.chain_input.append(inputs)
+        self.chain_input.append(cleaned_inputs)
 
-    def on_llm_start(
-        self,
-        serialized,
-        prompts,
-        **kwargs,
-    ):
-        print("x"*30 + "llm_start called" + 'x'*30)
-        
+
+    def on_llm_start(self, serialized, prompts, **kwargs):
+        print("x" * 30 + "llm_start called" + "x" * 30)
+        clean_prompts = [filter_emoji(p) for p in prompts]
         self.seralized_input.append(serialized)
-        self.chain_input.append(prompts)
+        self.chain_input.append(clean_prompts)
+
         
     def on_llm_end(self, llm_result: LLMResult, **kwargs):
-        print("x"*30 + "llm_end called" + 'x'*30)
-
-        self.llm_out.append(llm_result.llm_output)
+        # 强制使用UTF-8编码打印
+        print("x" * 30 + "llm_end called" + "x" * 30)
+        
+        # 安全处理llm_output（可能包含Unicode字符）
+        if llm_result.llm_output is not None:
+            try:
+                # 如果是字典形式（如OpenAI返回的token_usage等）
+                llm_result.llm_output = filter_emoji(llm_result.llm_output)
+                if isinstance(llm_result.llm_output, dict):
+                    import json
+                    # 将字典转为JSON字符串确保UTF-8编码
+                    output_str = json.dumps(llm_result.llm_output, ensure_ascii=False)
+                    self.llm_out.append(output_str)
+                else:
+                    # 其他情况直接存储，确保是Unicode字符串
+                    self.llm_out.append(str(llm_result.llm_output))
+            except UnicodeEncodeError:
+                # 如果仍有编码问题，强制UTF-8编码
+                self.llm_out.append(llm_result.llm_output.encode('utf-8', errors='replace').decode('utf-8'))
+        
 
 class Agent():
     '''
@@ -141,7 +179,7 @@ class Agent():
     @staticmethod
     def get_url_prefix() -> dict:
         if os.path.exists("data/url_prefix.json"):
-            with open("data/url_prefix.json", "r") as f:
+            with open("data/url_prefix.json", "r", encoding='utf-8') as f:
                 url_prefix = json.load(f)
         else:
             url_prefix = {}
@@ -196,7 +234,7 @@ class Agent():
             return
         url_prefix = Agent.get_url_prefix()
         url_prefix[name] = f"http://localhost:{local_port}"
-        with open("data/url_prefix.json", "w") as f:
+        with open("data/url_prefix.json", "w", encoding='utf-8') as f:
             json.dump(url_prefix, f)
 
         Agent.name2port[name] = local_port
@@ -245,7 +283,7 @@ class Agent():
                 try:
                     Agent.agent_process[key] = subprocess.Popen(
                         ["python", "env/minecraft_server_fast.py", "-H", host, "-P", str(port), "-LP", str(value), "-U", key, "-W",
-                    world, "-D", str(debug)], shell=False)
+                    world, "-D", str(debug)], shell=False, env=env)
                     print(f"python env/minecraft_server_fast.py -H \"{host}\" -P {port} -LP {value} -U \"{key}\" -W \"{world}\" -D {debug}")
                 except Exception as e:
                     print(f"An error occurred: {e}")
@@ -254,7 +292,7 @@ class Agent():
             else:
                 Agent.agent_process[key] = subprocess.Popen(
                     ["python", "env/minecraft_server.py", "-H", host, "-P", str(port), "-LP", str(value), "-U", key, "-W",
-                 world, "-D", str(debug)], shell=False)
+                 world, "-D", str(debug)], shell=False, env=env)
                 print(f"python env/minecraft_server.py -H \"{host}\" -P {port} -LP {value} -U \"{key}\" -W \"{world}\" -D {debug}")
                 time.sleep(2)
         if verbose:
@@ -884,13 +922,13 @@ class Agent():
 
     def update_history(self, response):
         self.action_history.append(response)
-        with open(".cache/meta_setting.json", "r") as f:
+        with open(".cache/meta_setting.json", "r", encoding='utf-8') as f:
             config = json.load(f)
             task_name = config["task_name"]
         if not os.path.exists("result/" + task_name):
             os.mkdir(os.path.join("result/", task_name))
         root = os.path.join("result/", task_name)
-        with open(os.path.join(root, f"{self.name}_history.json"), "w") as f:
+        with open(os.path.join(root, f"{self.name}_history.json"), "w", encoding='utf-8') as f:
             json.dump(self.action_history, f, indent=4)
 
     def step(self, instruction: str, actions=[], observations=[], player_name_list=[], max_try_turn=2, max_iterations=1, tools=[], recommended_actions=[]):
@@ -899,22 +937,22 @@ class Agent():
 
         if 'qwen' or "default" in self.model:
             from langchain_community.chat_models.tongyi import ChatTongyi
-            self.llm = ChatTongyi(model=self.model, temperature=0, max_tokens=256, dashscope_api_key=random.choice(Agent.api_key_list), base_url=Agent.base_url)
+            self.llm = ChatTongyi(model=self.model, temperature=0, max_tokens=256, dashscope_api_key=random.choice(Agent.api_key_list), base_url=Agent.base_url, model_kwargs={"encoding": "utf-8"})
         elif "deepseek" in self.model:
             from openai import OpenAI
-            self.llm = OpenAI(model=self.model, temperature=0, max_token=256, openai_api_key=random.choice(Agent.api_key_list), base_url=Agent.base_url)
+            self.llm = OpenAI(model=self.model, temperature=0, max_token=256, openai_api_key=random.choice(Agent.api_key_list), base_url=Agent.base_url, model_kwargs={"encoding": "utf-8"})
         elif "instruct" in self.model and "gpt" in self.model:
             from langchain.llms import OpenAI
-            self.llm = OpenAI(model=self.model, temperature=0, max_tokens=256, openai_api_key=random.choice(Agent.api_key_list), base_url=Agent.base_url)
+            self.llm = OpenAI(model=self.model, temperature=0, max_tokens=256, openai_api_key=random.choice(Agent.api_key_list), base_url=Agent.base_url, model_kwargs={"encoding": "utf-8"})
         elif "gpt" in self.model:
             from langchain.chat_models import ChatOpenAI
-            self.llm = ChatOpenAI(model=self.model, temperature=0,  max_tokens=256, openai_api_key=random.choice(Agent.api_key_list), base_url=Agent.base_url)
+            self.llm = ChatOpenAI(model=self.model, temperature=0,  max_tokens=256, openai_api_key=random.choice(Agent.api_key_list), base_url=Agent.base_url, model_kwargs={"encoding": "utf-8"})
         elif "glm" in self.model:
             from zhipu import ChatZhipuAI
-            self.llm = ChatZhipuAI(model_name=self.model, temperature=0.01, api_key=random.choice(Agent.api_key_list))
+            self.llm = ChatZhipuAI(model_name=self.model, temperature=0.01, api_key=random.choice(Agent.api_key_list), model_kwargs={"encoding": "utf-8"})
         elif "default" in self.model:
             from openai import OpenAI
-            self.llm = OpenAI(model=self.model, openai_api_key=random.choice(Agent.api_key_list), base_url=Agent.base_url)
+            self.llm = OpenAI(model=self.model, openai_api_key=random.choice(Agent.api_key_list), base_url=Agent.base_url, model_kwargs={"encoding": "utf-8"})
         
         for act, obs in zip(actions, observations):
             instruction += f"\n{act['log']}\n{obs}"
@@ -945,26 +983,27 @@ class Agent():
             response = None
             try:
                 if len(player_name_list) == 0:
-                    response = agent({"input": f"Your name is {self.name}.\n{instruction}"})
+                    task = f"Your name is {self.name}.\n{instruction}"
+                    response = agent({"input": filter_emoji(task)})
                 else:
-                    response = agent(
-                        {"input": f"You should control {player_name_list} work together. \n{instruction}"})
+                    task = f"You should control {player_name_list} work together. \n{instruction}"
+                    response = agent({"input": filter_emoji(task)})
                 break
             except KeyboardInterrupt:
                 logging.info("KeyboardInterrupt")
                 raise KeyboardInterrupt
             except ConnectionError as e:
-                logging.info(e)
+                logging.info(filter_emoji(str(e)))
                 raise ConnectionError
             except ConnectionRefusedError as e:
-                logging.info(e)
+                logging.info(filter_emoji(str(e)))
                 raise ConnectionRefusedError
             except Exception as e:
-                print(e)
+                print(filter_emoji(str(e)))
                 print("retrying...")
                 time.sleep(1)
                 max_try_turn -= 1
-
+        response = filter_emoji_from_dict(response)
         if response is None:
             return (None, None), {"input": f"Your name is {self.name}.\n{instruction}", "action_list": [],
                                                 "final_answer": "The task execute failed.", "chain_input": llmhandler.chain_input, "seralized_input": llmhandler.seralized_input}
@@ -983,7 +1022,7 @@ class Agent():
         final_answer = response["output"]
         # save the action_list and final_answer
 
-        with open(f"data/history/{hash(response['input'])}.json", "w") as f:
+        with open(f"data/history/{hash(response['input'])}.json", "w", encoding='utf-8') as f:
             json.dump({"input": response["input"], "action_list": action_list, "final_answer": final_answer}, f,
                       indent=4)
         action = action_list[0]
@@ -995,13 +1034,13 @@ class Agent():
         # dynamic api key
         if 'qwen' in self.model:
             from langchain_community.chat_models.tongyi import ChatTongyi
-            self.llm = ChatTongyi(model=self.model, temperature=0, max_tokens=256, dashscope_api_key=random.choice(Agent.api_key_list), base_url=Agent.base_url)
+            self.llm = ChatTongyi(model=self.model, temperature=0, max_tokens=256, dashscope_api_key=random.choice(Agent.api_key_list), base_url=Agent.base_url, model_kwargs={"encoding": "utf-8"})
         elif ("instruct" in self.model and "gpt" in self.model):
             from langchain.llms import OpenAI
             self.llm = OpenAI(model=self.model, temperature=0, max_tokens=256, openai_api_key=random.choice(Agent.api_key_list), base_url=Agent.base_url)
         elif "gpt" in self.model or "NAS" in self.model or "llama" in self.model:
             from langchain.chat_models import ChatOpenAI
-            self.llm = ChatOpenAI(model=self.model, temperature=0,  max_tokens=256, openai_api_key=random.choice(Agent.api_key_list), base_url=Agent.base_url)
+            self.llm = ChatOpenAI(model=self.model, temperature=0,  max_tokens=256, openai_api_key=random.choice(Agent.api_key_list), base_url=Agent.base_url, model_kwargs={"encoding": "utf-8"})
         elif "gemini" in self.model:
             from langchain_google_genai import ChatGoogleGenerativeAI
             self.llm = ChatGoogleGenerativeAI(model=self.model, temperature=0, google_api_key=random.choice(Agent.api_key_list))
@@ -1010,10 +1049,10 @@ class Agent():
             self.llm = ChatZhipuAI(model_name=self.model, temperature=0.01, api_key=random.choice(Agent.api_key_list))
         elif "deepseek" in self.model:
             from langchain.chat_models import ChatOpenAI
-            self.llm = ChatOpenAI(model=self.model, temperature=0,  max_tokens=256, openai_api_key=random.choice(Agent.api_key_list), base_url=Agent.base_url)
+            self.llm = ChatOpenAI(model=self.model, temperature=0,  max_tokens=256, openai_api_key=random.choice(Agent.api_key_list), base_url=Agent.base_url, model_kwargs={"encoding": "utf-8"})
         elif "default" in self.model:
             from langchain.chat_models import ChatOpenAI
-            self.llm = ChatOpenAI(model=self.model, temperature=0,  max_tokens=256, openai_api_key=random.choice(Agent.api_key_list), base_url=Agent.base_url)
+            self.llm = ChatOpenAI(model=self.model, temperature=0,  max_tokens=256, openai_api_key=random.choice(Agent.api_key_list), base_url=Agent.base_url, model_kwargs={"encoding": "utf-8"})
         else:
             raise NotImplementedError(f"Model {self.model} not implemented.")
         # 这个地方是定义的agent的类型，初始化位置的agent没有被使用
@@ -1036,10 +1075,11 @@ class Agent():
                 with get_openai_callback() as cb:
                     start_time = time.time()
                     if len(player_name_list) == 0:
-                        response = agent({"input": f"Your name is {self.name}.\n{instruction}"})
+                        task = f"Your name is {self.name}.\n{instruction}"
+                        response = agent({"input": filter_emoji(task)})
                     else:
-                        response = agent(
-                            {"input": f"You should control {player_name_list} work together. \n{instruction}"})
+                        task = f"You should control {player_name_list} work together. \n{instruction}"
+                        response = agent({"input": filter_emoji(task)})
                     # print(llmhandler.chain_input)
                     # print(llmhandler.seralized_input)
 
@@ -1071,17 +1111,17 @@ class Agent():
                 logging.info("KeyboardInterrupt")
                 raise KeyboardInterrupt
             except ConnectionError as e:
-                logging.info(e)
+                logging.info(filter_emoji(str(e)))
                 raise ConnectionError
             except ConnectionRefusedError as e:
-                logging.info(e)
+                logging.info(filter_emoji(str(e)))
                 raise ConnectionRefusedError
             except Exception as e:
-                print(e)
+                print(filter_emoji(str(e)))
                 print("retrying...")
                 time.sleep(1)
                 max_try_turn -= 1
-
+        response = filter_emoji_from_dict(response)
         if max_try_turn < 0 or response is None:
             return "The task execute failed.", {"input": f"Your name is {self.name}.\n{instruction}", "action_list": [],
                                                 "final_answer": "The task execute failed.", "chain_input": llmhandler.chain_input, "seralized_input": llmhandler.seralized_input}
@@ -1103,7 +1143,7 @@ class Agent():
         #     print("-" * 40)
         # print("========= End ========")
 
-        with open(f"data/history/{hash(response['input'])}.json", "w") as f:
+        with open(f"data/history/{hash(response['input'])}.json", "w", encoding='utf-8') as f:
             json.dump({"input": response["input"], "action_list": action_list, "final_answer": final_answer}, f,
                       indent=4)
         self.update_history({"input": response["input"], "action_list": action_list, "final_answer": final_answer})

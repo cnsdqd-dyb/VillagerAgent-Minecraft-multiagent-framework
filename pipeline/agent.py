@@ -607,14 +607,26 @@ class BaseAgent:
         print(f"rl_action: {act}, reward: {reward}")
         return reward, task_status
     
+    def filter_emoji(self, text: str) -> str:
+        ret_str = []
+        for c in text:
+            try:
+                c.encode('gbk')
+                ret_str.append(c)
+            except UnicodeEncodeError:
+                continue
+        return ''.join(ret_str)
+
     def reflect(self, task: Task, detail) -> bool:
         '''
         Reflect on the task and return the result
         '''
+        # print("in reflect")
         task_description = task.description
         milestone_description = task.milestones
         action_history = detail["action_list"]
         global reflect_system_prompt, reflect_user_prompt
+        # print("before llm")
         if isinstance(self.llm, OpenAILanguageModel):
             prompt = format_string(reflect_user_prompt,
                                    {
@@ -623,6 +635,8 @@ class BaseAgent:
                                        "state": self.data_manager.query_history(self.name),
                                        "action_history": action_history
                                    })
+            prompt = self.filter_emoji(prompt)
+            # print("before response")
             response = self.llm.few_shot_generate_thoughts(reflect_system_prompt, prompt, cache_enabled=False, max_tokens=256, json_check=True)
         else:
             prompt = format_string(reflect_user_prompt,
@@ -632,8 +646,12 @@ class BaseAgent:
                                        "state": self.data_manager.query_history(self.name),
                                        "action_history": action_history
                                    })
+            prompt = self.filter_emoji(prompt)
+            # print("before response")
             response = self.llm.few_shot_generate_thoughts(reflect_system_prompt, prompt, cache_enabled=False, max_tokens=256, json_check=False)
         # print(response)
+        # print("before filter emoji")
+        response = self.filter_emoji(response)
         self.update_reflect(reflect_system_prompt, prompt, response)
         result = extract_info(response)[0]
         task.reflect = result
@@ -644,6 +662,7 @@ class BaseAgent:
 
         # add the action to the history
         self.history_action_list = [self.action_format(action) for action in action_history]
+        # print("before return ")
         return result["task_status"]
     
     def to_json(self) -> dict:

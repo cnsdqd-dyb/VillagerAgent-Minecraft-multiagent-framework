@@ -1,37 +1,25 @@
 {
-    "api_model": "qwen-max",
+    "api_model": "qwen3-235b-a22b",
     "api_base": "https://dashscope.aliyuncs.com/compatible-mode/v1",
     "task_type": "gen",
-    "task_idx": 1,
-    "agent_num": 4,
+    "task_idx": 10,
+    "agent_num": 2,
     "dig_needed": false,
-    "task_goal": "Work together to build and maintain a sustainable farm within the specified area. \n\n- Construct a fenced area for crops at [41, -60, 137] using wooden planks and fence gates. \n- Plant wheat, carrots, and potatoes in the farmland. Seeds and tools can be found in the chest at [36, -60, 132].\n- Set up an irrigation system using water buckets from the chest at [46, -60, 132] to ensure the crops are watered.\n- Build a small storage shed at [41, -60, 142] to store harvested crops and tools.\n- One agent should craft torches using coal and sticks from the chest at [41, -60, 132] and place them around the farm to prevent mob spawns at night.\n- Another agent should patrol the perimeter to keep the farm safe from hostile mobs.\n- Collaborate to harvest the crops when they are fully grown and store them in the shed.\n- Ensure the farm is well-maintained and all materials are stored properly after use.",
+    "task_goal": "Work together to craft 3 torches using coal from the chest at [48, -60, 127] and sticks from the chest at [34, -60, 127]. Place all torches in the chest at [41, -60, 132].\nThe chest contains all items or tools agents may require. When searching for these resources, all chests in the environment should be examined first.",
     "blueprint": {
         "blocks": [
             {
                 "type": "single",
                 "position": [
-                    -5,
+                    7,
                     0,
-                    10
+                    5
                 ],
                 "name": "chest",
                 "facing": "north",
                 "items": [
                     {
-                        "name": "wheat_seeds",
-                        "count": 16
-                    },
-                    {
-                        "name": "carrot",
-                        "count": 16
-                    },
-                    {
-                        "name": "potato",
-                        "count": 16
-                    },
-                    {
-                        "name": "iron_hoe",
+                        "name": "coal",
                         "count": 1
                     }
                 ]
@@ -39,78 +27,25 @@
             {
                 "type": "single",
                 "position": [
-                    5,
+                    -7,
                     0,
-                    10
+                    5
                 ],
                 "name": "chest",
                 "facing": "north",
                 "items": [
-                    {
-                        "name": "water_bucket",
-                        "count": 4
-                    }
-                ]
-            },
-            {
-                "type": "single",
-                "position": [
-                    0,
-                    0,
-                    10
-                ],
-                "name": "chest",
-                "facing": "north",
-                "items": [
-                    {
-                        "name": "coal",
-                        "count": 16
-                    },
                     {
                         "name": "stick",
-                        "count": 16
+                        "count": 1
                     }
                 ]
             },
             {
-                "type": "cube",
-                "from": [
-                    -2,
-                    -1,
-                    20
-                ],
-                "to": [
-                    2,
-                    1,
-                    20
-                ],
-                "name": "oak_planks"
-            },
-            {
                 "type": "single",
                 "position": [
                     0,
                     0,
-                    20
-                ],
-                "name": "oak_door",
-                "facing": "south"
-            },
-            {
-                "type": "single",
-                "position": [
-                    0,
-                    0,
-                    21
-                ],
-                "name": "crafting_table"
-            },
-            {
-                "type": "single",
-                "position": [
-                    0,
-                    0,
-                    22
+                    10
                 ],
                 "name": "chest",
                 "facing": "north",
@@ -120,33 +55,15 @@
                 "type": "single",
                 "position": [
                     0,
-                    -1,
-                    15
-                ],
-                "name": "water"
-            },
-            {
-                "type": "tree",
-                "position": [
-                    3,
                     0,
-                    5
+                    0
                 ],
-                "name": "oak"
+                "name": "crafting_table"
             }
         ],
-        "entities": [
-            {
-                "position": [
-                    -4,
-                    0,
-                    10
-                ],
-                "name": "cow"
-            }
-        ]
+        "entities": []
     },
     "host": "127.0.0.1",
     "port": 25565,
-    "task_name": "gen_1_4p"
+    "task_name": "gen_10_2p_0615"
 }
