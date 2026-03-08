@@ -77,6 +77,8 @@ start_time = None
 
 max_action_time = 90
 max_time = 180
+base_iter = 1
+max_iter_flag = 0
 
 environment_set_time = 10
 info_count = 0
@@ -325,6 +327,7 @@ def handleViewer(*args):
     bot.chat(f"/fill {orx} {ory + room_height + wall_width} {orz} {orx + room_width + wall_width} {ory + room_height + wall_width} {orz + room_width + wall_width} glass")
     time.sleep(.2)
     bot.chat(f"/fill {orx} {ory} {orz} {orx + room_width + wall_width} {ory} {orz + room_width + wall_width} grass_block")
+    bot.chat(f"/fill {orx} {ory - 1} {orz} {orx + room_width + wall_width} {ory - 2} {orz + room_width + wall_width} grass_block")
     time.sleep(.2)
     # 生成一个内部空间width*width*height，五面玻璃一面草方块的封闭空间
     bot.chat(f"/gamemode survival {agent_name}")
@@ -748,8 +751,8 @@ def handle(this):
             else:
                 return True
 
-    global last_time, start_time, score
-    bot.chat(f"/kill @e[type=minecraft:slime]")
+    global last_time, start_time, score, max_iter_flag
+    # bot.chat(f"/kill @e[type=minecraft:slime]")
     if start_time is not None:
         global complexity_score, efficiency, balance, info_count, environment_set_time
         now_time = time.time()
@@ -846,8 +849,8 @@ def handle(this):
                         bot.chat(f'/recipe take {agent_name} *') # 去除合成表中的所有合成
                         bot.chat(f'/data get entity {arg_dict["target"]}')
 
-            if score == 100 and os.path.exists("result/" + task_name + "/Alice_history.json"):
-                time.sleep(10)
+            if score == 100:# and os.path.exists("result/" + task_name + "/Alice_history.json"):
+                # time.sleep(10)
                 # 至少得等到所有的action都执行完了，有记录了再结束吧
                 if not os.path.exists("result/" + task_name):
                     os.mkdir(os.path.join("result/", task_name))
@@ -864,61 +867,97 @@ def handle(this):
                     json.dump({"status": "end"}, f, indent=4)
 
             # check failed action number
-            failed_action = 0
-            success_action = 0
-            if os.path.exists("data/failed_action.json"):
-                with open("data/Alice_history.json", "r") as f:
-                    data = json.load(f)
-                try:
-                    for actions in data:
-                        for action in actions["action_list"]:
-                            if action["feedback"]["status"] == False:
-                                failed_action += 1
-                            else:
-                                success_action += 1
-                except:
-                    pass
-            if calculate_action_time() > max_action_time or failed_action > 5:
-                efficiency = 1
-                # 给出结束信号和写入文件
-                if not os.path.exists("result/" + task_name):
-                    os.mkdir(os.path.join("result/", task_name))
-                with open(os.path.join(os.path.join("result", task_name), "score.json"), "w") as f:
-                    json.dump({
-                        "complexity_score": complexity_score,
-                        "efficiency": efficiency,
-                        "balance": balance,
-                        "use_time": calculate_action_time(),
-                        "end_reason": "action_time out",
-                        "end_time": time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(now_time))
-                    }, f, indent=4)
-                with open(os.path.join(os.path.join("result", task_name), "config.json"), "w") as f:
-                    json.dump(config, f, indent=4)
-                with open(".cache/load_status.cache", "w") as f:
-                    json.dump({"status": "end"}, f, indent=4)
+            # failed_action = 0
+            # success_action = 0
+            # if os.path.exists("data/failed_action.json"):
+            #     with open("data/Alice_history.json", "r") as f:
+            #         data = json.load(f)
+            #     try:
+            #         for actions in data:
+            #             for action in actions["action_list"]:
+            #                 if action["feedback"]["status"] == False:
+            #                     failed_action += 1
+            #                 else:
+            #                     success_action += 1
+            #     except:
+            #         pass
+            # if calculate_action_time() > max_action_time or failed_action > 5:
+            #     efficiency = 1
+            #     # 给出结束信号和写入文件
+            #     if not os.path.exists("result/" + task_name):
+            #         os.mkdir(os.path.join("result/", task_name))
+            #     with open(os.path.join(os.path.join("result", task_name), "score.json"), "w") as f:
+            #         json.dump({
+            #             "complexity_score": complexity_score,
+            #             "efficiency": efficiency,
+            #             "balance": balance,
+            #             "use_time": calculate_action_time(),
+            #             "end_reason": "action_time out",
+            #             "end_time": time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(now_time))
+            #         }, f, indent=4)
+            #     with open(os.path.join(os.path.join("result", task_name), "config.json"), "w") as f:
+            #         json.dump(config, f, indent=4)
+            #     with open(".cache/load_status.cache", "w") as f:
+            #         json.dump({"status": "end"}, f, indent=4)
+            
+            # max_iter作为超时退出条件
+            action_log_root = os.path.join(os.path.join("result", task_name), "Alice_history.json")
 
-            if now_time - start_time > max_time:
-                action_time = calculate_action_time()
-                if action_time == 0:
-                    efficiency = 1
+            if os.path.exists(action_log_root):
+                with open(action_log_root, "r", encoding='utf-8') as f:
+                    action_history = json.load(f)
+                    now_iter = len(action_history)
+                if config["evaluation_arg"]["item_position"] == "chest" and config["evaluation_arg"]["action"] != "store" or config["evaluation_arg"]["action"] == "chat":
+                    max_iter = base_iter + 1
                 else:
-                    efficiency = max_action_time / action_time
-                # 给出结束信号和写入文件
-                if not os.path.exists("result/" + task_name):
-                    os.mkdir(os.path.join("result", task_name))
-                with open(os.path.join(os.path.join("result", task_name), "score.json"), "w") as f:
-                    json.dump({
-                        "complexity_score": complexity_score,
-                        "efficiency": efficiency,
-                        "balance": balance,
-                        "use_time": calculate_action_time(),
-                        "end_reason": "max time out",
-                        "end_time": time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(now_time))
-                    }, f, indent=4)
-                with open(os.path.join(os.path.join("result", task_name), "config.json"), "w") as f:
-                    json.dump(config, f, indent=4)
-                with open(".cache/load_status.cache", "w") as f:
-                    json.dump({"status": "end"}, f, indent=4)
+                    max_iter = base_iter
+                if max_iter_flag >= 3:
+                    action_time = calculate_action_time()
+                    if action_time == 0:
+                        efficiency = 1
+                    else:
+                        efficiency = max_action_time / action_time
+                    # 给出结束信号和写入文件
+                    if not os.path.exists("result/" + task_name):
+                        os.mkdir(os.path.join("result", task_name))
+                    with open(os.path.join(os.path.join("result", task_name), "score.json"), "w") as f:
+                        json.dump({
+                            "complexity_score": complexity_score,
+                            "efficiency": efficiency,
+                            "balance": balance,
+                            "use_time": calculate_action_time(),
+                            "end_reason": "max iteration out",
+                            "end_time": time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(now_time))
+                        }, f, indent=4)
+                    with open(os.path.join(os.path.join("result", task_name), "config.json"), "w") as f:
+                        json.dump(config, f, indent=4)
+                    with open(".cache/load_status.cache", "w") as f:
+                        json.dump({"status": "end"}, f, indent=4)
+                if now_iter >= max_iter: 
+                    max_iter_flag += 1
+
+            # if now_time - start_time > max_time: # max_time作为超时退出条件
+            #     action_time = calculate_action_time()
+            #     if action_time == 0:
+            #         efficiency = 1
+            #     else:
+            #         efficiency = max_action_time / action_time
+            #     # 给出结束信号和写入文件
+            #     if not os.path.exists("result/" + task_name):
+            #         os.mkdir(os.path.join("result", task_name))
+            #     with open(os.path.join(os.path.join("result", task_name), "score.json"), "w") as f:
+            #         json.dump({
+            #             "complexity_score": complexity_score,
+            #             "efficiency": efficiency,
+            #             "balance": balance,
+            #             "use_time": calculate_action_time(),
+            #             "end_reason": "max time out",
+            #             "end_time": time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(now_time))
+            #         }, f, indent=4)
+            #     with open(os.path.join(os.path.join("result", task_name), "config.json"), "w") as f:
+            #         json.dump(config, f, indent=4)
+            #     with open(".cache/load_status.cache", "w") as f:
+            #         json.dump({"status": "end"}, f, indent=4)
 
             last_time = now_time
 
@@ -1100,6 +1139,7 @@ def handleChat(_, message, messagePosition, jsonMsg, sender, *args):
                 # bot.chat("bone meal")
                 inventory = data.get("Inventory", [])
                 have_bone = False
+                feed_item = aligned_item_name(arg_dict["tool"])
                 for item in inventory:
                     if aligned_item_name(item['id']) == feed_item:
                         score = 50
@@ -1136,10 +1176,9 @@ def handleChat(_, message, messagePosition, jsonMsg, sender, *args):
             
             if config["task_scenario"] == "interact" and arg_dict["action"] == "bed":
                 sleeptime = int(data.get("SleepTimer", 0).split("s")[0])
-                print(sleeptime)
                 if sleeptime > 0 and score == 0:
-                    score = 50
-                if score == 50 and sleeptime == 0:
+                #     score = 50
+                # if score == 50 and sleeptime == 0:
                     score = 100
                 
 

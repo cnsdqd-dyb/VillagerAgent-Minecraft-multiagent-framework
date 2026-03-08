@@ -37,6 +37,24 @@ def find_correct_data(dict_data, guard_keys=[]):
     return None
 
 
+def _fix_missing_commas_in_object(s: str) -> str:
+    """
+    修复一种常见 LLM 错误：JSON 对象中 key-value 对之间漏写逗号
+    例如：{"a": 1 "b": 2} -> {"a": 1, "b": 2}
+
+    原理：当我们看到下一个 key 的起始形态 `"xxx":` 时，
+    如果它前面紧挨着的内容看起来像“一个 value 已经结束”（如字符串结束引号、数字、}、] 等），
+    就在它前面插入逗号。
+    """
+    return re.sub(
+        # (?="[^"]+"\s*:)  这段确保后面确实是 "key":
+        # 前面的 lookbehind 约束：前一个字符像 value 的结束符
+        r'(?<=[0-9"\}\]])\s*(?="[^"]+"\s*:)',
+        ', ',
+        s
+    )
+
+
 def extract_info(text: str, guard_keys=[]) -> [dict]:
     try:
         # Initialize an empty list to store the extracted dictionaries
@@ -64,6 +82,10 @@ def extract_info(text: str, guard_keys=[]) -> [dict]:
                     dict_text = dict_text.replace("False", "false").replace("True", "true").replace("None", "null")
                     # 处理注释 string // annotation
                     dict_text = re.sub(r'//.*?\n', '\n', dict_text)
+
+                    # 逗号修复
+                    dict_text = _fix_missing_commas_in_object(dict_text)
+
                     try:
                         # Convert the dictionary text to a dictionary and add it to the list
                         dict_data = json.loads(dict_text)

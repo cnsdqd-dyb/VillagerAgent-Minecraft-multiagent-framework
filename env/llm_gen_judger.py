@@ -47,8 +47,8 @@ bot.loadPlugin(collectBlock.plugin)
 bot.loadPlugin(pvp)
 bot.loadPlugin(minecraftHawkEye)
 
-# with open("qwen3-235b-a22b_gen_config.json", "r") as f:
-#     config = json.load(f)[0]
+# with open("qwen3-235b-a22b_gen_3p_config.json", "r") as f:
+    # config = json.load(f)[0]
 with open(".cache/meta_setting.json", "r") as f:
     config = json.load(f)
 blueprint = config["blueprint"]

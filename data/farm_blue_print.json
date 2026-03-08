@@ -9091,25 +9091,6 @@
                     0,
                     -2
                 ]
-            },
-            {
-                "name": "chest",
-                "position": [
-                    -1,
-                    0,
-                    2
-                ],
-                "facing": "north",
-                "items": [
-                    {
-                        "name": "iron_pickaxe",
-                        "count": 1
-                    },
-                    {
-                        "name": "iron_axe",
-                        "count": 1
-                    }
-                ]
             }
         ],
         "size": [

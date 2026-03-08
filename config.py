@@ -35,7 +35,7 @@ api_key_list = json.load(open("API_KEY_LIST", "r"))["AGENT_KEY"]
 llm_config = {
     "api_key": api_key_list[0],
     "api_base": "https://dashscope.aliyuncs.com/compatible-mode/v1",
-    "api_model": "qwen-max",
+    "api_model": "qwen3-235b-a22b",
     "api_key_list": api_key_list
 }
 
@@ -75,8 +75,8 @@ You should randomly select only one sentence from your rewritten version and ret
 """
 
 template = {
-    "api_model": "deepseek-chat",
-    "api_base": "https://api.deepseek.com",
+    "api_model": "qwen_max",
+    "api_base": "https://dashscope.aliyuncs.com/compatible-mode/v1",
     "task_type": "meta",
     "task_idx": 0,
     "agent_num": 1,
@@ -117,7 +117,8 @@ arg_template = {
 
 def select_task_goal(task):
     if task == "construction":
-        return "Using the provided blueprint, please collaborate to place blocks in Minecraft. You have access to two chests: one contains a selection of materials, and the other, located in the factory, is equipped with tools which is not needed for this task. The task is completed when the blueprint is fully constructed."
+        # return "Using the provided blueprint, please collaborate to place blocks in Minecraft. You have access to two chests: one contains a selection of materials, and the other, located in the factory, is equipped with tools which is not needed for this task. The task is completed when the blueprint is fully constructed."
+        return "Using the provided blueprint, please collaborate to place blocks in Minecraft. You can use materials from both your inventory and the chest. The task is complete once the blueprint is fully built."
     elif task == "farming_rabbit_stew":
         return "You are on a farm where you need to collaborate to make a rabbit_stew. Some ingredients are contained within chests, and if the ingredients are not in the chests, you may need to work together to acquire them. Crafting table is placed to craft items"
     elif task == "farming_cake":
@@ -200,10 +201,10 @@ def generate_task_goal(task_scenario, arg_dict):
         elif arg_dict["action"] == "bed":
             template_prompt = f"Sleep on the {arg_dict['target']}, then wake up. The {arg_dict['target']} is in the environment, so you don't need to make one."
         elif arg_dict["action"] == "chat":
-            if random.randint(1, 2) == 1:
-                template_prompt = generate_conversation_prompt_zh()
-            else:
-                template_prompt = generate_conversation_prompt()
+            # if random.randint(1, 2) == 1:
+                # template_prompt = generate_conversation_prompt_zh()
+            # else:
+            template_prompt = generate_conversation_prompt()
             arg_dict["other_arg"] = [template_prompt]
     
     template_prompt = template_prompt.replace("the inventory", "your inventory")
@@ -224,7 +225,7 @@ def generate_config(task, api_model, host, port, agent_num=2):
 
     config_list = []
     if task == "construction":
-        for i in range(5,6):
+        for i in range(34, 40, 4):
             task_goal = select_task_goal(task)
             config = template.copy()
             config["api_model"] = api_model
@@ -236,10 +237,12 @@ def generate_config(task, api_model, host, port, agent_num=2):
             config["agent_num"] = agent_num
             config["task_name"] = f"{config['api_model']}_{task}_task{i}_{config['agent_num']}p"
             config["document_file"] = f"data\\map_description.json"
+            config.pop("evaluation_arg", None)
+            config.pop("task_scenario", None)
             config_list.append(config)
 
     elif task == "farming":
-        for i in range(10,11):
+        for i in range(30, 62, 30):
             if i <= 35:
                 task_goal = select_task_goal("farming_cake")
             else:
@@ -255,24 +258,26 @@ def generate_config(task, api_model, host, port, agent_num=2):
             config["task_goal"] = task_goal
             config["task_name"] = f"{config['api_model']}_{task}_task{i}_{config['agent_num']}p"
             config["document_file"] = f"data\\recipe_hint.json"
+            config.pop("evaluation_arg", None)
+            config.pop("task_scenario", None)
             config_list.append(config)
     
     elif task == "puzzle":
         for i in range(1,5):
-            for j in range(0,8-i):
-                task_goal = select_task_goal(task)
-                config = template.copy()
-                config["api_model"] = api_model
-                config["host"] = host
-                config["port"] = port
-                config["task_idx"] = j
-                config["task_type"] = task
-                config["agent_num"] = agent_num
-                config["max_task_num"] = i
-                config["task_goal"] = task_goal
-                config["task_name"] = f"{config['api_model']}_{task}_task{i}_{config['agent_num']}p" + f"_idx{j}"
-                config["document_file"] = ""
-                config_list.append(config)
+            # for j in range(0,8-i):
+            task_goal = select_task_goal(task)
+            config = template.copy()
+            config["api_model"] = api_model
+            config["host"] = host
+            config["port"] = port
+            # config["task_idx"] = j
+            config["task_type"] = task
+            config["agent_num"] = agent_num
+            config["max_task_num"] = i
+            config["task_goal"] = task_goal
+            config["task_name"] = f"{config['api_model']}_{task}_task{i}_{config['agent_num']}p" # + f"_idx{j}"
+            config["document_file"] = ""
+            config_list.append(config)
     elif task == "meta":
         item_position_weight = [67, 33]
         for j in tqdm.tqdm(range(0, args.meta_task_num)):
@@ -609,7 +614,7 @@ def generate_config(task, api_model, host, port, agent_num=2):
                             crops_on_sand = ["bamboo", "sugar_cane"]
                             tree_saplings = ["oak_sapling", "spruce_sapling", "birch_sapling", "acacia_sapling", "jungle_sapling", "dark_oak_sapling"]
                             crops_on_grass = ["tall_grass", "rose_bush", "peony", "lilac", "sunflower"]
-                            crops_on_farmland = ["wheat", "beetroot", "carrot", "potato"]
+                            crops_on_farmland = ["beetroot", "carrot", "potato"]
 
                             base_block = random.choice(["dirt", "grass_block", "coarse_dirt", "podzol", "dirt_path", "farmland"])
                             if base_block == "farmland":
@@ -785,7 +790,7 @@ def generate_config(task, api_model, host, port, agent_num=2):
             blocks = json.load(f)
         placeable_blocks = []
         allowed_facing = {"north", "south", "east", "west", "x", "y", "z"}
-        invalid_blocks = ["potted", "_cauldron", "candle_cake", "_torch", "soul_fire"]
+        invalid_blocks = ["potted", "_cauldron", "candle_cake", "_torch", "soul_fire", "wall_sign"]
 
         for block in blocks:
             placeable = True

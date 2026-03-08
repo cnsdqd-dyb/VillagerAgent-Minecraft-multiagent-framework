@@ -524,7 +524,7 @@ class TaskManager:
         # self.logger.warning("TM DEBUG:")
         # self.logger.warning(system_prompt)
         self.logger.warning(user_prompt)
-        response = self.llm.few_shot_generate_thoughts(system_prompt, user_prompt, cache_enabled=True, json_check=True,
+        response = self.llm.few_shot_generate_thoughts(system_prompt, user_prompt, cache_enabled=False, json_check=True,
                                                        check_tags=["description", "milestones", "assigned agents"])
         self.update_history(system_prompt, user_prompt, response)
         result = extract_info(response, guard_keys=["description", "milestones", "assigned agents"])

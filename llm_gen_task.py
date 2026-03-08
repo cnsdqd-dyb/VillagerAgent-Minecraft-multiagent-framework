@@ -28,8 +28,11 @@ api_key_list = json.load(open("API_KEY_LIST", "r"))["AGENT_KEY"]
 llm_config = {
     "api_key": api_key_list[0],
     "api_base": "https://dashscope.aliyuncs.com/compatible-mode/v1",
+    # "api_base": "https://api.deepseek.com",
+    # "api_model": "deepseek-reasoner",
     # "api_model": "qwen-max",
     "api_model": "qwen3-235b-a22b",
+
     "api_key_list": api_key_list
 }
 llm = init_language_model(llm_config)
@@ -43,7 +46,23 @@ def filter_emoji(text: str) -> str:
         except UnicodeEncodeError:
             continue
     return ''.join(ret_str)
-
+def remove_even_hashed_segments(text):
+    """
+    删除偶数个#之间的内容（包括#自身）
+    示例：
+    >>> remove_even_hashed_segments("abc#123#def##456#ghi")
+    'abcdefghi'
+    >>> remove_even_hashed_segments("a#b#c#d#e")
+    'ace'
+    """
+    # 使用正则表达式匹配两个#之间的内容
+    pattern = r'#.*?#'
+    while True:
+        new_text = re.sub(pattern, '', text, count=1)
+        if new_text == text:  # 如果没有替换发生，退出循环
+            break
+        text = new_text
+    return text
 def createVABreadthPrompt(instruction):
     # randomly select 3 actions from action_list
     selected_actions = random.sample(action_list, 3)
@@ -344,7 +363,7 @@ def clean_env_dict(data:dict, task_description):
                         "count": 1
                     })
         
-        if block["name"] not in item_name_list and block["name"] != "water":
+        if block["name"] not in item_name_list and block["name"] != "water" and block["name"] != "lava":
             block["name"] = llm.few_shot_generate_thoughts(system_prompt=
                                                                   format_string(CORRECTOR_PROMPT, {
                                                                       "Task": task_description,
@@ -352,7 +371,7 @@ def clean_env_dict(data:dict, task_description):
                                                                       "Item_list": item_name_list
                                                                     #   "Item_para": item
                                                                   }))
-        if block["name"] not in item_name_list and block["name"] != "water":
+        if block["name"] not in item_name_list and block["name"] != "water" and block["name"] != "lava":
             print(f"INVALID LLM CORRECTOR:\n {block['name']}")
             
         cleaned_block.append(block) 
@@ -411,7 +430,8 @@ def gen_task(times = 1):
 
         selected_evol_prompt = random.choice(evol_prompts)
         evol_instruction = llm.few_shot_generate_thoughts(system_prompt="You are a helpful assistant", example_prompt=selected_evol_prompt)
-        evol_objs.append({"instruction": evol_instruction})
+
+        evol_objs.append({"instruction": remove_even_hashed_segments(filter_emoji(evol_instruction))})
     return evol_objs
 
 def concreting_task(task_list):
@@ -506,7 +526,7 @@ def apply_coordinate_offset(input_str, offset = [41, -60, 122]):
         print("INVALID POSITION!")
         raise RuntimeError
     result = re.sub(pattern, replace_match, input_str)
-    return filter_emoji(result)
+    return remove_even_hashed_segments(filter_emoji(result))
 
 def extract_env(text):
     """
@@ -558,6 +578,6 @@ if __name__ == "__main__":
         current_mdh = datetime.now()
         config["task_name"] += current_mdh.strftime("_%m%d")
 
-    with open(f"{args.api_model}_gen_config.json", "w", encoding='utf-8') as f:
+    with open(f"{args.api_model}_gen_{args.agent_num}p_config.json", "w", encoding='utf-8') as f:
         json.dump(config_list, f, indent=4)
     print("gen task saved!")

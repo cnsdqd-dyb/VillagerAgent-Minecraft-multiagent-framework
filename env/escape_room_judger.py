@@ -114,8 +114,10 @@ def handleViewer(*args):
 
     global max_action_time, max_time
     max_action_time = state_tree.complexity * 30 + 60
-    max_time = len(state_tree.task_list) * 60 + 360
-
+    # max_time = len(state_tree.task_list) * 60 + 360
+    max_time = len(state_tree.task_list) * 40 + 240
+    if max_time > 720:
+            max_time = 720
     with open(".cache/load_status.cache", "w") as f:
         json.dump({"status": "loaded"}, f, indent=4)
     for i in range(-3, 4):

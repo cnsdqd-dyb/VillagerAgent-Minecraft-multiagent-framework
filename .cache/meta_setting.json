@@ -1,69 +1,14 @@
 {
-    "api_model": "qwen3-235b-a22b",
+    "api_model": "qwen-max",
     "api_base": "https://dashscope.aliyuncs.com/compatible-mode/v1",
-    "task_type": "gen",
-    "task_idx": 10,
+    "task_type": "construction",
+    "task_idx": 2,
     "agent_num": 2,
     "dig_needed": false,
-    "task_goal": "Work together to craft 3 torches using coal from the chest at [48, -60, 127] and sticks from the chest at [34, -60, 127]. Place all torches in the chest at [41, -60, 132].\nThe chest contains all items or tools agents may require. When searching for these resources, all chests in the environment should be examined first.",
-    "blueprint": {
-        "blocks": [
-            {
-                "type": "single",
-                "position": [
-                    7,
-                    0,
-                    5
-                ],
-                "name": "chest",
-                "facing": "north",
-                "items": [
-                    {
-                        "name": "coal",
-                        "count": 1
-                    }
-                ]
-            },
-            {
-                "type": "single",
-                "position": [
-                    -7,
-                    0,
-                    5
-                ],
-                "name": "chest",
-                "facing": "north",
-                "items": [
-                    {
-                        "name": "stick",
-                        "count": 1
-                    }
-                ]
-            },
-            {
-                "type": "single",
-                "position": [
-                    0,
-                    0,
-                    10
-                ],
-                "name": "chest",
-                "facing": "north",
-                "items": []
-            },
-            {
-                "type": "single",
-                "position": [
-                    0,
-                    0,
-                    0
-                ],
-                "name": "crafting_table"
-            }
-        ],
-        "entities": []
-    },
+    "max_task_num": 0,
+    "task_goal": "Using the provided blueprint, please collaborate to place blocks in Minecraft. You can use materials from both your inventory and the chest. The task is complete once the blueprint is fully built.",
+    "document_file": "data\\map_description.json",
     "host": "127.0.0.1",
     "port": 25565,
-    "task_name": "gen_10_2p_0615"
+    "task_name": "qwen-max_construction_task2_2p_102716"
 }

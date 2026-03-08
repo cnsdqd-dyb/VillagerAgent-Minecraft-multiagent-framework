@@ -10,7 +10,7 @@ While it does not need to belong to the same domain as the #Given Task#, it must
 - Provide only a general task specification and avoid explicitly assigning specific tasks to any individual agent.
 - The length of #Created Task# should be within 800 characters.
 - The terms '#Given Task#', '#Created Task#', 'given task', and 'created task' must not appear in the #Created Task#.
-- Do not include anything other than #Created Task# in your output.
+- Do not include anything outside of the #Created Task# section in your response — no explanations, character counts, or additional notes.
 '''
 
 VA_Volume_base_instruction = '''

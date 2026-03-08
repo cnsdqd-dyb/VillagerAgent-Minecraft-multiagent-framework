@@ -261,7 +261,7 @@ class OpenAILanguageModel(AbstractLanguageModel):
 
     @retry(tries=10, delay=5, backoff=2, max_delay=60)
     def few_shot_generate_thoughts(self, system_prompt: str = "", example_prompt: [str] or str = [], max_tokens=1024,
-                                   temperature=0.0, k=1, stop=None, cache_enabled=True, api_model="", check_tags=[],
+                                   temperature=0.0, k=1, stop=None, cache_enabled=False, api_model="", check_tags=[],
                                    json_check=False, stream=True):
         self.client = OpenAI(
             # This is the default and can be omitted
@@ -269,6 +269,7 @@ class OpenAILanguageModel(AbstractLanguageModel):
             base_url=self.api_base,
             max_retries=5,
         )
+
         # print(random.choice(self.api_key_list) if len(self.api_key_list) > 0 else self.api_key)
         # print(self.api_base)
         # print(self.api_model)
@@ -311,7 +312,7 @@ class OpenAILanguageModel(AbstractLanguageModel):
 
                 # self.update_token_usage(response.usage.prompt_tokens, response.usage.completion_tokens)
 
-                content = response.choices[0].message.content
+                content = response.choices[0].message.content            
             # print("-"*70)
             # print(content)
             # print("-"*70)
@@ -331,12 +332,12 @@ class OpenAILanguageModel(AbstractLanguageModel):
                 )
 
             # logger.info(f"LLM API Time taken: {time.time() - start_time}")
-            if os.path.exists("data/llm_inference.json"):
-                with open("data/llm_inference.json", "r") as log_file:
-                    log = json.load(log_file)
-                log["time"] += time.time() - start_time
-                with open("data/llm_inference.json", "w") as log_file:
-                    json.dump(log, log_file)
+            # if os.path.exists("data/llm_inference.json"):
+            #     with open("data/llm_inference.json", "r") as log_file:
+            #         log = json.load(log_file)
+            #     log["time"] += time.time() - start_time
+            #     with open("data/llm_inference.json", "w") as log_file:
+            #         json.dump(log, log_file)
             return content
             
             # except openai.APIConnectionError as e:

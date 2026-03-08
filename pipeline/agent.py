@@ -99,24 +99,6 @@ class BaseAgent:
         with open(os.path.join(root, f"{self.name}_reflect.json"), "w") as f:
             json.dump(self.reflect_info, f, indent=4)
 
-    def update_reflect(self, system_prompt, user_prompt, response):
-        if type(user_prompt) == str:
-            user_prompt = [user_prompt]
-        prompt = str(system_prompt) + "\n"
-        for i in range(len(user_prompt)):
-            prompt += user_prompt[i] + "\n"
-
-        self.reflect_info["prompt"].append(prompt)
-        self.reflect_info["response"].append(response)
-        with open(".cache/meta_setting.json", "r") as f:
-            config = json.load(f)
-            task_name = config["task_name"]
-        if not os.path.exists("result/" + task_name):
-            os.mkdir(os.path.join("result/", task_name))
-        root = os.path.join("result/", task_name)
-        with open(os.path.join(root, f"{self.name}_reflect.json"), "w") as f:
-            json.dump(self.reflect_info, f, indent=4)
-
     def step(self, task:Task) -> (str, dict):
         '''
         take an action and return the feedback and detail
@@ -576,7 +558,19 @@ class BaseAgent:
     
     def action_format(self, action:dict) -> str:
         action_str = '''{{message}}'''
-        return format_string(action_str, action["feedback"])
+        feedback = action.get("feedback", {})
+        # 如果 feedback 是字符串，转换成 {"message": feedback}
+        if isinstance(feedback, str):
+            feedback = {"message": feedback}
+        # 否则确保 feedback 是字典，并设置默认 message
+        elif not isinstance(feedback, dict):
+            feedback = {"message": ""}
+        
+        # 如果 message 不存在，设置默认空字符串
+        if "message" not in feedback:
+            feedback["message"] = ""
+
+        return format_string(action_str, feedback)
     
     def rl_one_step_reflect(self, task_description, milestone_description, actions, observations, act, obs):
         '''
@@ -663,7 +657,8 @@ class BaseAgent:
         # add the action to the history
         self.history_action_list = [self.action_format(action) for action in action_history]
         # print("before return ")
-        return result["task_status"]
+        return result.get("task_status", False)
+        # return result["task_status"]
     
     def to_json(self) -> dict:
         return {

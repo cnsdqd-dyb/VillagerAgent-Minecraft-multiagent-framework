@@ -80,7 +80,7 @@ def init_logger(name: str, level=logging.ERROR, dump=False, silent=False):
     return logger
 
 
-def building_material_load(path,bot,dig_needed=False):
+def building_material_load(path,bot,dig_needed=False,inventory_load=False,agent_names=[]):
     # 返回需要挖掘的方块数量
     import json
     with open(path, 'r') as f:
@@ -104,6 +104,9 @@ def building_material_load(path,bot,dig_needed=False):
     for k,v in material_pair.items():
         name = k
         amount = v
+        for agent_name in agent_names:
+            bot.chat(f"/give {agent_name} {name} {amount}")
+            time.sleep(.1)
         while amount > 0:
             # print(k,v)
             time.sleep(.1)

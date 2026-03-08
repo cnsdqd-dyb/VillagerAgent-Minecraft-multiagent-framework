@@ -138,9 +138,10 @@ if __name__ == '__main__':
     last_time = None
 
     max_action_time = complexity * 40
-    max_time = complexity * 200
-    max_time = complexity * 200
-
+    # max_time = complexity * 200
+    max_time = complexity * 50
+    if max_time > 720:
+            max_time = 720
     # metric
     score = 0
     cooperation = 0
@@ -223,6 +224,10 @@ if __name__ == '__main__':
                     if c["name"] == "chest":
                         bot.chat(
                             f'/setblock {x_bias + c["position"][0]} {y_bias + c["position"][1]} {z_bias + c["position"][2]} chest')
+                        bot.chat(
+                            f'/setblock {x_bias + c["position"][0] + 1} {y_bias + c["position"][1]} {z_bias + c["position"][2]} furnace')
+                        bot.chat(
+                            f'/setblock {x_bias + c["position"][0] - 1} {y_bias + c["position"][1]} {z_bias + c["position"][2]} crafting_table')
                         next_slot = 0
                         for i, item in enumerate(c["items"]):
                             item_name = item["name"]
@@ -267,6 +272,8 @@ if __name__ == '__main__':
             bot.chat(f"/fill {x_b + min_x} {y_b + min_y} {z_b + min_z} {x_b + min_x} {y_b + max_y} {z_b + max_z} glass")
             bot.chat(f"/fill {x_b + max_x} {y_b + min_y} {z_b + min_z} {x_b + max_x} {y_b + max_y} {z_b + max_z} glass")
             bot.chat(f"/fill {x_b + min_x} -61 {z_b + min_z} {x_b + max_x} -61 {z_b + max_z} grass_block")
+            bot.chat(f"/fill {x_b + min_x} -62 {z_b + min_z} {x_b + max_x} -62 {z_b + max_z} dirt")
+            bot.chat(f"/fill {x_b + min_x} -63 {z_b + min_z} {x_b + max_x} -63 {z_b + max_z} dirt")
             render(task_data, x_b, y_b, z_b)
 
             bot.chat("/gamemode spectator")
@@ -277,6 +284,8 @@ if __name__ == '__main__':
             bot.chat(f"/tp {bot.username} {x_b} {y_b} {z_b}")
             bot.chat(f"/tp @e[type=minecraft:player, gamemode=survival] {x_b} {y_b} {z_b + 2}")
             bot.chat(f"/clear @e[type=minecraft:player, gamemode=survival]")
+            bot.chat(f"/give @e[type=minecraft:player, gamemode=survival] coal 2")
+            bot.chat(f'/execute as @a[gamemode=survival] run give @s oak_planks 10')
 
             target = []
             for key in score_dict.keys():

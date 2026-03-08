@@ -759,7 +759,7 @@ def move_to(pathfinder, bot, Vec3, RANGE_GOAL, pos):  # √
             x, y, z = bot.entity.position.x, bot.entity.position.y, bot.entity.position.z
             # tp to the y+2
             if bot.blockAt(Vec3(x, y + 1.2, z))['name'] == 'air':
-                bot.chat(f'/tp @s {x} {y + 1.2} {z}')
+            #     bot.chat(f'/tp @s {x} {y + 1.2} {z}')
                 last_jump_time = time.time()
             # bot.chat(f'bot seems like in an idle state.')
 
@@ -1030,7 +1030,7 @@ def get_direction_hint(path):
 
 async def place_block_op(bot, mcData, pathfinder, Vec3, item_name, pos, axis=None):
     if bot.blockAt(Vec3(pos[0], pos[1], pos[2]))['name'] == item_name:
-        return True, "the block is  placed there"
+        return False, "the block has already been placed there"
     elif bot.blockAt(Vec3(pos[0], pos[1], pos[2]))['name'] == 'dirt':
         # dig the dirt
         bot.dig(bot.blockAt(Vec3(pos[0], pos[1], pos[2])))
@@ -1051,102 +1051,117 @@ async def place_block_op(bot, mcData, pathfinder, Vec3, item_name, pos, axis=Non
     
     # 检查 6 方位是否有可能的参考块
     has_reference_block = False
-    for offset in [[0, -1, 0], [0, 1, 0], [-1, 0, 0], [1, 0, 0], [0, 0, -1], [0, 0, 1]]:
-        if bot.blockAt(Vec3(pos[0] + offset[0], pos[1] + offset[1], pos[2] + offset[2]))['name'] != 'air':
-            has_reference_block = True
-            break
-    if axis == 'N':
-        offset = [0, 0, 1]
-        if bot.blockAt(Vec3(pos[0] + offset[0], pos[1] + offset[1], pos[2] + offset[2]))['name'] == 'air':
-            solid_pos, path, hint = find_nearest_solid_block(
-                bot, 
-                Vec3,
-                Vec3(pos[0] + offset[0], pos[1] + offset[1], pos[2] + offset[2]),
-                max_range=3  # Specify maximum search range
-            )
-            return False, f"cannot place the block at this position facing {axis}, no reference block at {pos[0] + offset[0]} {pos[1] + offset[1]} {pos[2] + offset[2]}, {hint}. Consider placing blocks from the nearest solid block to create a support structure."
-    elif axis == 'S':
-        offset = [0, 0, -1]
-        if bot.blockAt(Vec3(pos[0] + offset[0], pos[1] + offset[1], pos[2] + offset[2]))['name'] == 'air':
-            solid_pos, path, hint = find_nearest_solid_block(
-                bot, 
-                Vec3,
-                Vec3(pos[0] + offset[0], pos[1] + offset[1], pos[2] + offset[2]),
-                max_range=3  # Specify maximum search range
-            )
-            return False, f"cannot place the block at this position facing {axis}, no reference block at {pos[0] + offset[0]} {pos[1] + offset[1]} {pos[2] + offset[2]}, {hint}. Consider placing blocks from the nearest solid block to create a support structure."
-    elif axis == 'W':
-        offset = [1, 0, 0]
-        if bot.blockAt(Vec3(pos[0] + offset[0], pos[1] + offset[1], pos[2] + offset[2]))['name'] == 'air':
-            solid_pos, path, hint = find_nearest_solid_block(
-                bot, 
-                Vec3,
-                Vec3(pos[0] + offset[0], pos[1] + offset[1], pos[2] + offset[2]),
-                max_range=3  # Specify maximum search range
-            )
-            return False, f"cannot place the block at this position facing {axis}, no reference block at {pos[0] + offset[0]} {pos[1] + offset[1]} {pos[2] + offset[2]}, {hint}. Consider placing blocks from the nearest solid block to create a support structure."
-    elif axis == 'E':
-        offset = [-1, 0, 0]
-        if bot.blockAt(Vec3(pos[0] + offset[0], pos[1] + offset[1], pos[2] + offset[2]))['name'] == 'air':
-            solid_pos, path, hint = find_nearest_solid_block(
-                bot, 
-                Vec3,
-                Vec3(pos[0] + offset[0], pos[1] + offset[1], pos[2] + offset[2]),
-                max_range=3  # Specify maximum search range
-            )
-            return False, f"cannot place the block at this position facing {axis}, no reference block at {pos[0] + offset[0]} {pos[1] + offset[1]} {pos[2] + offset[2]}, {hint}. Consider placing blocks from the nearest solid block to create a support structure."
+    # for offset in [[0, -1, 0], [0, 1, 0], [-1, 0, 0], [1, 0, 0], [0, 0, -1], [0, 0, 1]]:
+    #     if bot.blockAt(Vec3(pos[0] + offset[0], pos[1] + offset[1], pos[2] + offset[2]))['name'] != 'air':
+    #         has_reference_block = True
+    #         break
+    # if axis == 'N':
+    #     offset = [0, 0, 1]
+    #     if bot.blockAt(Vec3(pos[0] + offset[0], pos[1] + offset[1], pos[2] + offset[2]))['name'] == 'air':
+    #         solid_pos, path, hint = find_nearest_solid_block(
+    #             bot, 
+    #             Vec3,
+    #             Vec3(pos[0] + offset[0], pos[1] + offset[1], pos[2] + offset[2]),
+    #             max_range=3  # Specify maximum search range
+    #         )
+    #         return False, f"cannot place the block at this position facing {axis}, no reference block at {pos[0] + offset[0]} {pos[1] + offset[1]} {pos[2] + offset[2]}, {hint}. Consider placing dirt there as a support structure."
+    #         # return False, f"cannot place the block at this position facing {axis}, no reference block at {pos[0] + offset[0]} {pos[1] + offset[1]} {pos[2] + offset[2]}, {hint}. Consider placing blocks from the nearest solid block to create a support structure."
+    # elif axis == 'S':
+    #     offset = [0, 0, -1]
+    #     if bot.blockAt(Vec3(pos[0] + offset[0], pos[1] + offset[1], pos[2] + offset[2]))['name'] == 'air':
+    #         solid_pos, path, hint = find_nearest_solid_block(
+    #             bot, 
+    #             Vec3,
+    #             Vec3(pos[0] + offset[0], pos[1] + offset[1], pos[2] + offset[2]),
+    #             max_range=3  # Specify maximum search range
+    #         )
+    #         return False, f"cannot place the block at this position facing {axis}, no reference block at {pos[0] + offset[0]} {pos[1] + offset[1]} {pos[2] + offset[2]}, {hint}. Consider placing dirt there as a support structure."
+    #         # return False, f"cannot place the block at this position facing {axis}, no reference block at {pos[0] + offset[0]} {pos[1] + offset[1]} {pos[2] + offset[2]}, {hint}. Consider placing blocks from the nearest solid block to create a support structure."
+    # elif axis == 'W':
+    #     offset = [1, 0, 0]
+    #     if bot.blockAt(Vec3(pos[0] + offset[0], pos[1] + offset[1], pos[2] + offset[2]))['name'] == 'air':
+    #         solid_pos, path, hint = find_nearest_solid_block(
+    #             bot, 
+    #             Vec3,
+    #             Vec3(pos[0] + offset[0], pos[1] + offset[1], pos[2] + offset[2]),
+    #             max_range=3  # Specify maximum search range
+    #         )
+    #         return False, f"cannot place the block at this position facing {axis}, no reference block at {pos[0] + offset[0]} {pos[1] + offset[1]} {pos[2] + offset[2]}, {hint}. Consider placing dirt there as a support structure."
+    #         # return False, f"cannot place the block at this position facing {axis}, no reference block at {pos[0] + offset[0]} {pos[1] + offset[1]} {pos[2] + offset[2]}, {hint}. Consider placing blocks from the nearest solid block to create a support structure."
+    # elif axis == 'E':
+    #     offset = [-1, 0, 0]
+    #     if bot.blockAt(Vec3(pos[0] + offset[0], pos[1] + offset[1], pos[2] + offset[2]))['name'] == 'air':
+    #         solid_pos, path, hint = find_nearest_solid_block(
+    #             bot, 
+    #             Vec3,
+    #             Vec3(pos[0] + offset[0], pos[1] + offset[1], pos[2] + offset[2]),
+    #             max_range=3  # Specify maximum search range
+    #         )
+    #         return False, f"cannot place the block at this position facing {axis}, no reference block at {pos[0] + offset[0]} {pos[1] + offset[1]} {pos[2] + offset[2]}, {hint}. Consider placing dirt there as a support structure."
+    #         # return False, f"cannot place the block at this position facing {axis}, no reference block at {pos[0] + offset[0]} {pos[1] + offset[1]} {pos[2] + offset[2]}, {hint}. Consider placing blocks from the nearest solid block to create a support structure."
 
-    elif axis == 'y':
-        offset = [0, 1, 0]
-        ground_y = pos[1]
-        while bot.blockAt(Vec3(pos[0], ground_y - 1, pos[2]))['name'] == 'air':
-            ground_y -= 1
-        has_reference_block = False
-        if bot.blockAt(Vec3(pos[0] + offset[0], pos[1] + offset[1], pos[2] + offset[2]))['name'] != 'air':
-            has_reference_block = True
-        if bot.blockAt(Vec3(pos[0] + offset[0], pos[1] - offset[1], pos[2] + offset[2]))['name'] != 'air':
-            has_reference_block = True
+    # elif axis == 'y':
+    #     offset = [0, 1, 0]
+    #     ground_y = pos[1]
+    #     while bot.blockAt(Vec3(pos[0], ground_y - 1, pos[2]))['name'] == 'air':
+    #         ground_y -= 1
+    #     has_reference_block = False
+    #     if bot.blockAt(Vec3(pos[0] + offset[0], pos[1] + offset[1], pos[2] + offset[2]))['name'] != 'air':
+    #         has_reference_block = True
+    #     if bot.blockAt(Vec3(pos[0] + offset[0], pos[1] - offset[1], pos[2] + offset[2]))['name'] != 'air':
+    #         has_reference_block = True
         
-        if not has_reference_block:
-            solid_pos, path, hint = find_nearest_solid_block(
-                bot, 
-                Vec3,
-                Vec3(pos[0] + offset[0], pos[1] - offset[1], pos[2] + offset[2]),
-                max_range=3  # Specify maximum search range
-            )
-            return False, f"cannot place the block at this position facing {axis}, no reference block at {pos[0] + offset[0]} {pos[1] + offset[1]} {pos[2] + offset[2]} or {pos[0] + offset[0]} {pos[1] - offset[1]} {pos[2] + offset[2]}. The ground block is at {pos[0]} {ground_y-1} {pos[2]}, {hint}. Consider placing blocks from the nearest solid block to create a support structure."
-    elif axis == 'x':
-        offset = [1, 0, 0]
-        has_reference_block = False
-        if bot.blockAt(Vec3(pos[0] + offset[0], pos[1] + offset[1], pos[2] + offset[2]))['name'] != 'air':
-            has_reference_block = True
-        if bot.blockAt(Vec3(pos[0] - offset[0], pos[1] + offset[1], pos[2] + offset[2]))['name'] != 'air':
-            has_reference_block = True
+    #     if not has_reference_block:
+    #         solid_pos, path, hint = find_nearest_solid_block(
+    #             bot, 
+    #             Vec3,
+    #             Vec3(pos[0] + offset[0], pos[1] - offset[1], pos[2] + offset[2]),
+    #             max_range=3  # Specify maximum search range
+    #         )
+    #         return False, f"cannot place the block at this position facing {axis}, no reference block at {pos[0] + offset[0]} {pos[1] + offset[1]} {pos[2] + offset[2]} or {pos[0] + offset[0]} {pos[1] - offset[1]} {pos[2] + offset[2]}. Consider placing dirt there as a support structure."
+    #         # return False, f"cannot place the block at this position facing {axis}, no reference block at {pos[0] + offset[0]} {pos[1] + offset[1]} {pos[2] + offset[2]} or {pos[0] + offset[0]} {pos[1] - offset[1]} {pos[2] + offset[2]}. The ground block is at {pos[0]} {ground_y-1} {pos[2]}, {hint}. Consider placing blocks from the nearest solid block to create a support structure."
+    # elif axis == 'x':
+    #     offset = [1, 0, 0]
+    #     has_reference_block = False
+    #     if bot.blockAt(Vec3(pos[0] + offset[0], pos[1] + offset[1], pos[2] + offset[2]))['name'] != 'air':
+    #         has_reference_block = True
+    #     if bot.blockAt(Vec3(pos[0] - offset[0], pos[1] + offset[1], pos[2] + offset[2]))['name'] != 'air':
+    #         has_reference_block = True
         
-        if not has_reference_block:
-            solid_pos, path, hint = find_nearest_solid_block(
-                bot, 
-                Vec3,
-                Vec3(pos[0] + offset[0], pos[1] + offset[1], pos[2] + offset[2]),
-                max_range=3  # Specify maximum search range
-            )
-            return False, f"cannot place the block at this position facing {axis}, no reference block at {pos[0] + offset[0]} {pos[1] + offset[1]} {pos[2] + offset[2]} or {pos[0] - offset[0]} {pos[1] + offset[1]} {pos[2] + offset[2]}, {hint}. Consider placing blocks from the nearest solid block to create a support structure."
-    elif axis == 'z':
-        offset = [0, 0, 1]
-        has_reference_block = False
-        if bot.blockAt(Vec3(pos[0] + offset[0], pos[1] + offset[1], pos[2] + offset[2]))['name'] != 'air':
-            has_reference_block = True
-        if bot.blockAt(Vec3(pos[0] + offset[0], pos[1] + offset[1], pos[2] - offset[2]))['name'] != 'air':
-            has_reference_block = True
+    #     if not has_reference_block:
+    #         solid_pos, path, hint = find_nearest_solid_block(
+    #             bot, 
+    #             Vec3,
+    #             Vec3(pos[0] + offset[0], pos[1] + offset[1], pos[2] + offset[2]),
+    #             max_range=3  # Specify maximum search range
+    #         )
+    #         return False, f"cannot place the block at this position facing {axis}, no reference block at {pos[0] + offset[0]} {pos[1] + offset[1]} {pos[2] + offset[2]} or {pos[0] - offset[0]} {pos[1] + offset[1]} {pos[2] + offset[2]}. Consider placing dirt there as a support structure."
+    #         # return False, f"cannot place the block at this position facing {axis}, no reference block at {pos[0] + offset[0]} {pos[1] + offset[1]} {pos[2] + offset[2]} or {pos[0] - offset[0]} {pos[1] + offset[1]} {pos[2] + offset[2]}, {hint}. Consider placing blocks from the nearest solid block to create a support structure."
+    # elif axis == 'z':
+    #     offset = [0, 0, 1]
+    #     has_reference_block = False
+    #     if bot.blockAt(Vec3(pos[0] + offset[0], pos[1] + offset[1], pos[2] + offset[2]))['name'] != 'air':
+    #         has_reference_block = True
+    #     if bot.blockAt(Vec3(pos[0] + offset[0], pos[1] + offset[1], pos[2] - offset[2]))['name'] != 'air':
+    #         has_reference_block = True
         
-        if not has_reference_block:
-            solid_pos, path, hint = find_nearest_solid_block(
-                bot, 
-                Vec3,
-                Vec3(pos[0] + offset[0], pos[1] + offset[1], pos[2] + offset[2]),
-                max_range=3  # Specify maximum search range
-            )
-            return False, f"cannot place the block at this position facing {axis}, no reference block at {pos[0] + offset[0]} {pos[1] + offset[1]} {pos[2] + offset[2]} or {pos[0] + offset[0]} {pos[1] + offset[1]} {pos[2] - offset[2]}, {hint}. Consider placing blocks from the nearest solid block to create a support structure."
+    #     if not has_reference_block:
+    #         solid_pos, path, hint = find_nearest_solid_block(
+    #             bot, 
+    #             Vec3,
+    #             Vec3(pos[0] + offset[0], pos[1] + offset[1], pos[2] + offset[2]),
+    #             max_range=3  # Specify maximum search range
+    #         )
+    #         return False, f"cannot place the block at this position facing {axis}, no reference block at {pos[0] + offset[0]} {pos[1] + offset[1]} {pos[2] + offset[2]} or {pos[0] + offset[0]} {pos[1] + offset[1]} {pos[2] - offset[2]}. Consider placing dirt there as a support structure."
+    #         # return False, f"cannot place the block at this position facing {axis}, no reference block at {pos[0] + offset[0]} {pos[1] + offset[1]} {pos[2] + offset[2]} or {pos[0] + offset[0]} {pos[1] + offset[1]} {pos[2] - offset[2]}, {hint}. Consider placing blocks from the nearest solid block to create a support structure."
+    
+    if bot.blockAt(Vec3(pos[0], pos[1] - 1, pos[2]))['name'] != 'air' \
+       or bot.blockAt(Vec3(pos[0], pos[1] + 1, pos[2]))['name'] != 'air' \
+       or bot.blockAt(Vec3(pos[0] - 1, pos[1], pos[2]))['name'] != 'air' \
+       or bot.blockAt(Vec3(pos[0] + 1, pos[1], pos[2]))['name'] != 'air' \
+       or bot.blockAt(Vec3(pos[0], pos[1], pos[2] - 1))['name'] != 'air' \
+       or bot.blockAt(Vec3(pos[0], pos[1], pos[2] + 1))['name'] != 'air':
+        has_reference_block = True
         
     if not has_reference_block:
         # 找到正下方地面位置
@@ -1159,7 +1174,8 @@ async def place_block_op(bot, mcData, pathfinder, Vec3, item_name, pos, axis=Non
             Vec3(pos[0], pos[1] - 1, pos[2]),
             max_range=3  # Specify maximum search range
         )
-        return False, f"cannot place the block at this position, no reference block can be found, the ground block is at {pos[0]} {ground_y-1} {pos[2]}, {hint}. Consider placing blocks from the nearest solid block to create a support structure."
+        return False, f"cannot place the block at this position, no reference block can be found. Consider placing dirt next to this position as a support structure."
+        # return False, f"cannot place the block at this position, no reference block can be found, the ground block is at {pos[0]} {ground_y-1} {pos[2]}, {hint}. Consider placing blocks from the nearest solid block to create a support structure."
     
     bot.unequip("hand")
     
@@ -1936,7 +1952,7 @@ async def interact_nearest(pathfinder, bot,  Vec3, envs_info, mcData, RANGE_GOAL
                 "maxDistance": 16,
             })
             if not furnaceBlock:
-                return f"No furnace nearby", False
+                return f"No furnace nearby", False, []
             try:
                 furnace = bot.openFurnace(furnaceBlock)
                 if furnace.inputItem() and furnace.fuelSeconds and furnace.fuelSeconds > 1:
@@ -2215,7 +2231,7 @@ def countInventoryItems(bot, name):
                 count += item['count']
 
         try:
-            if bot.heldItem.name:
+            if name in bot.heldItem.name:
                 count += 1
         except Exception as e:
             pass
@@ -2281,10 +2297,12 @@ def mount(bot, name):
 
 
 def dismount(bot):
+    if not bot.vehicle:
+        return "not mounted", False
     try:
         bot.dismount()
         # bot.chat(f'#dismounted')
-        return f" dismount", True
+        return f"dismount", True
     except Exception as e:
         # bot.chat(f'unable to dismount: {e}')
         return f"unable to dismount", False
@@ -2320,6 +2338,11 @@ def useOnBlock(bot, Vec3, pathfinder, item_name, x, y, z):
         return msg, tag
     try:
         pos = Vec3(x, y, z)
+        block_name = bot.blockAt(pos)['name']
+        if "furnace" in block_name:
+            return f"can not use {item_name} on furnace --> try SmeltingCooking", False
+        if "boat" in item_name:
+            return f"can not use boat on block --> try placeBlock", False
         distance = distanceTo(bot.entity.position, pos)
         if distance > 3:
             move_to(pathfinder=pathfinder, bot=bot, Vec3=Vec3, RANGE_GOAL=2, pos=pos)
@@ -2348,6 +2371,7 @@ def useOnNearest(bot, Vec3, pathfinder, envs_info, mcData, blocks, item_name, na
                     if distance > 3:
                         move_to(pathfinder=pathfinder, bot=bot, Vec3=Vec3, RANGE_GOAL=2, pos=pos)
                     bot.lookAt(pos)
+                    msg, tag = equip(bot, item_name)
                     bot.activateBlock(bot.blockAt(pos))
                     bot.activateItem()
                     bot.useOn(bot.blockAt(pos))
@@ -2364,6 +2388,7 @@ def useOnNearest(bot, Vec3, pathfinder, envs_info, mcData, blocks, item_name, na
             if distance > 3:
                 move_to(pathfinder=pathfinder, bot=bot, Vec3=Vec3, RANGE_GOAL=2, pos=entity["position"])
             bot.lookAt(entity["position"])
+            msg, tag = equip(bot, item_name)
             if item_name == "shears" or item_name == "saddle":
                 bot.useOn(entity)
             elif item_name == "bucket":

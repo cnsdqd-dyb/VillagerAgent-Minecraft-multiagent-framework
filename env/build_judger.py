@@ -250,7 +250,8 @@ def handleViewer(*args):
         if dig_needed:
             material_pairs = material_factory_load('data/map.json', bot, Vec3, mcData, center_pos=(-12, -60, -12), rate=.5)
         time.sleep(2)
-        building_material_load('data/map.json', bot, dig_needed=dig_needed)
+        # building_material_load('data/map.json', bot, dig_needed=dig_needed)
+        building_material_load('data/map.json', bot, dig_needed=dig_needed, inventory_load=True, agent_names=agent_names)
         bot.chat(f"/time set 0")
 
         with open("data/blueprint_description_all.json", 'r') as f:
@@ -270,7 +271,10 @@ def handleViewer(*args):
         complexity = measure_complexity(task_data, dig_needed=dig_needed)
         bot.chat(f" complexity {complexity}") # 1 - 1000
         max_action_time = (np.log(complexity) + 1) * 60 + 180
-        max_time = (np.log(complexity) + 1) * 180 + 600
+        # max_time = (np.log(complexity) + 1) * 180 + 600
+        max_time = (np.log(complexity) + 1) * 60 + 300
+        if max_time > 720:
+            max_time = 720
 
     def check_block(Block, block_dict):
         if Block["name"] == "air" or Block["name"] == "water" or Block["name"] == "lava":
@@ -515,7 +519,9 @@ def handleViewer(*args):
         time.sleep(.1)
 
     # 更新地面
-    bot.chat(f'/fill -19 {y_b - 1} -20 -5 {y_b - 2} 7 minecraft:stone_bricks')
+    bot.chat(f'/fill -19 {y_b - 1} -20 -5 {y_b - 1} 7 minecraft:stone_bricks')
+    time.sleep(.1)
+    bot.chat(f'/fill -19 {y_b - 2} -20 -5 {y_b - 4} 7 minecraft:dirt')
     time.sleep(.1)
     bot.chat(f'/fill -19 {y_b} -20 -19 {y_b + 15} 7 minecraft:glass')
     time.sleep(.1)
@@ -535,11 +541,15 @@ def handleViewer(*args):
     time.sleep(.1)
     bot.chat(f'/fill -2 {y_b + 4} -4 -5 {y_b + 4} 4 minecraft:glass')
     time.sleep(.1)
+    bot.chat(f'/fill -2 {y_b - 1} -4 -5 {y_b - 2} 4 minecraft:stone_bricks')
+    time.sleep(.1)
     bot.chat(f'/clear @e[distance=..10,type=minecraft:player]')
     time.sleep(.1)
     bot.chat(f'/execute as @a[gamemode=survival] run give @s dirt 15')
     time.sleep(.1)
     bot.chat(f'/execute as @a[gamemode=survival] run give @s ladder 15')
+    time.sleep(.1)
+    bot.chat(f'/execute as @a[gamemode=survival] run give @s oak_planks 10')
 
     t = threading.Thread(target=core, args=(select_idx,))
     t.start()
@@ -683,7 +693,7 @@ def handleViewer(*args):
             with open(".cache/heart_beat.cache", "w") as f:
                 json.dump({"time": now_time}, f, indent=4)
 
-        if now_time - last_time > 10 and task_data:
+        if now_time - last_time > 20 and task_data:
             block_hit_rate = cal_block_hit_rate(task_data)
             if block_hit_rate > max_block_hit_rate:
                 max_block_hit_rate = block_hit_rate

@@ -59,6 +59,8 @@ bot.loadPlugin(minecraftHawkEye)
 
 VISIBLE_ONLY = True # 是否只看到可见的方块 | False: 开金手指
 
+mount_state = False
+
 # 定义修饰器
 def log_activity(bot):
     def decorator(func):
@@ -312,6 +314,12 @@ def find():
     """find name distance count: find tag in the distance, and count is the number of items you want to find."""
     data = request.get_json()
     name, distance, count = data.get('name'), data.get('distance'), data.get('count')
+
+    if name == "carrot":
+        name = "carrots"
+    elif name == "potato":
+        name = "potatoes"
+        
     origin_name = name
     center_pos = bot.entity.position
     # 随机移动一下 防止卡住
@@ -512,14 +520,19 @@ def dig():
 @app.route('/post_place', methods=['POST'])
 @log_activity(bot)
 def place():
+    status = False
     """place item_name x y z facing: place item at x y z, facing is one of [W, E, S, N, x, y, z, A]."""
     data = request.get_json()
     item_name, x, y, z, facing = data.get('item_name'), data.get('x'), data.get('y'), data.get('z'), data.get('facing')
+    orig_block = bot.blockAt(Vec3(x, y, z))['name']
     if "minecart" in item_name.lower().replace(" ", "_") \
         or "seeds" in item_name.lower().replace(" ", "_") \
-        or "saddle" in item_name.lower().replace(" ", "_"):
+        or "saddle" in item_name.lower().replace(" ", "_") \
+        or "carrot" in item_name.lower().replace(" ", "_") \
+        or "beetroot" in item_name.lower().replace(" ", "_") \
+        or "potato" in item_name.lower().replace(" ", "_"):
         events = info_bot.get_action_description_new()
-        return jsonify({'message': f"can not place {item_name} --> try useItemOnEntity", 'status': False, "new_events": events})
+        return jsonify({'message': f"can not place {item_name} --> try useItemOnBlock", 'status': False, "new_events": events})
     if facing.lower() == 'default':
         facing = 'A'
     if facing.lower() == 'up' or facing.lower() == 'down':
@@ -542,9 +555,13 @@ def place():
         if "chest_boat" in item_name.lower().replace(" ", "_"):
             bot.chat(f"/summon minecraft:chest_boat {x} {y+1} {z}")
             time.sleep(1)
-            bot.chat(f"/tp @s {x} {y+1} {z}")
-        elif "boat" in item_name.lower().replace(" ", "_"):
+            bot.chat(f"/tp @s {x} {y+2} {z}")
+            status = True
+        elif "boat" in item_name.lower().replace(" ", "_"): 
             bot.chat(f"/summon minecraft:boat {x} {y+1} {z}")
+            time.sleep(1)
+            bot.chat(f"/tp @s {x} {y+2} {z}")
+            status = True
         elif "bed" in item_name.lower().replace(" ", "_"):
             if facing not in ["W", "E", "S", "N"]:
                 facing = random.choice(["W", "E", "S", "N"])
@@ -571,17 +588,27 @@ def place():
                 bot.chat(f"/setblock {x} {y} {z} {item_name}[axis={facing.lower()}]")
             elif facing == "A":
                 bot.chat(f"/setblock {x} {y} {z} {item_name}")
+            cur_block = bot.blockAt(Vec3(x, y, z))['name']
+            if cur_block == orig_block and orig_block != item_name:
+                flag = False
+                msg = f"can not place {item_name}"
+        
+        bot.chat(f"/tp {x} {y+1} {z}")
+        bot.pathfinder.stop()
     if flag:
         bot.chat(f"/clear @s {item_name} 1")
 
-    distance = distanceTo(bot.entity.position, Vec3(x, y, z))
-    if distance < 1.4:
-        # jump 0.1s
-        bot.setControlState('jump', True)
-        time.sleep(.3)
-        bot.setControlState('jump', False)
+    # distance = distanceTo(bot.entity.position, Vec3(x, y, z))
+    # if distance < 1.4:
+    #     # jump 0.1s
+    #     bot.setControlState('jump', True)
+    #     time.sleep(.3)
+    #     bot.setControlState('jump', False)
     events = info_bot.get_action_description_new()
-    return jsonify({'message': msg, 'status': flag, "new_events": events})
+    if "boat" not in item_name.lower().replace(" ", "_"):
+        status = bot.blockAt(Vec3(x, y, z))['name'] == item_name
+    bot.pathfinder.stop()
+    return jsonify({'message': msg, 'status': status, "new_events": events})
 
 
 @app.route('/post_attack', methods=['POST'])
@@ -1486,6 +1513,8 @@ def handleViewer(*args):
 
     @On(bot, "entityAttach")
     def entityAttach(this, entity, vehicle):
+        # global mount_state 
+        # mount_state = True
         if entity.type == "player" and vehicle.type == "object":
             info_bot.add_event("entityAttach", info_bot.existing_time, f"{entity.username} is riding that {vehicle.displayName}", True)
             # print(f"Sweet, {entity.username} is riding that {vehicle.displayName}")
@@ -1493,6 +1522,8 @@ def handleViewer(*args):
 
     @On(bot, "entityDetach")
     def entityDetach(this, entity, vehicle):
+        # global mount_state 
+        # mount_state = False
         if entity.type == "player" and vehicle.type == "object":
             info_bot.add_event("entityDetach", info_bot.existing_time, f"Lame, {entity.username} stopped riding the {vehicle.displayName}", True)
             # print(f"Lame, {entity.username} stopped riding the {vehicle.displayName}")

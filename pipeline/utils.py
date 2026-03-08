@@ -119,6 +119,22 @@ def find_correct_data(dict_data, guard_keys=[]):
     # 如果没有找到，返回None
     return None
 
+def _fix_missing_commas_in_object(s: str) -> str:
+    """
+    修复一种常见 LLM 错误：JSON 对象中 key-value 对之间漏写逗号
+    例如：{"a": 1 "b": 2} -> {"a": 1, "b": 2}
+
+    原理：当我们看到下一个 key 的起始形态 `"xxx":` 时，
+    如果它前面紧挨着的内容看起来像“一个 value 已经结束”（如字符串结束引号、数字、}、] 等），
+    就在它前面插入逗号。
+    """
+    return re.sub(
+        # (?="[^"]+"\s*:)  这段确保后面确实是 "key":
+        # 前面的 lookbehind 约束：前一个字符像 value 的结束符
+        r'(?<=[0-9"\}\]])\s*(?="[^"]+"\s*:)',
+        ', ',
+        s
+    )
 
 def extract_info(text: str, guard_keys=[]) -> [dict]:
     # Initialize an empty list to store the extracted dictionaries
@@ -147,6 +163,8 @@ def extract_info(text: str, guard_keys=[]) -> [dict]:
 
                 # 处理注释 string // annotation
                 dict_text = re.sub(r'//.*?\n', '\n', dict_text)
+                # 逗号修复
+                dict_text = _fix_missing_commas_in_object(dict_text)
 
                 try:
                     # Convert the dictionary text to a dictionary and add it to the list
@@ -156,8 +174,12 @@ def extract_info(text: str, guard_keys=[]) -> [dict]:
                     dict_data = None
 
                 if dict_data is None:
-                    # 如果转换失败，尝试使用yaml
-                    dict_data = yaml.load(dict_text, Loader=yaml.FullLoader)
+                    # ✅【修改 2】给 yaml.load 加 try/except，避免 yaml 也失败时函数直接崩溃
+                    try:
+                        dict_data = yaml.load(dict_text, Loader=yaml.FullLoader)
+                    except Exception as e2:
+                        print(f"extract with yaml error\n{e2}\nerror text:\n{dict_text}")
+                        dict_data = None
                 # 存在一种情况 llm 对 数据进行了包裹，导致数据格式为 {"data":{...}} 或者 {"task":{...}}
                 # 这种情况下，我们需要将数据提取出来
                 # 假设第一层正确的key为 description
