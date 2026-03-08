@@ -107,7 +107,7 @@ Customize your private tasks in your Minecraft server with our VillagerAgent mul
     <a href='https://arxiv.org/abs/2406.05720'>
       <img src='https://img.shields.io/badge/Paper-PDF-green?style=for-the-badge&logo=arXiv&logoColor=green' alt='Paper PDF'>
     </a>
-    <a href='https://cnsdqd-dyb.github.io/VillagerAgent.github.io/2024/04/01/VillagerAgent.html'>
+    <a href='https://cnsdqd-dyb.github.io/workshare/2024/04/01/VillagerAgent.html'>
       <img src='https://img.shields.io/badge/Project-Page-blue?style=for-the-badge&logo=Web&logoColor=white' alt='Project Page'>
     </a>
 </p>
