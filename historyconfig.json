@@ -1,0 +1,2235 @@
+[
+    {
+        "api_model": "deepseek_chat",
+        "api_base": "https://api.deepseek.com",
+        "task_type": "meta",
+        "task_idx": 0,
+        "agent_num": 1,
+        "dig_needed": false,
+        "max_task_num": 0,
+        "task_goal": [
+            {
+                "instruction": "**Environment:**  \n- The bakery is located at [0, 0, 10] and is constructed from oak planks, birch logs, and stone bricks. The interior features a furnace, crafting tables, and storage chests. The surrounding area includes wheat fields to the west (around [-5, 0, 15]) and a riverbank to the east (near [3, 0, 5]) where sugar cane grows. The bakery has a wooden door at [1, 0, 10] and is illuminated by torches to prevent hostile mob spawns.  \n\n**Interactive-Items:**  \n- **Furnace**: [0, 1, 10] (facing north)  \n- **Chest (Storage)**: [2, 0, 10]  \n- **Lever**: To be placed at [1, 0, 10] (for locking the bakery)  \n\n**Task:**  \n- Collaborate to construct and operate a bakery at [0, 0, 10].  \n- One agent must gather wheat from the nearby fields (located around [-5, 0, 15]) and craft it into bread using the furnace placed inside the bakery.  \n- Another agent should collect sugar cane from the riverbank (near [3, 0, 5]) and craft it into sugar, then use it to bake cakes in the furnace.  \n- A third agent must manage the storage, ensuring all baked goods (bread and cakes) are placed in the chest at [2, 0, 10] and that the furnace is always stocked with fuel (coal or wood).  \n- The bakery must operate for a full Minecraft day (from sunrise to sunset). Once complete, all agents must lock the bakery by placing a lever next to the door at [1, 0, 10] and switching it off.  \n- Ensure no hostile mobs enter the bakery by lighting the area with torches and eliminating any threats.  \n\n**Actions available:**  \n- Agents can harvest wheat and sugar cane from designated areas.  \n- Agents can use the furnace to bake bread and cakes.  \n- Agents can transfer items to and from the storage chest.  \n- Agents can place and toggle the lever to lock the bakery.  \n- Agents must maintain torch lighting and defend against hostile mobs.  \n\n**Additional Notes:**  \n- The bakery’s operation time is tied to the Minecraft day-night cycle.  \n- Hostile mobs may spawn in unlit areas, so agents should prioritize lighting and security.  \n- All baked goods must be stored before locking the bakery."
+            }
+        ],
+        "task_scenario": "Unknown",
+        "evaluation_arg": {},
+        "document_file": "",
+        "host": "127.0.0.1",
+        "port": 25565,
+        "task_name": "multi_agent_task_2858",
+        "simplified_task": [
+            {
+                "instruction": "**Task:**  \n\n- Collaborate to construct and operate a bakery at [0, 0, 10].  \n- One agent must gather wheat from the nearby fields (located around [-5, 0, 15]) and craft it into bread using the furnace placed inside the bakery.  \n- Another agent should collect sugar cane from the riverbank (near [3, 0, 5]) and craft it into sugar, then use it to bake cakes in the furnace.  \n- A third agent must manage the storage, ensuring all baked goods (bread and cakes) are placed in the chest at [2, 0, 10] and that the furnace is always stocked with fuel (coal or wood).  \n- The bakery must operate for a full Minecraft day (from sunrise to sunset). Once complete, all agents must lock the bakery by placing a lever next to the door at [1, 0, 10] and switching it off.  \n- Ensure no hostile mobs enter the bakery by lighting the area with torches and eliminating any threats."
+            }
+        ],
+        "blueprint": {
+            "blocks": [
+                {
+                    "type": "rectangle",
+                    "from": [
+                        -5,
+                        0,
+                        15
+                    ],
+                    "to": [
+                        -7,
+                        0,
+                        17
+                    ],
+                    "name": "wheat"
+                },
+                {
+                    "type": "rectangle",
+                    "from": [
+                        3,
+                        0,
+                        5
+                    ],
+                    "to": [
+                        5,
+                        0,
+                        7
+                    ],
+                    "name": "sugar_cane"
+                },
+                {
+                    "type": "rectangle",
+                    "from": [
+                        3,
+                        0,
+                        4
+                    ],
+                    "to": [
+                        5,
+                        0,
+                        4
+                    ],
+                    "name": "water"
+                },
+                {
+                    "type": "rectangle",
+                    "from": [
+                        3,
+                        0,
+                        8
+                    ],
+                    "to": [
+                        5,
+                        0,
+                        8
+                    ],
+                    "name": "water"
+                },
+                {
+                    "type": "rectangle",
+                    "from": [
+                        2,
+                        0,
+                        5
+                    ],
+                    "to": [
+                        2,
+                        0,
+                        7
+                    ],
+                    "name": "water"
+                },
+                {
+                    "type": "rectangle",
+                    "from": [
+                        6,
+                        0,
+                        5
+                    ],
+                    "to": [
+                        6,
+                        0,
+                        7
+                    ],
+                    "name": "water"
+                },
+                {
+                    "type": "line",
+                    "from": [
+                        -4,
+                        0,
+                        15
+                    ],
+                    "to": [
+                        0,
+                        0,
+                        15
+                    ],
+                    "name": "oak_planks"
+                },
+                {
+                    "type": "line",
+                    "from": [
+                        3,
+                        0,
+                        6
+                    ],
+                    "to": [
+                        3,
+                        0,
+                        10
+                    ],
+                    "name": "oak_planks"
+                },
+                {
+                    "position": [
+                        -4,
+                        1,
+                        15
+                    ],
+                    "name": "torch"
+                },
+                {
+                    "position": [
+                        3,
+                        1,
+                        6
+                    ],
+                    "name": "torch"
+                },
+                {
+                    "position": [
+                        0,
+                        1,
+                        15
+                    ],
+                    "name": "torch"
+                },
+                {
+                    "position": [
+                        3,
+                        1,
+                        10
+                    ],
+                    "name": "torch"
+                }
+            ],
+            "entities": []
+        }
+    },
+    {
+        "api_model": "deepseek_chat",
+        "api_base": "https://api.deepseek.com",
+        "task_type": "meta",
+        "task_idx": 0,
+        "agent_num": 1,
+        "dig_needed": false,
+        "max_task_num": 0,
+        "task_goal": [
+            {
+                "instruction": "**Environment:**  \n- The construction site at [0, 10, 12] is located on a grassy plain surrounded by oak trees and a small river to the east. The area is well-lit with torches placed on wooden posts to prevent mob spawns.  \n- A chest containing stone bricks and torches is located at [-5, 0, 10], near a makeshift storage shed made of oak planks and cobblestone.  \n\n**Interactive-Items:**  \n- **Oak Sign**: To be placed at the base of the watchtower with the text \"Guard Post\" (facing north).  \n\n**Task:**  \n- Collaborate to construct a watchtower at [0, 10, 12] with a height of at least 8 blocks and a base of 5x5 blocks.  \n- Gather the required materials (stone bricks and torches) from the chest at [-5, 0, 10].  \n- One agent must act as the \"architect,\" directing the placement of blocks, while the other agents gather materials and build.  \n- Place a sign at the base of the watchtower with the text \"Guard Post\" to mark its purpose.  \n- Ensure the tower has an accessible ladder or staircase inside for agents to reach the top.  \n\n**Actions available:**  \n- Agents can gather materials from the chest.  \n- Agents can place blocks according to the architect's directions.  \n- The architect can mark block placements using temporary markers (e.g., wool blocks).  \n- Agents can construct ladders or staircases inside the tower.  \n- Agents must avoid obstructing the construction site with excess materials.  \n\n**Additional Notes:**  \n- The watchtower should have a clear line of sight to the river and surrounding plains for optimal functionality.  \n- Torches should be placed strategically to ensure the tower remains well-lit at night."
+            }
+        ],
+        "task_scenario": "Unknown",
+        "evaluation_arg": {},
+        "document_file": "",
+        "host": "127.0.0.1",
+        "port": 25565,
+        "task_name": "multi_agent_task_1151",
+        "simplified_task": [
+            {
+                "instruction": "**Task:**  \n- Collaborate to construct a watchtower at [0, 10, 12] with a height of at least 8 blocks and a base of 5x5 blocks.  \n- Gather the required materials (stone bricks and torches) from the chest at [-5, 0, 10].  \n- One agent must act as the \"architect,\" directing the placement of blocks, while the other agents gather materials and build.  \n- Place a sign at the base of the watchtower with the text \"Guard Post\" to mark its purpose.  \n- Ensure the tower has an accessible ladder or staircase inside for agents to reach the top.  \n\nThis task requires coordination, division of labor, and dependency between agents (e.g., material collection, block placement, and structural design). The spatial constraints ensure the build remains manageable within the given coordinates."
+            }
+        ],
+        "blueprint": {
+            "blocks": [
+                {
+                    "type": "line",
+                    "from": [
+                        -8,
+                        0,
+                        5
+                    ],
+                    "to": [
+                        -8,
+                        4,
+                        5
+                    ],
+                    "name": "oak_log"
+                },
+                {
+                    "type": "rectangle",
+                    "from": [
+                        -9,
+                        4,
+                        4
+                    ],
+                    "to": [
+                        -7,
+                        4,
+                        6
+                    ],
+                    "name": "oak_leaves"
+                },
+                {
+                    "type": "line",
+                    "from": [
+                        8,
+                        0,
+                        5
+                    ],
+                    "to": [
+                        8,
+                        4,
+                        5
+                    ],
+                    "name": "oak_log"
+                },
+                {
+                    "type": "rectangle",
+                    "from": [
+                        7,
+                        4,
+                        4
+                    ],
+                    "to": [
+                        9,
+                        4,
+                        6
+                    ],
+                    "name": "oak_leaves"
+                },
+                {
+                    "type": "line",
+                    "from": [
+                        -8,
+                        0,
+                        19
+                    ],
+                    "to": [
+                        -8,
+                        4,
+                        19
+                    ],
+                    "name": "oak_log"
+                },
+                {
+                    "type": "rectangle",
+                    "from": [
+                        -9,
+                        4,
+                        18
+                    ],
+                    "to": [
+                        -7,
+                        4,
+                        20
+                    ],
+                    "name": "oak_leaves"
+                },
+                {
+                    "type": "line",
+                    "from": [
+                        8,
+                        0,
+                        19
+                    ],
+                    "to": [
+                        8,
+                        4,
+                        19
+                    ],
+                    "name": "oak_log"
+                },
+                {
+                    "type": "rectangle",
+                    "from": [
+                        7,
+                        4,
+                        18
+                    ],
+                    "to": [
+                        9,
+                        4,
+                        20
+                    ],
+                    "name": "oak_leaves"
+                },
+                {
+                    "type": "rectangle",
+                    "from": [
+                        5,
+                        0,
+                        10
+                    ],
+                    "to": [
+                        10,
+                        0,
+                        15
+                    ],
+                    "name": "water"
+                },
+                {
+                    "type": "rectangle",
+                    "from": [
+                        5,
+                        0,
+                        9
+                    ],
+                    "to": [
+                        10,
+                        0,
+                        9
+                    ],
+                    "name": "stone"
+                },
+                {
+                    "type": "rectangle",
+                    "from": [
+                        5,
+                        0,
+                        16
+                    ],
+                    "to": [
+                        10,
+                        0,
+                        16
+                    ],
+                    "name": "stone"
+                },
+                {
+                    "type": "line",
+                    "from": [
+                        -7,
+                        0,
+                        12
+                    ],
+                    "to": [
+                        -7,
+                        2,
+                        12
+                    ],
+                    "name": "oak_log"
+                },
+                {
+                    "position": [
+                        -7,
+                        3,
+                        12
+                    ],
+                    "name": "torch",
+                    "facing": "south"
+                },
+                {
+                    "type": "line",
+                    "from": [
+                        7,
+                        0,
+                        12
+                    ],
+                    "to": [
+                        7,
+                        2,
+                        12
+                    ],
+                    "name": "oak_log"
+                },
+                {
+                    "position": [
+                        7,
+                        3,
+                        12
+                    ],
+                    "name": "torch",
+                    "facing": "south"
+                },
+                {
+                    "type": "line",
+                    "from": [
+                        0,
+                        0,
+                        5
+                    ],
+                    "to": [
+                        0,
+                        2,
+                        5
+                    ],
+                    "name": "oak_log"
+                },
+                {
+                    "position": [
+                        0,
+                        3,
+                        5
+                    ],
+                    "name": "torch",
+                    "facing": "south"
+                },
+                {
+                    "type": "line",
+                    "from": [
+                        0,
+                        0,
+                        19
+                    ],
+                    "to": [
+                        0,
+                        2,
+                        19
+                    ],
+                    "name": "oak_log"
+                },
+                {
+                    "position": [
+                        0,
+                        3,
+                        19
+                    ],
+                    "name": "torch",
+                    "facing": "south"
+                },
+                {
+                    "position": [
+                        -5,
+                        0,
+                        10
+                    ],
+                    "name": "chest",
+                    "facing": "north",
+                    "items": [
+                        {
+                            "name": "stone_bricks",
+                            "count": 64
+                        },
+                        {
+                            "name": "torch",
+                            "count": 16
+                        }
+                    ]
+                },
+                {
+                    "type": "rectangle",
+                    "from": [
+                        -6,
+                        0,
+                        8
+                    ],
+                    "to": [
+                        -4,
+                        0,
+                        12
+                    ],
+                    "name": "oak_planks"
+                },
+                {
+                    "type": "rectangle",
+                    "from": [
+                        -6,
+                        1,
+                        8
+                    ],
+                    "to": [
+                        -6,
+                        2,
+                        12
+                    ],
+                    "name": "cobblestone"
+                },
+                {
+                    "type": "rectangle",
+                    "from": [
+                        -4,
+                        1,
+                        8
+                    ],
+                    "to": [
+                        -4,
+                        2,
+                        12
+                    ],
+                    "name": "cobblestone"
+                },
+                {
+                    "type": "rectangle",
+                    "from": [
+                        -6,
+                        3,
+                        8
+                    ],
+                    "to": [
+                        -4,
+                        3,
+                        12
+                    ],
+                    "name": "oak_planks"
+                }
+            ],
+            "entities": []
+        }
+    },
+    {
+        "api_model": "deepseek_chat",
+        "api_base": "https://api.deepseek.com",
+        "task_type": "meta",
+        "task_idx": 0,
+        "agent_num": 1,
+        "dig_needed": false,
+        "max_task_num": 0,
+        "task_goal": [
+            {
+                "instruction": "**Environment:**  \n- The construction site is located in a village with a mix of oak and spruce buildings. The ground floor at [0, 0, 10] is near the village square, while the observation deck at [0, 12, 10] overlooks the entire settlement.  \n- The nearby cave at [-5, 3, 15] contains redstone deposits but is dimly lit, so bring torches. The village blacksmith at [8, 0, 18] has a furnace and anvil, along with iron ingots stored in a chest.  \n- The storage shed at [3, 0, 5] is made of oak planks and cobblestone, housing stone slabs and additional oak planks. A crafting table is available inside.  \n- The observation deck is constructed from quartz and glass panes, with a chest containing fireworks at [0, 12, 8].  \n\n**Task:**  \n- Work together to construct and activate a redstone-powered elevator between the ground floor at [0, 0, 10] and the observation deck at [0, 12, 10].  \n- One agent must gather redstone dust from the nearby cave at [-5, 3, 15] and craft pistons using iron ingots from the village blacksmith at [8, 0, 18].  \n- Another agent should collect building materials (stone slabs and oak planks) from the storage shed at [3, 0, 5] and construct the elevator shaft.  \n- A third agent must wire the redstone circuitry correctly to ensure the elevator functions smoothly (test by sending a villager up and down).  \n- The elevator must be completed before sunset (set time to 12000 for a time check).  \n- All agents must meet at the observation deck to celebrate once the elevator is operational (set off fireworks stored in the chest at [0, 12, 8]).  \n\n**Actions available:**  \n- Agents can mine redstone from the cave and craft pistons at the blacksmith.  \n- Agents can gather building materials from the storage shed and construct the elevator shaft.  \n- Agents can wire redstone circuits and test the elevator with a villager.  \n- Agents can use the crafting table in the storage shed or blacksmith for necessary items.  \n- Agents must monitor the time to ensure completion before sunset.  \n- Agents can set off fireworks from the observation deck chest upon successful completion."
+            }
+        ],
+        "task_scenario": "Unknown",
+        "evaluation_arg": {},
+        "document_file": "",
+        "host": "127.0.0.1",
+        "port": 25565,
+        "task_name": "multi_agent_task_1117",
+        "simplified_task": [
+            {
+                "instruction": "**Task:**  \n\n- Work together to construct and activate a redstone-powered elevator between the ground floor at [0, 0, 10] and the observation deck at [0, 12, 10].  \n- One agent must gather redstone dust from the nearby cave at [-5, 3, 15] and craft pistons using iron ingots from the village blacksmith at [8, 0, 18].  \n- Another agent should collect building materials (stone slabs and oak planks) from the storage shed at [3, 0, 5] and construct the elevator shaft.  \n- A third agent must wire the redstone circuitry correctly to ensure the elevator functions smoothly (test by sending a villager up and down).  \n- The elevator must be completed before sunset (set time to 12000 for a time check).  \n- All agents must meet at the observation deck to celebrate once the elevator is operational (set off fireworks stored in the chest at [0, 12, 8])."
+            }
+        ],
+        "blueprint": {
+            "blocks": [
+                {
+                    "type": "rectangle",
+                    "from": [
+                        -2,
+                        0,
+                        8
+                    ],
+                    "to": [
+                        2,
+                        0,
+                        12
+                    ],
+                    "name": "grass_block"
+                },
+                {
+                    "type": "rectangle",
+                    "from": [
+                        -2,
+                        12,
+                        8
+                    ],
+                    "to": [
+                        2,
+                        12,
+                        12
+                    ],
+                    "name": "quartz_block"
+                },
+                {
+                    "type": "line",
+                    "from": [
+                        -5,
+                        0,
+                        10
+                    ],
+                    "to": [
+                        -5,
+                        0,
+                        15
+                    ],
+                    "name": "cobblestone"
+                },
+                {
+                    "type": "line",
+                    "from": [
+                        8,
+                        0,
+                        10
+                    ],
+                    "to": [
+                        8,
+                        0,
+                        18
+                    ],
+                    "name": "cobblestone"
+                },
+                {
+                    "type": "line",
+                    "from": [
+                        3,
+                        0,
+                        5
+                    ],
+                    "to": [
+                        3,
+                        0,
+                        10
+                    ],
+                    "name": "cobblestone"
+                },
+                {
+                    "type": "rectangle",
+                    "from": [
+                        -6,
+                        0,
+                        14
+                    ],
+                    "to": [
+                        -4,
+                        2,
+                        16
+                    ],
+                    "name": "stone"
+                },
+                {
+                    "type": "rectangle",
+                    "from": [
+                        -5,
+                        1,
+                        15
+                    ],
+                    "to": [
+                        -5,
+                        1,
+                        15
+                    ],
+                    "name": "air"
+                },
+                {
+                    "position": [
+                        -5,
+                        3,
+                        15
+                    ],
+                    "name": "redstone_ore"
+                },
+                {
+                    "position": [
+                        -6,
+                        3,
+                        15
+                    ],
+                    "name": "redstone_ore"
+                },
+                {
+                    "position": [
+                        -5,
+                        3,
+                        16
+                    ],
+                    "name": "redstone_ore"
+                },
+                {
+                    "type": "rectangle",
+                    "from": [
+                        7,
+                        0,
+                        17
+                    ],
+                    "to": [
+                        9,
+                        3,
+                        19
+                    ],
+                    "name": "cobblestone"
+                },
+                {
+                    "type": "rectangle",
+                    "from": [
+                        8,
+                        1,
+                        18
+                    ],
+                    "to": [
+                        8,
+                        1,
+                        18
+                    ],
+                    "name": "air"
+                },
+                {
+                    "position": [
+                        7,
+                        1,
+                        18
+                    ],
+                    "name": "furnace",
+                    "facing": "west"
+                },
+                {
+                    "position": [
+                        9,
+                        1,
+                        18
+                    ],
+                    "name": "anvil",
+                    "facing": "east"
+                },
+                {
+                    "position": [
+                        8,
+                        1,
+                        17
+                    ],
+                    "name": "chest",
+                    "facing": "north",
+                    "items": [
+                        {
+                            "name": "iron_ingot",
+                            "count": 8
+                        }
+                    ]
+                },
+                {
+                    "type": "rectangle",
+                    "from": [
+                        2,
+                        0,
+                        4
+                    ],
+                    "to": [
+                        4,
+                        2,
+                        6
+                    ],
+                    "name": "oak_planks"
+                },
+                {
+                    "type": "rectangle",
+                    "from": [
+                        3,
+                        1,
+                        5
+                    ],
+                    "to": [
+                        3,
+                        1,
+                        5
+                    ],
+                    "name": "air"
+                },
+                {
+                    "position": [
+                        2,
+                        1,
+                        5
+                    ],
+                    "name": "chest",
+                    "facing": "west",
+                    "items": [
+                        {
+                            "name": "stone_slab",
+                            "count": 16
+                        },
+                        {
+                            "name": "oak_planks",
+                            "count": 32
+                        }
+                    ]
+                },
+                {
+                    "position": [
+                        4,
+                        1,
+                        5
+                    ],
+                    "name": "crafting_table"
+                },
+                {
+                    "position": [
+                        0,
+                        12,
+                        8
+                    ],
+                    "name": "chest",
+                    "facing": "north",
+                    "items": [
+                        {
+                            "name": "firework_rocket",
+                            "count": 12
+                        }
+                    ]
+                },
+                {
+                    "type": "tree",
+                    "position": [
+                        5,
+                        0,
+                        12
+                    ],
+                    "name": "oak"
+                },
+                {
+                    "type": "tree",
+                    "position": [
+                        -5,
+                        0,
+                        8
+                    ],
+                    "name": "spruce"
+                },
+                {
+                    "type": "tree",
+                    "position": [
+                        6,
+                        0,
+                        18
+                    ],
+                    "name": "oak"
+                },
+                {
+                    "type": "tree",
+                    "position": [
+                        0,
+                        0,
+                        20
+                    ],
+                    "name": "spruce"
+                }
+            ],
+            "entities": [
+                {
+                    "position": [
+                        0,
+                        0,
+                        10
+                    ],
+                    "name": "villager"
+                }
+            ]
+        }
+    },
+    {
+        "api_model": "deepseek_chat",
+        "api_base": "https://api.deepseek.com",
+        "task_type": "meta",
+        "task_idx": 0,
+        "agent_num": 1,
+        "dig_needed": false,
+        "max_task_num": 0,
+        "task_goal": [
+            {
+                "instruction": "**Environment:**  \n- The construction site at [0, 10, 20] is located on a grassy plain surrounded by a dense forest to the east and a small river to the west. The chest at [-5, 0, 15] is placed under a wooden shelter made of oak planks and contains cobblestone and oak logs. The forest at [3, 0, 18] has abundant oak and birch trees for wood gathering.  \n- Two beds are placed inside a small wooden hut near the construction site at [1, 0, 20] and [-1, 0, 20], equipped with basic furnishings like crafting tables and furnaces.  \n\n**Task:**  \n- Work together to construct a watchtower at [0, 10, 20] with a height of at least 10 blocks.  \n- Gather building materials (cobblestone and wood) from the chest at [-5, 0, 15] and the nearby forest at [3, 0, 18].  \n- One agent must remain at the top of the tower to monitor the surroundings while the others gather materials and build.  \n- Place a torch every 3 blocks on the tower to ensure visibility at night.  \n- All agents must sleep in the beds at [1, 0, 20] and [-1, 0, 20] by midnight to avoid mobs.  \n\n**Actions available:**  \n- Agents can chop trees in the forest for wood.  \n- Agents can retrieve cobblestone and other materials from the chest.  \n- Agents can build the tower layer by layer, ensuring structural stability.  \n- The monitoring agent can alert others of any approaching threats.  \n- Agents must place torches strategically to prevent mob spawns.  \n- All agents must return to the beds before midnight to reset their spawn points and avoid nighttime dangers.  \n\n**Additional Notes:**  \n- The tower should have a ladder or staircase for easy access.  \n- A crafting table is available near the beds for any necessary tool repairs or crafting.  \n- The river nearby can be used as a water source if needed.  \n\nThis task requires division of labor (material gathering, construction, and monitoring) and coordination to ensure the tower is built safely and efficiently."
+            }
+        ],
+        "task_scenario": "Unknown",
+        "evaluation_arg": {},
+        "document_file": "",
+        "host": "127.0.0.1",
+        "port": 25565,
+        "task_name": "multi_agent_task_119",
+        "simplified_task": [
+            {
+                "instruction": "**Task:**  \n- Work together to construct a watchtower at [0, 10, 20] with a height of at least 10 blocks.  \n- Gather building materials (cobblestone and wood) from the chest at [-5, 0, 15] and the nearby forest at [3, 0, 18].  \n- One agent must remain at the top of the tower to monitor the surroundings while the others gather materials and build.  \n- Place a torch every 3 blocks on the tower to ensure visibility at night.  \n- All agents must sleep in the beds at [1, 0, 20] and [-1, 0, 20] by midnight to avoid mobs.  \n\nThis task requires division of labor (material gathering, construction, and monitoring) and coordination to ensure the tower is built safely and efficiently."
+            }
+        ],
+        "blueprint": {
+            "blocks": [
+                {
+                    "type": "rectangle",
+                    "from": [
+                        -10,
+                        -1,
+                        1
+                    ],
+                    "to": [
+                        10,
+                        -1,
+                        24
+                    ],
+                    "name": "grass_block"
+                },
+                {
+                    "type": "tree",
+                    "position": [
+                        3,
+                        0,
+                        18
+                    ],
+                    "name": "oak"
+                },
+                {
+                    "type": "tree",
+                    "position": [
+                        4,
+                        0,
+                        17
+                    ],
+                    "name": "oak"
+                },
+                {
+                    "type": "tree",
+                    "position": [
+                        5,
+                        0,
+                        19
+                    ],
+                    "name": "oak"
+                },
+                {
+                    "type": "tree",
+                    "position": [
+                        6,
+                        0,
+                        16
+                    ],
+                    "name": "birch"
+                },
+                {
+                    "type": "tree",
+                    "position": [
+                        7,
+                        0,
+                        18
+                    ],
+                    "name": "birch"
+                },
+                {
+                    "type": "tree",
+                    "position": [
+                        8,
+                        0,
+                        20
+                    ],
+                    "name": "oak"
+                },
+                {
+                    "type": "line",
+                    "from": [
+                        -8,
+                        0,
+                        5
+                    ],
+                    "to": [
+                        -8,
+                        0,
+                        15
+                    ],
+                    "name": "water"
+                },
+                {
+                    "type": "line",
+                    "from": [
+                        -7,
+                        0,
+                        5
+                    ],
+                    "to": [
+                        -7,
+                        0,
+                        15
+                    ],
+                    "name": "stone"
+                },
+                {
+                    "type": "line",
+                    "from": [
+                        -9,
+                        0,
+                        5
+                    ],
+                    "to": [
+                        -9,
+                        0,
+                        15
+                    ],
+                    "name": "stone"
+                },
+                {
+                    "type": "rectangle",
+                    "from": [
+                        -6,
+                        0,
+                        14
+                    ],
+                    "to": [
+                        -4,
+                        0,
+                        16
+                    ],
+                    "name": "oak_planks"
+                },
+                {
+                    "type": "line",
+                    "from": [
+                        -6,
+                        1,
+                        14
+                    ],
+                    "to": [
+                        -6,
+                        2,
+                        14
+                    ],
+                    "name": "oak_log"
+                },
+                {
+                    "type": "line",
+                    "from": [
+                        -4,
+                        1,
+                        14
+                    ],
+                    "to": [
+                        -4,
+                        2,
+                        14
+                    ],
+                    "name": "oak_log"
+                },
+                {
+                    "type": "line",
+                    "from": [
+                        -6,
+                        1,
+                        16
+                    ],
+                    "to": [
+                        -6,
+                        2,
+                        16
+                    ],
+                    "name": "oak_log"
+                },
+                {
+                    "type": "line",
+                    "from": [
+                        -4,
+                        1,
+                        16
+                    ],
+                    "to": [
+                        -4,
+                        2,
+                        16
+                    ],
+                    "name": "oak_log"
+                },
+                {
+                    "type": "rectangle",
+                    "from": [
+                        -6,
+                        3,
+                        14
+                    ],
+                    "to": [
+                        -4,
+                        3,
+                        16
+                    ],
+                    "name": "oak_planks"
+                },
+                {
+                    "position": [
+                        -5,
+                        0,
+                        15
+                    ],
+                    "name": "chest",
+                    "facing": "north",
+                    "items": [
+                        {
+                            "name": "cobblestone",
+                            "count": 64
+                        },
+                        {
+                            "name": "oak_log",
+                            "count": 32
+                        }
+                    ]
+                },
+                {
+                    "type": "rectangle",
+                    "from": [
+                        -2,
+                        0,
+                        19
+                    ],
+                    "to": [
+                        2,
+                        0,
+                        21
+                    ],
+                    "name": "oak_planks"
+                },
+                {
+                    "type": "line",
+                    "from": [
+                        -2,
+                        1,
+                        19
+                    ],
+                    "to": [
+                        -2,
+                        2,
+                        19
+                    ],
+                    "name": "oak_log"
+                },
+                {
+                    "type": "line",
+                    "from": [
+                        2,
+                        1,
+                        19
+                    ],
+                    "to": [
+                        2,
+                        2,
+                        19
+                    ],
+                    "name": "oak_log"
+                },
+                {
+                    "type": "line",
+                    "from": [
+                        -2,
+                        1,
+                        21
+                    ],
+                    "to": [
+                        -2,
+                        2,
+                        21
+                    ],
+                    "name": "oak_log"
+                },
+                {
+                    "type": "line",
+                    "from": [
+                        2,
+                        1,
+                        21
+                    ],
+                    "to": [
+                        2,
+                        2,
+                        21
+                    ],
+                    "name": "oak_log"
+                },
+                {
+                    "type": "rectangle",
+                    "from": [
+                        -2,
+                        3,
+                        19
+                    ],
+                    "to": [
+                        2,
+                        3,
+                        21
+                    ],
+                    "name": "oak_planks"
+                },
+                {
+                    "position": [
+                        1,
+                        0,
+                        20
+                    ],
+                    "name": "red_bed",
+                    "facing": "north"
+                },
+                {
+                    "position": [
+                        -1,
+                        0,
+                        20
+                    ],
+                    "name": "red_bed",
+                    "facing": "north"
+                },
+                {
+                    "position": [
+                        0,
+                        0,
+                        19
+                    ],
+                    "name": "crafting_table"
+                },
+                {
+                    "position": [
+                        0,
+                        0,
+                        21
+                    ],
+                    "name": "furnace",
+                    "facing": "north"
+                }
+            ],
+            "entities": []
+        }
+    },
+    {
+        "api_model": "deepseek_chat",
+        "api_base": "https://api.deepseek.com",
+        "task_type": "meta",
+        "task_idx": 0,
+        "agent_num": 1,
+        "dig_needed": false,
+        "max_task_num": 0,
+        "task_goal": [
+            {
+                "instruction": "**Environment:**  \n- The designated area for the animal farm is a grassy plain surrounded by oak trees and a small river to the east. The chest at [-5, 0, 12] contains oak planks and fences, while the chest at [5, 0, 8] holds stacks of wheat and seeds. A storage chest is placed at [0, 0, 15], near a crafting table and a water trough for the animals.  \n\n**Interactive-Items:**  \n- **Chest (Materials):** [-5, 0, 12] (contains oak planks, fences, and tools)  \n- **Chest (Feed):** [5, 0, 8] (contains wheat, seeds, and carrots)  \n- **Storage Chest:** [0, 0, 15] (for animal products)  \n- **Crafting Table:** [0, 0, 14] (for repairing tools or crafting additional items)  \n\n**Task:**  \n- Work together to construct and operate a small animal farm within the designated area.  \n- One agent must build a fenced enclosure measuring 5x5 blocks centered at [0, 0, 10] using wooden planks from the chest at [-5, 0, 12].  \n- Another agent should breed at least four animals (cows, sheep, or chickens) inside the enclosure using wheat from the chest at [5, 0, 8].  \n- A third agent must collect the animal products (milk, wool, or eggs) and store them in the chest at [0, 0, 15].  \n- Ensure all animals are fed regularly and the enclosure is secure before completing the task.  \n\n**Actions available:**  \n- Agents can gather materials from the chests to build the enclosure.  \n- Agents can use wheat to lure and breed animals inside the fenced area.  \n- Agents can collect animal products and store them in the designated chest.  \n- Agents must monitor the animals' health and ensure the fence is intact to prevent escapes."
+            }
+        ],
+        "task_scenario": "Unknown",
+        "evaluation_arg": {},
+        "document_file": "",
+        "host": "127.0.0.1",
+        "port": 25565,
+        "task_name": "multi_agent_task_184",
+        "simplified_task": [
+            {
+                "instruction": "**Task:**  \n- Work together to construct and operate a small animal farm within the designated area.  \n- One agent must build a fenced enclosure measuring 5x5 blocks centered at [0, 0, 10] using wooden planks from the chest at [-5, 0, 12].  \n- Another agent should breed at least four animals (cows, sheep, or chickens) inside the enclosure using wheat from the chest at [5, 0, 8].  \n- A third agent must collect the animal products (milk, wool, or eggs) and store them in the chest at [0, 0, 15].  \n- Ensure all animals are fed regularly and the enclosure is secure before completing the task."
+            }
+        ],
+        "blueprint": {
+            "blocks": [
+                {
+                    "type": "tree",
+                    "position": [
+                        -8,
+                        0,
+                        5
+                    ],
+                    "name": "oak"
+                },
+                {
+                    "type": "tree",
+                    "position": [
+                        -6,
+                        0,
+                        20
+                    ],
+                    "name": "oak"
+                },
+                {
+                    "type": "tree",
+                    "position": [
+                        7,
+                        0,
+                        18
+                    ],
+                    "name": "oak"
+                },
+                {
+                    "type": "tree",
+                    "position": [
+                        9,
+                        0,
+                        10
+                    ],
+                    "name": "oak"
+                },
+                {
+                    "type": "rectangle",
+                    "from": [
+                        8,
+                        -1,
+                        1
+                    ],
+                    "to": [
+                        10,
+                        -1,
+                        5
+                    ],
+                    "name": "grass_block"
+                },
+                {
+                    "type": "rectangle",
+                    "from": [
+                        8,
+                        0,
+                        1
+                    ],
+                    "to": [
+                        10,
+                        0,
+                        5
+                    ],
+                    "name": "water"
+                },
+                {
+                    "type": "rectangle",
+                    "from": [
+                        7,
+                        -1,
+                        1
+                    ],
+                    "to": [
+                        7,
+                        0,
+                        5
+                    ],
+                    "name": "dirt"
+                },
+                {
+                    "type": "rectangle",
+                    "from": [
+                        11,
+                        -1,
+                        1
+                    ],
+                    "to": [
+                        11,
+                        0,
+                        5
+                    ],
+                    "name": "dirt"
+                },
+                {
+                    "type": "rectangle",
+                    "from": [
+                        8,
+                        -1,
+                        0
+                    ],
+                    "to": [
+                        10,
+                        0,
+                        0
+                    ],
+                    "name": "dirt"
+                },
+                {
+                    "type": "rectangle",
+                    "from": [
+                        8,
+                        -1,
+                        6
+                    ],
+                    "to": [
+                        10,
+                        0,
+                        6
+                    ],
+                    "name": "dirt"
+                },
+                {
+                    "position": [
+                        -5,
+                        0,
+                        12
+                    ],
+                    "name": "chest",
+                    "facing": "north",
+                    "items": [
+                        {
+                            "name": "oak_planks",
+                            "count": 64
+                        },
+                        {
+                            "name": "oak_fence",
+                            "count": 32
+                        },
+                        {
+                            "name": "wooden_axe",
+                            "count": 1
+                        }
+                    ]
+                },
+                {
+                    "position": [
+                        5,
+                        0,
+                        8
+                    ],
+                    "name": "chest",
+                    "facing": "north",
+                    "items": [
+                        {
+                            "name": "wheat",
+                            "count": 64
+                        },
+                        {
+                            "name": "wheat_seeds",
+                            "count": 64
+                        },
+                        {
+                            "name": "carrot",
+                            "count": 32
+                        }
+                    ]
+                },
+                {
+                    "position": [
+                        0,
+                        0,
+                        15
+                    ],
+                    "name": "chest",
+                    "facing": "north",
+                    "items": []
+                },
+                {
+                    "position": [
+                        0,
+                        0,
+                        14
+                    ],
+                    "name": "crafting_table"
+                }
+            ],
+            "entities": []
+        }
+    },
+    {
+        "api_model": "deepseek_chat",
+        "api_base": "https://api.deepseek.com",
+        "task_type": "meta",
+        "task_idx": 0,
+        "agent_num": 1,
+        "dig_needed": false,
+        "max_task_num": 0,
+        "task_goal": [
+            {
+                "instruction": "**Environment:**  \n- The designated farming area is located in a grassy plain near a river. The land is flat with scattered oak trees and a few wildflowers. The river at [4, 0, 8] is shallow and clear, flowing gently southward.  \n- A wooden chest at [2, 0, 12] contains wheat seeds, hoes, and other farming tools. Another chest at [0, 0, 14] is empty and ready to store harvested wheat.  \n- The soil in the 5x5 section at [0, 0, 10] is dry and untilled, surrounded by grass blocks and a few dirt paths.  \n\n**Interactive-Items:**  \n- **Oak Sign**: [1, 0, 12] (facing north) - Displays instructions for the wheat farm setup.  \n- **Water Source**: [4, 0, 8] - A clean river providing water for irrigation.  \n\n**Task:**  \n- Collaborate to construct and operate a small automated wheat farm within the designated area.  \n  - One agent must plow a 5x5 section of land at [0, 0, 10] using a hoe and plant wheat seeds from the chest at [2, 0, 12].  \n  - Another agent should build a water channel system by digging a 1-block-wide trench from the nearby river at [4, 0, 8] to the farm and filling it with water to hydrate the soil.  \n  - A third agent must craft and place a hopper at [0, 1, 10] connected to a chest at [0, 0, 14] to collect the harvested wheat automatically.  \n- Once the wheat is fully grown, all agents must work together to harvest it and ensure the system functions correctly.  \n- Return all unused tools and materials to the chest at [2, 0, 12] after completion.  \n\n**Actions available:**  \n- Agents can till soil, plant seeds, and harvest wheat.  \n- Agents can dig trenches and redirect water from the river.  \n- Agents can craft and place hoppers and link them to chests.  \n- Agents must avoid flooding non-farm areas and ensure the hopper-chest system is properly connected.  \n\n**Constraints:**  \n- The farm must be fully operational within the specified coordinates.  \n- Ensure the water channel does not flood adjacent areas.  \n- Verify the hopper-chest system is correctly linked before harvesting.  \n\n**Sign info:**  \n- Instructions for wheat farm setup and water channel construction."
+            }
+        ],
+        "task_scenario": "Unknown",
+        "evaluation_arg": {},
+        "document_file": "",
+        "host": "127.0.0.1",
+        "port": 25565,
+        "task_name": "multi_agent_task_7245",
+        "simplified_task": [
+            {
+                "instruction": "**Task:**  \n\n- Collaborate to construct and operate a small automated wheat farm within the designated area.  \n- One agent must plow a 5x5 section of land at [0, 0, 10] using a hoe and plant wheat seeds from the chest at [2, 0, 12].  \n- Another agent should build a water channel system by digging a 1-block-wide trench from the nearby river at [4, 0, 8] to the farm and filling it with water to hydrate the soil.  \n- A third agent must craft and place a hopper at [0, 1, 10] connected to a chest at [0, 0, 14] to collect the harvested wheat automatically.  \n- Once the wheat is fully grown, all agents must work together to harvest it and ensure the system functions correctly.  \n- Return all unused tools and materials to the chest at [2, 0, 12] after completion.  \n\n**Constraints:**  \n- The farm must be fully operational within the specified coordinates.  \n- Ensure the water channel does not flood adjacent areas.  \n- Verify the hopper-chest system is correctly linked before harvesting."
+            }
+        ],
+        "blueprint": {
+            "blocks": [
+                {
+                    "type": "tree",
+                    "position": [
+                        3,
+                        0,
+                        5
+                    ],
+                    "name": "oak"
+                },
+                {
+                    "type": "tree",
+                    "position": [
+                        -2,
+                        0,
+                        7
+                    ],
+                    "name": "oak"
+                },
+                {
+                    "type": "tree",
+                    "position": [
+                        6,
+                        0,
+                        15
+                    ],
+                    "name": "oak"
+                },
+                {
+                    "type": "rectangle",
+                    "from": [
+                        4,
+                        -1,
+                        8
+                    ],
+                    "to": [
+                        4,
+                        -1,
+                        10
+                    ],
+                    "name": "grass_block"
+                },
+                {
+                    "type": "rectangle",
+                    "from": [
+                        4,
+                        0,
+                        8
+                    ],
+                    "to": [
+                        4,
+                        0,
+                        10
+                    ],
+                    "name": "water"
+                },
+                {
+                    "type": "rectangle",
+                    "from": [
+                        0,
+                        0,
+                        10
+                    ],
+                    "to": [
+                        4,
+                        0,
+                        14
+                    ],
+                    "name": "grass_block"
+                },
+                {
+                    "type": "rectangle",
+                    "from": [
+                        0,
+                        0,
+                        10
+                    ],
+                    "to": [
+                        4,
+                        0,
+                        14
+                    ],
+                    "name": "dirt"
+                },
+                {
+                    "position": [
+                        2,
+                        0,
+                        12
+                    ],
+                    "name": "chest",
+                    "facing": "north",
+                    "items": [
+                        {
+                            "name": "wheat_seeds",
+                            "count": 16
+                        },
+                        {
+                            "name": "iron_hoe",
+                            "count": 2
+                        }
+                    ]
+                },
+                {
+                    "position": [
+                        0,
+                        0,
+                        14
+                    ],
+                    "name": "chest",
+                    "facing": "north",
+                    "items": []
+                },
+                {
+                    "position": [
+                        1,
+                        0,
+                        12
+                    ],
+                    "name": "oak_sign",
+                    "facing": "north",
+                    "text": "Wheat Farm Setup: Till soil, plant seeds, build water channel from river."
+                }
+            ],
+            "entities": []
+        }
+    },
+    {
+        "api_model": "deepseek_chat",
+        "api_base": "https://api.deepseek.com",
+        "task_type": "meta",
+        "task_idx": 0,
+        "agent_num": 1,
+        "dig_needed": false,
+        "max_task_num": 0,
+        "task_goal": [
+            {
+                "instruction": "**Environment:**  \n- The construction site at [0, 0, 20] is situated in a grassy plain surrounded by oak trees and a small pond to the northeast. The area is flat, making it ideal for building. A chest containing wood planks and cobblestone is located at [-5, 0, 15], while another chest with torches and sticks is at [5, 0, 18]. The sun is high, giving approximately 4 in-game hours until nightfall.  \n\n**Interactive-Items:**  \n- **Chest (Building Materials):** [-5, 0, 15] (contains wood planks, cobblestone, and sticks)  \n- **Chest (Lighting Supplies):** [5, 0, 18] (contains torches and additional sticks)  \n\n**Task:**  \n- Collaborate to construct a functional watchtower with a height of at least 10 blocks at coordinates [0, 0, 20].  \n- Gather building materials (wood planks and cobblestone) from the chest located at [-5, 0, 15].  \n- One agent must craft a ladder using sticks and wood planks (materials available in the same chest) and place it for tower access.  \n- Another agent must equip a torch from the chest at [5, 0, 18] and place it at the top of the tower for visibility.  \n- Ensure the tower is stable and complete before nightfall to monitor incoming hostile mobs.  \n\n**Constraints:**  \n- The tower must have a base of at least 3x3 blocks.  \n- All agents must contribute to either material gathering, construction, or lighting.  \n- The task is complete once the tower is fully built and lit.  \n\n**Actions available:**  \n- Agents can gather materials from the chests.  \n- Agents can craft ladders using sticks and wood planks.  \n- Agents can place blocks to construct the tower.  \n- Agents can place torches for lighting.  \n- Agents must coordinate to ensure the tower is stable and complete before nightfall.  \n\n**Time Constraint:**  \n- The task must be completed within 4 in-game hours (before nightfall)."
+            }
+        ],
+        "task_scenario": "Unknown",
+        "evaluation_arg": {},
+        "document_file": "",
+        "host": "127.0.0.1",
+        "port": 25565,
+        "task_name": "multi_agent_task_5298",
+        "simplified_task": [
+            {
+                "instruction": "**Task:**  \n\n- Collaborate to construct a functional watchtower with a height of at least 10 blocks at coordinates [0, 0, 20].  \n- Gather building materials (wood planks and cobblestone) from the chest located at [-5, 0, 15].  \n- One agent must craft a ladder using sticks and wood planks (materials available in the same chest) and place it for tower access.  \n- Another agent must equip a torch from the chest at [5, 0, 18] and place it at the top of the tower for visibility.  \n- Ensure the tower is stable and complete before nightfall to monitor incoming hostile mobs.  \n\n**Constraints:**  \n- The tower must have a base of at least 3x3 blocks.  \n- All agents must contribute to either material gathering, construction, or lighting.  \n- The task is complete once the tower is fully built and lit."
+            }
+        ],
+        "blueprint": "\\{ERROR\\}"
+    },
+    {
+        "api_model": "deepseek_chat",
+        "api_base": "https://api.deepseek.com",
+        "task_type": "meta",
+        "task_idx": 0,
+        "agent_num": 1,
+        "dig_needed": false,
+        "max_task_num": 0,
+        "task_goal": [
+            {
+                "instruction": "**Environment:**  \n- The ravine at [0, 5, 12] is approximately 15 blocks wide and 20 blocks deep, with a river flowing at the bottom. The surrounding terrain consists of oak and birch trees, with a small cave entrance visible at [3, 2, 8].  \n- A crafting table is set up near [0, 0, 10], surrounded by chests containing basic tools and a furnace. Another chest for storage is located at [0, 0, 14].  \n- The forest at [-5, 0, 15] is dense with oak trees, and slimes can be summoned in the nearby swamp biome if needed.  \n\n**Interactive-Items:**  \n- **Chest (Tools & Materials):** [0, 0, 10] (contains axes, pickaxes, and spare wood)  \n- **Chest (Storage):** [0, 0, 14] (for leftover materials)  \n- **Crafting Table:** [0, 0, 10] (facing east)  \n\n**Task:**  \n- Work together to construct and activate a redstone-powered bridge across a ravine at [0, 5, 12].  \n- One agent must gather materials: 64 wooden planks from the forest at [-5, 0, 15] and 16 redstone dust from the cave at [3, 2, 8].  \n- Another agent should craft the necessary components: 4 levers at the crafting table near [0, 0, 10] and 8 sticky pistons using slimeballs (summon 2 slimes if needed).  \n- A third agent must assemble the bridge structure, ensuring it extends and retracts properly using the redstone circuit.  \n- Test the bridge by having all agents cross it simultaneously once completed.  \n- Deactivate the bridge using the levers and store any leftover materials in the chest at [0, 0, 14].  \n\n**Actions available:**  \n- Agents can chop trees in the forest for wooden planks.  \n- Agents can mine redstone dust in the cave.  \n- Agents can craft levers and sticky pistons at the crafting table.  \n- Agents can summon slimes in the swamp biome if slimeballs are insufficient.  \n- Agents must coordinate to ensure the bridge’s redstone circuit is correctly assembled.  \n- Agents must test the bridge’s functionality by crossing it together.  \n- Agents must store unused materials in the designated chest.  \n\n**Note:**  \n- Avoid falling into the ravine during construction.  \n- Ensure the bridge retracts fully after testing to prevent mobs from crossing."
+            }
+        ],
+        "task_scenario": "Unknown",
+        "evaluation_arg": {},
+        "document_file": "",
+        "host": "127.0.0.1",
+        "port": 25565,
+        "task_name": "multi_agent_task_9642",
+        "simplified_task": [
+            {
+                "instruction": "**Task:**  \n\n- Work together to construct and activate a redstone-powered bridge across a ravine at [0, 5, 12].  \n- One agent must gather materials: 64 wooden planks from the forest at [-5, 0, 15] and 16 redstone dust from the cave at [3, 2, 8].  \n- Another agent should craft the necessary components: 4 levers at the crafting table near [0, 0, 10] and 8 sticky pistons using slimeballs (summon 2 slimes if needed).  \n- A third agent must assemble the bridge structure, ensuring it extends and retracts properly using the redstone circuit.  \n- Test the bridge by having all agents cross it simultaneously once completed.  \n- Deactivate the bridge using the levers and store any leftover materials in the chest at [0, 0, 14].  \n\nThis task requires coordination in material gathering, component crafting, and precise construction to ensure the bridge functions correctly."
+            }
+        ],
+        "blueprint": {
+            "blocks": [
+                {
+                    "type": "rectangle",
+                    "from": [
+                        -7,
+                        -1,
+                        2
+                    ],
+                    "to": [
+                        7,
+                        -1,
+                        22
+                    ],
+                    "name": "air"
+                },
+                {
+                    "type": "rectangle",
+                    "from": [
+                        -7,
+                        -1,
+                        2
+                    ],
+                    "to": [
+                        -7,
+                        20,
+                        22
+                    ],
+                    "name": "stone"
+                },
+                {
+                    "type": "rectangle",
+                    "from": [
+                        7,
+                        -1,
+                        2
+                    ],
+                    "to": [
+                        7,
+                        20,
+                        22
+                    ],
+                    "name": "stone"
+                },
+                {
+                    "type": "rectangle",
+                    "from": [
+                        -7,
+                        -1,
+                        2
+                    ],
+                    "to": [
+                        7,
+                        -1,
+                        2
+                    ],
+                    "name": "stone"
+                },
+                {
+                    "type": "rectangle",
+                    "from": [
+                        -7,
+                        -1,
+                        22
+                    ],
+                    "to": [
+                        7,
+                        -1,
+                        22
+                    ],
+                    "name": "stone"
+                },
+                {
+                    "type": "rectangle",
+                    "from": [
+                        -5,
+                        -1,
+                        10
+                    ],
+                    "to": [
+                        5,
+                        -1,
+                        14
+                    ],
+                    "name": "water"
+                },
+                {
+                    "type": "tree",
+                    "position": [
+                        3,
+                        0,
+                        5
+                    ],
+                    "name": "oak"
+                },
+                {
+                    "type": "tree",
+                    "position": [
+                        -3,
+                        0,
+                        5
+                    ],
+                    "name": "birch"
+                },
+                {
+                    "type": "tree",
+                    "position": [
+                        5,
+                        0,
+                        8
+                    ],
+                    "name": "oak"
+                },
+                {
+                    "type": "tree",
+                    "position": [
+                        -5,
+                        0,
+                        8
+                    ],
+                    "name": "birch"
+                },
+                {
+                    "type": "tree",
+                    "position": [
+                        4,
+                        0,
+                        18
+                    ],
+                    "name": "oak"
+                },
+                {
+                    "type": "tree",
+                    "position": [
+                        -4,
+                        0,
+                        18
+                    ],
+                    "name": "birch"
+                },
+                {
+                    "type": "rectangle",
+                    "from": [
+                        3,
+                        0,
+                        8
+                    ],
+                    "to": [
+                        3,
+                        2,
+                        8
+                    ],
+                    "name": "air"
+                },
+                {
+                    "type": "rectangle",
+                    "from": [
+                        2,
+                        0,
+                        8
+                    ],
+                    "to": [
+                        2,
+                        2,
+                        8
+                    ],
+                    "name": "stone"
+                },
+                {
+                    "type": "rectangle",
+                    "from": [
+                        4,
+                        0,
+                        8
+                    ],
+                    "to": [
+                        4,
+                        2,
+                        8
+                    ],
+                    "name": "stone"
+                },
+                {
+                    "type": "rectangle",
+                    "from": [
+                        3,
+                        0,
+                        7
+                    ],
+                    "to": [
+                        3,
+                        2,
+                        7
+                    ],
+                    "name": "stone"
+                },
+                {
+                    "type": "rectangle",
+                    "from": [
+                        3,
+                        0,
+                        9
+                    ],
+                    "to": [
+                        3,
+                        2,
+                        9
+                    ],
+                    "name": "stone"
+                },
+                {
+                    "position": [
+                        0,
+                        0,
+                        10
+                    ],
+                    "name": "crafting_table",
+                    "facing": "east"
+                },
+                {
+                    "position": [
+                        0,
+                        0,
+                        9
+                    ],
+                    "name": "chest",
+                    "facing": "north",
+                    "items": [
+                        {
+                            "name": "wooden_axe",
+                            "count": 2
+                        },
+                        {
+                            "name": "wooden_pickaxe",
+                            "count": 2
+                        },
+                        {
+                            "name": "oak_planks",
+                            "count": 32
+                        }
+                    ]
+                },
+                {
+                    "position": [
+                        0,
+                        0,
+                        14
+                    ],
+                    "name": "chest",
+                    "facing": "north",
+                    "items": []
+                },
+                {
+                    "type": "tree",
+                    "position": [
+                        -5,
+                        0,
+                        15
+                    ],
+                    "name": "oak"
+                },
+                {
+                    "type": "tree",
+                    "position": [
+                        -7,
+                        0,
+                        15
+                    ],
+                    "name": "oak"
+                },
+                {
+                    "type": "tree",
+                    "position": [
+                        -5,
+                        0,
+                        17
+                    ],
+                    "name": "oak"
+                },
+                {
+                    "type": "tree",
+                    "position": [
+                        -7,
+                        0,
+                        17
+                    ],
+                    "name": "oak"
+                },
+                {
+                    "type": "tree",
+                    "position": [
+                        -6,
+                        0,
+                        16
+                    ],
+                    "name": "oak"
+                },
+                {
+                    "type": "tree",
+                    "position": [
+                        -4,
+                        0,
+                        16
+                    ],
+                    "name": "oak"
+                },
+                {
+                    "type": "tree",
+                    "position": [
+                        -6,
+                        0,
+                        18
+                    ],
+                    "name": "oak"
+                },
+                {
+                    "type": "tree",
+                    "position": [
+                        -4,
+                        0,
+                        18
+                    ],
+                    "name": "oak"
+                },
+                {
+                    "position": [
+                        1,
+                        0,
+                        10
+                    ],
+                    "name": "furnace",
+                    "facing": "north"
+                }
+            ],
+            "entities": [
+                {
+                    "position": [
+                        -8,
+                        0,
+                        15
+                    ],
+                    "name": "slime"
+                },
+                {
+                    "position": [
+                        -8,
+                        0,
+                        17
+                    ],
+                    "name": "slime"
+                }
+            ]
+        }
+    },
+    {
+        "api_model": "deepseek_chat",
+        "api_base": "https://api.deepseek.com",
+        "task_type": "meta",
+        "task_idx": 0,
+        "agent_num": 1,
+        "dig_needed": false,
+        "max_task_num": 0,
+        "task_goal": [
+            {
+                "instruction": "**Environment:**  \n- The designated area for the farm is a flat, grassy plain bordered by oak trees to the north and a small river to the east. The storage chest at [-3, 1, 20] is located under a wooden awning made of spruce planks and fences. Nearby, a crafting table and a furnace are available for use.  \n- The coordinates for the farm (x = [-5, 5], y = [1, 3], z = [5, 15]) are marked by stone boundary markers at each corner.  \n\n**Interactive-Items:**  \n- **Storage Chest**: [-3, 1, 20] (contains wood, redstone, hoppers, seeds, and basic tools)  \n- **Crafting Table**: [-2, 1, 20]  \n- **Furnace**: [-1, 1, 20] (facing south)  \n\n**Task:**  \n- Work together to construct and activate a redstone-powered automatic wheat farm within the designated area.  \n- Gather materials (wood, redstone, hoppers, and seeds) from the storage chest at [-3, 1, 20].  \n- Build a 5x5 tilled farmland plot centered at [0, 1, 10] and plant wheat seeds.  \n- Design and connect a redstone mechanism using dispensers and water buckets to automate harvesting.  \n- Ensure the harvested wheat is collected in a chest placed at [2, 1, 12] and test the system by growing and harvesting at least 3 batches of wheat.  \n\n**Actions available:**  \n- Agents can use the crafting table and furnace to prepare materials.  \n- Agents must collaborate on redstone wiring, with at least two agents working together for complex connections.  \n- Agents can till soil, plant seeds, and activate the redstone mechanism.  \n- Agents must ensure all materials are sourced only from the provided chest.  \n\n**Constraints:**  \n- The farm must fit within the coordinates: x = [-5, 5], y = [1, 3], z = [5, 15].  \n- All materials must be sourced only from the provided chest.  \n- The system must be tested with at least 3 successful harvests."
+            }
+        ],
+        "task_scenario": "Unknown",
+        "evaluation_arg": {},
+        "document_file": "",
+        "host": "127.0.0.1",
+        "port": 25565,
+        "task_name": "multi_agent_task_819",
+        "simplified_task": [
+            {
+                "instruction": "**Task:**  \n\n- Work together to construct and activate a redstone-powered automatic wheat farm within the designated area.  \n- Gather materials (wood, redstone, hoppers, and seeds) from the storage chest at [-3, 1, 20].  \n- Build a 5x5 tilled farmland plot centered at [0, 1, 10] and plant wheat seeds.  \n- Design and connect a redstone mechanism using dispensers and water buckets to automate harvesting.  \n- Ensure the harvested wheat is collected in a chest placed at [2, 1, 12] and test the system by growing and harvesting at least 3 batches of wheat.  \n\n**Constraints:**  \n- The farm must fit within the coordinates: x = [-5, 5], y = [1, 3], z = [5, 15].  \n- At least two agents must collaborate on the redstone wiring to ensure proper functionality.  \n- All materials must be sourced only from the provided chest."
+            }
+        ],
+        "blueprint": {
+            "blocks": [
+                {
+                    "type": "tree",
+                    "position": [
+                        -8,
+                        0,
+                        10
+                    ],
+                    "name": "oak"
+                },
+                {
+                    "type": "tree",
+                    "position": [
+                        -5,
+                        0,
+                        10
+                    ],
+                    "name": "oak"
+                },
+                {
+                    "type": "tree",
+                    "position": [
+                        -2,
+                        0,
+                        10
+                    ],
+                    "name": "oak"
+                },
+                {
+                    "type": "tree",
+                    "position": [
+                        1,
+                        0,
+                        10
+                    ],
+                    "name": "oak"
+                },
+                {
+                    "type": "tree",
+                    "position": [
+                        4,
+                        0,
+                        10
+                    ],
+                    "name": "oak"
+                },
+                {
+                    "type": "tree",
+                    "position": [
+                        7,
+                        0,
+                        10
+                    ],
+                    "name": "oak"
+                },
+                {
+                    "type": "line",
+                    "from": [
+                        10,
+                        -1,
+                        5
+                    ],
+                    "to": [
+                        10,
+                        -1,
+                        15
+                    ],
+                    "name": "water"
+                },
+                {
+                    "type": "line",
+                    "from": [
+                        9,
+                        0,
+                        5
+                    ],
+                    "to": [
+                        9,
+                        0,
+                        15
+                    ],
+                    "name": "grass_block"
+                },
+                {
+                    "position": [
+                        -5,
+                        0,
+                        5
+                    ],
+                    "name": "stone"
+                },
+                {
+                    "position": [
+                        -5,
+                        0,
+                        15
+                    ],
+                    "name": "stone"
+                },
+                {
+                    "position": [
+                        5,
+                        0,
+                        5
+                    ],
+                    "name": "stone"
+                },
+                {
+                    "position": [
+                        5,
+                        0,
+                        15
+                    ],
+                    "name": "stone"
+                },
+                {
+                    "type": "rectangle",
+                    "from": [
+                        -4,
+                        1,
+                        19
+                    ],
+                    "to": [
+                        -2,
+                        1,
+                        21
+                    ],
+                    "name": "spruce_planks"
+                },
+                {
+                    "type": "line",
+                    "from": [
+                        -4,
+                        2,
+                        19
+                    ],
+                    "to": [
+                        -4,
+                        2,
+                        21
+                    ],
+                    "name": "spruce_fence"
+                },
+                {
+                    "type": "line",
+                    "from": [
+                        -2,
+                        2,
+                        19
+                    ],
+                    "to": [
+                        -2,
+                        2,
+                        21
+                    ],
+                    "name": "spruce_fence"
+                },
+                {
+                    "type": "rectangle",
+                    "from": [
+                        -4,
+                        2,
+                        19
+                    ],
+                    "to": [
+                        -2,
+                        2,
+                        21
+                    ],
+                    "name": "spruce_slab"
+                },
+                {
+                    "position": [
+                        -3,
+                        1,
+                        20
+                    ],
+                    "name": "chest",
+                    "facing": "north",
+                    "items": [
+                        {
+                            "name": "oak_planks",
+                            "count": 32
+                        },
+                        {
+                            "name": "redstone",
+                            "count": 16
+                        },
+                        {
+                            "name": "hopper",
+                            "count": 4
+                        },
+                        {
+                            "name": "wheat_seeds",
+                            "count": 16
+                        },
+                        {
+                            "name": "wooden_hoe",
+                            "count": 1
+                        }
+                    ]
+                },
+                {
+                    "position": [
+                        -2,
+                        1,
+                        20
+                    ],
+                    "name": "crafting_table"
+                },
+                {
+                    "position": [
+                        -1,
+                        1,
+                        20
+                    ],
+                    "name": "furnace",
+                    "facing": "south"
+                }
+            ],
+            "entities": []
+        }
+    }
+]

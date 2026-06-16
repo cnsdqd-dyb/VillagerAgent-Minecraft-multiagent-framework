@@ -1,0 +1,4075 @@
+[
+    {
+        "66_blueprint": "```json\n{\n  \"iron_smelting_station\": {\n    \"blocks\": [\n      {\"position\": [45, 70, -12], \"name\": \"furnace\", \"facing\": \"north\"},\n      {\"position\": [45, 70, -10], \"name\": \"chest\", \"facing\": \"north\"},\n      {\"position\": [45, 70, -8], \"name\": \"chest\", \"facing\": \"north\"},\n      {\"position\": [45, 70, -14], \"name\": \"chest\", \"facing\": \"north\"},\n      {\"position\": [44, 70, -12], \"name\": \"stone_bricks\"},\n      {\"position\": [46, 70, -12], \"name\": \"stone_bricks\"},\n      {\"position\": [45, 71, -12], \"name\": \"stone_brick_slab\"},\n      {\"position\": [44, 70, -10], \"name\": \"stone_bricks\"},\n      {\"position\": [46, 70, -10], \"name\": \"stone_bricks\"},\n      {\"position\": [44, 70, -8], \"name\": \"stone_bricks\"},\n      {\"position\": [46, 70, -8], \"name\": \"stone_bricks\"},\n      {\"position\": [44, 70, -14], \"name\": \"stone_bricks\"},\n      {\"position\": [46, 70, -14], \"name\": \"stone_bricks\"},\n      {\"position\": [45, 71, -10], \"name\": \"stone_brick_slab\"},\n      {\"position\": [45, 71, -8], \"name\": \"stone_brick_slab\"},\n      {\"position\": [45, 71, -14], \"name\": \"stone_brick_slab\"}\n    ],\n    \"entities\": [],\n    \"size\": [3, 2, 7]\n  }\n}\n```"
+    },
+    {
+        "19_blueprint": "```json\n{\n  \"iron_smelting_station\": {\n    \"blocks\": [\n      {\"position\": [0, 0, 0], \"name\": \"furnace\", \"facing\": \"north\"},\n      {\"position\": [0, 0, 2], \"name\": \"chest\", \"facing\": \"north\"},\n      {\"position\": [0, 0, -2], \"name\": \"chest\", \"facing\": \"north\"},\n      {\"position\": [0, 0, 4], \"name\": \"chest\", \"facing\": \"north\"},\n      {\"position\": [1, 0, 0], \"name\": \"stone_bricks\"},\n      {\"position\": [-1, 0, 0], \"name\": \"stone_bricks\"},\n      {\"position\": [0, 0, 1], \"name\": \"stone_bricks\"},\n      {\"position\": [0, 0, -1], \"name\": \"stone_bricks\"},\n      {\"position\": [1, 0, 1], \"name\": \"stone_bricks\"},\n      {\"position\": [-1, 0, 1], \"name\": \"stone_bricks\"},\n      {\"position\": [1, 0, -1], \"name\": \"stone_bricks\"},\n      {\"position\": [-1, 0, -1], \"name\": \"stone_bricks\"},\n      {\"position\": [1, 1, 0], \"name\": \"stone_bricks\"},\n      {\"position\": [-1, 1, 0], \"name\": \"stone_bricks\"},\n      {\"position\": [0, 1, 1], \"name\": \"stone_bricks\"},\n      {\"position\": [0, 1, -1], \"name\": \"stone_bricks\"},\n      {\"position\": [0, 1, 0], \"name\": \"stone_bricks\"},\n      {\"position\": [1, 1, 1], \"name\": \"stone_brick_slab\", \"type\": \"top\"},\n      {\"position\": [-1, 1, 1], \"name\": \"stone_brick_slab\", \"type\": \"top\"},\n      {\"position\": [1, 1, -1], \"name\": \"stone_brick_slab\", \"type\": \"top\"},\n      {\"position\": [-1, 1, -1], \"name\": \"stone_brick_slab\", \"type\": \"top\"}\n    ],\n    \"entities\": [],\n    \"size\": [3, 2, 5]\n  }\n}\n```"
+    },
+    {
+        "31_blueprint": "{\"iron_smelting_station\": {\"blocks\": [{\"position\": [45, 70, -12], \"name\": \"furnace\", \"facing\": \"north\"}, {\"position\": [45, 70, -10], \"name\": \"chest\", \"facing\": \"north\"}, {\"position\": [45, 70, -8], \"name\": \"chest\", \"facing\": \"north\"}, {\"position\": [45, 70, -14], \"name\": \"chest\", \"facing\": \"north\"}, {\"position\": [44, 70, -12], \"name\": \"stone\"}, {\"position\": [46, 70, -12], \"name\": \"stone\"}, {\"position\": [45, 71, -12], \"name\": \"stone\"}, {\"position\": [45, 70, -11], \"name\": \"stone\"}, {\"position\": [45, 70, -13], \"name\": \"stone\"}], \"size\": [3, 2, 7]}}"
+    },
+    {
+        "75_blueprint": {
+            "iron_smelting_station": {
+                "blocks": [
+                    {
+                        "position": [
+                            45,
+                            70,
+                            -12
+                        ],
+                        "name": "furnace",
+                        "facing": "north"
+                    },
+                    {
+                        "position": [
+                            45,
+                            70,
+                            -10
+                        ],
+                        "name": "chest",
+                        "facing": "north"
+                    },
+                    {
+                        "position": [
+                            45,
+                            70,
+                            -8
+                        ],
+                        "name": "chest",
+                        "facing": "north"
+                    },
+                    {
+                        "position": [
+                            45,
+                            70,
+                            -14
+                        ],
+                        "name": "chest",
+                        "facing": "north"
+                    }
+                ],
+                "entities": [],
+                "size": [
+                    1,
+                    1,
+                    7
+                ]
+            }
+        }
+    },
+    {
+        "14_blueprint": {
+            "iron_smelting_station": {
+                "blocks": [
+                    {
+                        "position": [
+                            0,
+                            0,
+                            0
+                        ],
+                        "name": "furnace",
+                        "facing": "north"
+                    },
+                    {
+                        "position": [
+                            0,
+                            0,
+                            2
+                        ],
+                        "name": "chest",
+                        "facing": "north"
+                    },
+                    {
+                        "position": [
+                            0,
+                            0,
+                            -2
+                        ],
+                        "name": "chest",
+                        "facing": "north"
+                    },
+                    {
+                        "position": [
+                            2,
+                            0,
+                            0
+                        ],
+                        "name": "chest",
+                        "facing": "west"
+                    }
+                ],
+                "size": [
+                    3,
+                    1,
+                    5
+                ]
+            }
+        }
+    },
+    {
+        "5_blueprint": {
+            "iron_smelting_station": {
+                "blocks": [
+                    {
+                        "position": [
+                            0,
+                            0,
+                            0
+                        ],
+                        "name": "furnace",
+                        "facing": "north"
+                    },
+                    {
+                        "position": [
+                            0,
+                            0,
+                            2
+                        ],
+                        "name": "chest",
+                        "facing": "north"
+                    },
+                    {
+                        "position": [
+                            0,
+                            0,
+                            4
+                        ],
+                        "name": "chest",
+                        "facing": "north"
+                    },
+                    {
+                        "position": [
+                            0,
+                            0,
+                            -2
+                        ],
+                        "name": "chest",
+                        "facing": "north"
+                    }
+                ],
+                "entities": [],
+                "size": [
+                    1,
+                    1,
+                    7
+                ]
+            }
+        }
+    },
+    {
+        "98_blueprint": {
+            "iron_smelting_station": {
+                "blocks": [
+                    {
+                        "position": [
+                            0,
+                            0,
+                            0
+                        ],
+                        "name": "furnace",
+                        "facing": "north"
+                    },
+                    {
+                        "position": [
+                            0,
+                            0,
+                            2
+                        ],
+                        "name": "chest",
+                        "facing": "north"
+                    },
+                    {
+                        "position": [
+                            0,
+                            0,
+                            4
+                        ],
+                        "name": "chest",
+                        "facing": "north"
+                    },
+                    {
+                        "position": [
+                            0,
+                            0,
+                            -2
+                        ],
+                        "name": "chest",
+                        "facing": "north"
+                    }
+                ],
+                "entities": [],
+                "size": [
+                    1,
+                    1,
+                    7
+                ]
+            }
+        }
+    },
+    {
+        "69_blueprint": {
+            "wheat_farm": {
+                "blocks": [
+                    {
+                        "position": [
+                            0,
+                            0,
+                            0
+                        ],
+                        "name": "farmland"
+                    },
+                    {
+                        "position": [
+                            0,
+                            0,
+                            1
+                        ],
+                        "name": "farmland"
+                    },
+                    {
+                        "position": [
+                            0,
+                            0,
+                            2
+                        ],
+                        "name": "farmland"
+                    },
+                    {
+                        "position": [
+                            0,
+                            0,
+                            3
+                        ],
+                        "name": "farmland"
+                    },
+                    {
+                        "position": [
+                            0,
+                            0,
+                            4
+                        ],
+                        "name": "farmland"
+                    },
+                    {
+                        "position": [
+                            1,
+                            0,
+                            0
+                        ],
+                        "name": "farmland"
+                    },
+                    {
+                        "position": [
+                            1,
+                            0,
+                            1
+                        ],
+                        "name": "farmland"
+                    },
+                    {
+                        "position": [
+                            1,
+                            0,
+                            2
+                        ],
+                        "name": "farmland"
+                    },
+                    {
+                        "position": [
+                            1,
+                            0,
+                            3
+                        ],
+                        "name": "farmland"
+                    },
+                    {
+                        "position": [
+                            1,
+                            0,
+                            4
+                        ],
+                        "name": "farmland"
+                    },
+                    {
+                        "position": [
+                            2,
+                            0,
+                            0
+                        ],
+                        "name": "farmland"
+                    },
+                    {
+                        "position": [
+                            2,
+                            0,
+                            1
+                        ],
+                        "name": "farmland"
+                    },
+                    {
+                        "position": [
+                            2,
+                            0,
+                            2
+                        ],
+                        "name": "farmland"
+                    },
+                    {
+                        "position": [
+                            2,
+                            0,
+                            3
+                        ],
+                        "name": "farmland"
+                    },
+                    {
+                        "position": [
+                            2,
+                            0,
+                            4
+                        ],
+                        "name": "farmland"
+                    },
+                    {
+                        "position": [
+                            3,
+                            0,
+                            0
+                        ],
+                        "name": "farmland"
+                    },
+                    {
+                        "position": [
+                            3,
+                            0,
+                            1
+                        ],
+                        "name": "farmland"
+                    },
+                    {
+                        "position": [
+                            3,
+                            0,
+                            2
+                        ],
+                        "name": "farmland"
+                    },
+                    {
+                        "position": [
+                            3,
+                            0,
+                            3
+                        ],
+                        "name": "farmland"
+                    },
+                    {
+                        "position": [
+                            3,
+                            0,
+                            4
+                        ],
+                        "name": "farmland"
+                    },
+                    {
+                        "position": [
+                            4,
+                            0,
+                            0
+                        ],
+                        "name": "farmland"
+                    },
+                    {
+                        "position": [
+                            4,
+                            0,
+                            1
+                        ],
+                        "name": "farmland"
+                    },
+                    {
+                        "position": [
+                            4,
+                            0,
+                            2
+                        ],
+                        "name": "farmland"
+                    },
+                    {
+                        "position": [
+                            4,
+                            0,
+                            3
+                        ],
+                        "name": "farmland"
+                    },
+                    {
+                        "position": [
+                            4,
+                            0,
+                            4
+                        ],
+                        "name": "farmland"
+                    },
+                    {
+                        "position": [
+                            -1,
+                            0,
+                            2
+                        ],
+                        "name": "chest",
+                        "facing": "east"
+                    },
+                    {
+                        "position": [
+                            5,
+                            0,
+                            2
+                        ],
+                        "name": "chest",
+                        "facing": "west"
+                    },
+                    {
+                        "position": [
+                            -2,
+                            0,
+                            5
+                        ],
+                        "name": "chest",
+                        "facing": "east"
+                    }
+                ],
+                "entities": [
+                    {
+                        "position": [
+                            0.5,
+                            0,
+                            0.5
+                        ],
+                        "name": "wheat",
+                        "growth": 0
+                    },
+                    {
+                        "position": [
+                            0.5,
+                            0,
+                            1.5
+                        ],
+                        "name": "wheat",
+                        "growth": 0
+                    },
+                    {
+                        "position": [
+                            0.5,
+                            0,
+                            2.5
+                        ],
+                        "name": "wheat",
+                        "growth": 0
+                    },
+                    {
+                        "position": [
+                            0.5,
+                            0,
+                            3.5
+                        ],
+                        "name": "wheat",
+                        "growth": 0
+                    },
+                    {
+                        "position": [
+                            0.5,
+                            0,
+                            4.5
+                        ],
+                        "name": "wheat",
+                        "growth": 0
+                    },
+                    {
+                        "position": [
+                            1.5,
+                            0,
+                            0.5
+                        ],
+                        "name": "wheat",
+                        "growth": 0
+                    },
+                    {
+                        "position": [
+                            1.5,
+                            0,
+                            1.5
+                        ],
+                        "name": "wheat",
+                        "growth": 0
+                    },
+                    {
+                        "position": [
+                            1.5,
+                            0,
+                            2.5
+                        ],
+                        "name": "wheat",
+                        "growth": 0
+                    },
+                    {
+                        "position": [
+                            1.5,
+                            0,
+                            3.5
+                        ],
+                        "name": "wheat",
+                        "growth": 0
+                    },
+                    {
+                        "position": [
+                            1.5,
+                            0,
+                            4.5
+                        ],
+                        "name": "wheat",
+                        "growth": 0
+                    },
+                    {
+                        "position": [
+                            2.5,
+                            0,
+                            0.5
+                        ],
+                        "name": "wheat",
+                        "growth": 0
+                    },
+                    {
+                        "position": [
+                            2.5,
+                            0,
+                            1.5
+                        ],
+                        "name": "wheat",
+                        "growth": 0
+                    },
+                    {
+                        "position": [
+                            2.5,
+                            0,
+                            2.5
+                        ],
+                        "name": "wheat",
+                        "growth": 0
+                    },
+                    {
+                        "position": [
+                            2.5,
+                            0,
+                            3.5
+                        ],
+                        "name": "wheat",
+                        "growth": 0
+                    },
+                    {
+                        "position": [
+                            2.5,
+                            0,
+                            4.5
+                        ],
+                        "name": "wheat",
+                        "growth": 0
+                    },
+                    {
+                        "position": [
+                            3.5,
+                            0,
+                            0.5
+                        ],
+                        "name": "wheat",
+                        "growth": 0
+                    },
+                    {
+                        "position": [
+                            3.5,
+                            0,
+                            1.5
+                        ],
+                        "name": "wheat",
+                        "growth": 0
+                    },
+                    {
+                        "position": [
+                            3.5,
+                            0,
+                            2.5
+                        ],
+                        "name": "wheat",
+                        "growth": 0
+                    },
+                    {
+                        "position": [
+                            3.5,
+                            0,
+                            3.5
+                        ],
+                        "name": "wheat",
+                        "growth": 0
+                    },
+                    {
+                        "position": [
+                            3.5,
+                            0,
+                            4.5
+                        ],
+                        "name": "wheat",
+                        "growth": 0
+                    },
+                    {
+                        "position": [
+                            4.5,
+                            0,
+                            0.5
+                        ],
+                        "name": "wheat",
+                        "growth": 0
+                    },
+                    {
+                        "position": [
+                            4.5,
+                            0,
+                            1.5
+                        ],
+                        "name": "wheat",
+                        "growth": 0
+                    },
+                    {
+                        "position": [
+                            4.5,
+                            0,
+                            2.5
+                        ],
+                        "name": "wheat",
+                        "growth": 0
+                    },
+                    {
+                        "position": [
+                            4.5,
+                            0,
+                            3.5
+                        ],
+                        "name": "wheat",
+                        "growth": 0
+                    },
+                    {
+                        "position": [
+                            4.5,
+                            0,
+                            4.5
+                        ],
+                        "name": "wheat",
+                        "growth": 0
+                    }
+                ],
+                "size": [
+                    7,
+                    1,
+                    6
+                ]
+            }
+        }
+    },
+    {
+        "14_blueprint": {
+            "village_barricade": {
+                "blocks": [
+                    {
+                        "position": [
+                            -11,
+                            0,
+                            0
+                        ],
+                        "name": "oak_fence"
+                    },
+                    {
+                        "position": [
+                            -11,
+                            0,
+                            1
+                        ],
+                        "name": "oak_fence"
+                    },
+                    {
+                        "position": [
+                            -11,
+                            0,
+                            2
+                        ],
+                        "name": "oak_fence"
+                    },
+                    {
+                        "position": [
+                            -11,
+                            0,
+                            3
+                        ],
+                        "name": "oak_fence"
+                    },
+                    {
+                        "position": [
+                            -11,
+                            0,
+                            4
+                        ],
+                        "name": "oak_fence"
+                    },
+                    {
+                        "position": [
+                            -11,
+                            0,
+                            5
+                        ],
+                        "name": "oak_fence"
+                    },
+                    {
+                        "position": [
+                            -11,
+                            0,
+                            6
+                        ],
+                        "name": "oak_fence"
+                    },
+                    {
+                        "position": [
+                            -11,
+                            0,
+                            7
+                        ],
+                        "name": "oak_fence"
+                    },
+                    {
+                        "position": [
+                            -11,
+                            0,
+                            8
+                        ],
+                        "name": "oak_fence"
+                    },
+                    {
+                        "position": [
+                            -11,
+                            0,
+                            9
+                        ],
+                        "name": "oak_fence"
+                    },
+                    {
+                        "position": [
+                            -11,
+                            0,
+                            10
+                        ],
+                        "name": "oak_fence"
+                    },
+                    {
+                        "position": [
+                            -11,
+                            0,
+                            11
+                        ],
+                        "name": "oak_fence"
+                    },
+                    {
+                        "position": [
+                            -11,
+                            0,
+                            12
+                        ],
+                        "name": "oak_fence"
+                    },
+                    {
+                        "position": [
+                            -11,
+                            0,
+                            13
+                        ],
+                        "name": "oak_fence"
+                    },
+                    {
+                        "position": [
+                            -11,
+                            0,
+                            14
+                        ],
+                        "name": "oak_fence"
+                    },
+                    {
+                        "position": [
+                            -11,
+                            0,
+                            15
+                        ],
+                        "name": "oak_fence"
+                    },
+                    {
+                        "position": [
+                            -11,
+                            0,
+                            16
+                        ],
+                        "name": "oak_fence"
+                    },
+                    {
+                        "position": [
+                            -11,
+                            0,
+                            17
+                        ],
+                        "name": "oak_fence"
+                    },
+                    {
+                        "position": [
+                            -11,
+                            0,
+                            18
+                        ],
+                        "name": "oak_fence"
+                    },
+                    {
+                        "position": [
+                            -11,
+                            0,
+                            19
+                        ],
+                        "name": "oak_fence"
+                    },
+                    {
+                        "position": [
+                            -11,
+                            0,
+                            20
+                        ],
+                        "name": "oak_fence"
+                    },
+                    {
+                        "position": [
+                            -11,
+                            0,
+                            21
+                        ],
+                        "name": "oak_fence"
+                    },
+                    {
+                        "position": [
+                            -11,
+                            0,
+                            22
+                        ],
+                        "name": "oak_fence"
+                    },
+                    {
+                        "position": [
+                            -11,
+                            0,
+                            23
+                        ],
+                        "name": "oak_fence"
+                    },
+                    {
+                        "position": [
+                            -11,
+                            0,
+                            24
+                        ],
+                        "name": "oak_fence"
+                    },
+                    {
+                        "position": [
+                            -11,
+                            0,
+                            25
+                        ],
+                        "name": "oak_fence"
+                    },
+                    {
+                        "position": [
+                            -10,
+                            0,
+                            25
+                        ],
+                        "name": "oak_fence"
+                    },
+                    {
+                        "position": [
+                            -9,
+                            0,
+                            25
+                        ],
+                        "name": "oak_fence"
+                    },
+                    {
+                        "position": [
+                            -8,
+                            0,
+                            25
+                        ],
+                        "name": "oak_fence"
+                    },
+                    {
+                        "position": [
+                            -7,
+                            0,
+                            25
+                        ],
+                        "name": "oak_fence"
+                    },
+                    {
+                        "position": [
+                            -6,
+                            0,
+                            25
+                        ],
+                        "name": "oak_fence"
+                    },
+                    {
+                        "position": [
+                            -5,
+                            0,
+                            25
+                        ],
+                        "name": "oak_fence"
+                    },
+                    {
+                        "position": [
+                            -4,
+                            0,
+                            25
+                        ],
+                        "name": "oak_fence"
+                    },
+                    {
+                        "position": [
+                            -3,
+                            0,
+                            25
+                        ],
+                        "name": "oak_fence"
+                    },
+                    {
+                        "position": [
+                            -2,
+                            0,
+                            25
+                        ],
+                        "name": "oak_fence"
+                    },
+                    {
+                        "position": [
+                            -1,
+                            0,
+                            25
+                        ],
+                        "name": "oak_fence"
+                    },
+                    {
+                        "position": [
+                            0,
+                            0,
+                            25
+                        ],
+                        "name": "oak_fence"
+                    },
+                    {
+                        "position": [
+                            1,
+                            0,
+                            25
+                        ],
+                        "name": "oak_fence"
+                    },
+                    {
+                        "position": [
+                            2,
+                            0,
+                            25
+                        ],
+                        "name": "oak_fence"
+                    },
+                    {
+                        "position": [
+                            3,
+                            0,
+                            25
+                        ],
+                        "name": "oak_fence"
+                    },
+                    {
+                        "position": [
+                            4,
+                            0,
+                            25
+                        ],
+                        "name": "oak_fence"
+                    },
+                    {
+                        "position": [
+                            5,
+                            0,
+                            25
+                        ],
+                        "name": "oak_fence"
+                    },
+                    {
+                        "position": [
+                            6,
+                            0,
+                            25
+                        ],
+                        "name": "oak_fence"
+                    },
+                    {
+                        "position": [
+                            7,
+                            0,
+                            25
+                        ],
+                        "name": "oak_fence"
+                    },
+                    {
+                        "position": [
+                            8,
+                            0,
+                            25
+                        ],
+                        "name": "oak_fence"
+                    },
+                    {
+                        "position": [
+                            9,
+                            0,
+                            25
+                        ],
+                        "name": "oak_fence"
+                    },
+                    {
+                        "position": [
+                            10,
+                            0,
+                            25
+                        ],
+                        "name": "oak_fence"
+                    },
+                    {
+                        "position": [
+                            11,
+                            0,
+                            25
+                        ],
+                        "name": "oak_fence"
+                    },
+                    {
+                        "position": [
+                            11,
+                            0,
+                            24
+                        ],
+                        "name": "oak_fence"
+                    },
+                    {
+                        "position": [
+                            11,
+                            0,
+                            23
+                        ],
+                        "name": "oak_fence"
+                    },
+                    {
+                        "position": [
+                            11,
+                            0,
+                            22
+                        ],
+                        "name": "oak_fence"
+                    },
+                    {
+                        "position": [
+                            11,
+                            0,
+                            21
+                        ],
+                        "name": "oak_fence"
+                    },
+                    {
+                        "position": [
+                            11,
+                            0,
+                            20
+                        ],
+                        "name": "oak_fence"
+                    },
+                    {
+                        "position": [
+                            11,
+                            0,
+                            19
+                        ],
+                        "name": "oak_fence"
+                    },
+                    {
+                        "position": [
+                            11,
+                            0,
+                            18
+                        ],
+                        "name": "oak_fence"
+                    },
+                    {
+                        "position": [
+                            11,
+                            0,
+                            17
+                        ],
+                        "name": "oak_fence"
+                    },
+                    {
+                        "position": [
+                            11,
+                            0,
+                            16
+                        ],
+                        "name": "oak_fence"
+                    },
+                    {
+                        "position": [
+                            11,
+                            0,
+                            15
+                        ],
+                        "name": "oak_fence"
+                    },
+                    {
+                        "position": [
+                            11,
+                            0,
+                            14
+                        ],
+                        "name": "oak_fence"
+                    },
+                    {
+                        "position": [
+                            11,
+                            0,
+                            13
+                        ],
+                        "name": "oak_fence"
+                    },
+                    {
+                        "position": [
+                            11,
+                            0,
+                            12
+                        ],
+                        "name": "oak_fence"
+                    },
+                    {
+                        "position": [
+                            11,
+                            0,
+                            11
+                        ],
+                        "name": "oak_fence"
+                    },
+                    {
+                        "position": [
+                            11,
+                            0,
+                            10
+                        ],
+                        "name": "oak_fence"
+                    },
+                    {
+                        "position": [
+                            11,
+                            0,
+                            9
+                        ],
+                        "name": "oak_fence"
+                    },
+                    {
+                        "position": [
+                            11,
+                            0,
+                            8
+                        ],
+                        "name": "oak_fence"
+                    },
+                    {
+                        "position": [
+                            11,
+                            0,
+                            7
+                        ],
+                        "name": "oak_fence"
+                    },
+                    {
+                        "position": [
+                            11,
+                            0,
+                            6
+                        ],
+                        "name": "oak_fence"
+                    },
+                    {
+                        "position": [
+                            11,
+                            0,
+                            5
+                        ],
+                        "name": "oak_fence"
+                    },
+                    {
+                        "position": [
+                            11,
+                            0,
+                            4
+                        ],
+                        "name": "oak_fence"
+                    },
+                    {
+                        "position": [
+                            11,
+                            0,
+                            3
+                        ],
+                        "name": "oak_fence"
+                    },
+                    {
+                        "position": [
+                            11,
+                            0,
+                            2
+                        ],
+                        "name": "oak_fence"
+                    },
+                    {
+                        "position": [
+                            11,
+                            0,
+                            1
+                        ],
+                        "name": "oak_fence"
+                    },
+                    {
+                        "position": [
+                            11,
+                            0,
+                            0
+                        ],
+                        "name": "oak_fence"
+                    },
+                    {
+                        "position": [
+                            10,
+                            0,
+                            0
+                        ],
+                        "name": "oak_fence"
+                    },
+                    {
+                        "position": [
+                            9,
+                            0,
+                            0
+                        ],
+                        "name": "oak_fence"
+                    },
+                    {
+                        "position": [
+                            8,
+                            0,
+                            0
+                        ],
+                        "name": "oak_fence"
+                    },
+                    {
+                        "position": [
+                            7,
+                            0,
+                            0
+                        ],
+                        "name": "oak_fence"
+                    },
+                    {
+                        "position": [
+                            6,
+                            0,
+                            0
+                        ],
+                        "name": "oak_fence"
+                    },
+                    {
+                        "position": [
+                            5,
+                            0,
+                            0
+                        ],
+                        "name": "oak_fence"
+                    },
+                    {
+                        "position": [
+                            4,
+                            0,
+                            0
+                        ],
+                        "name": "oak_fence"
+                    },
+                    {
+                        "position": [
+                            3,
+                            0,
+                            0
+                        ],
+                        "name": "oak_fence"
+                    },
+                    {
+                        "position": [
+                            2,
+                            0,
+                            0
+                        ],
+                        "name": "oak_fence"
+                    },
+                    {
+                        "position": [
+                            1,
+                            0,
+                            0
+                        ],
+                        "name": "oak_fence"
+                    },
+                    {
+                        "position": [
+                            0,
+                            0,
+                            0
+                        ],
+                        "name": "oak_fence"
+                    },
+                    {
+                        "position": [
+                            -1,
+                            0,
+                            0
+                        ],
+                        "name": "oak_fence"
+                    },
+                    {
+                        "position": [
+                            -2,
+                            0,
+                            0
+                        ],
+                        "name": "oak_fence"
+                    },
+                    {
+                        "position": [
+                            -3,
+                            0,
+                            0
+                        ],
+                        "name": "oak_fence"
+                    },
+                    {
+                        "position": [
+                            -4,
+                            0,
+                            0
+                        ],
+                        "name": "oak_fence"
+                    },
+                    {
+                        "position": [
+                            -5,
+                            0,
+                            0
+                        ],
+                        "name": "oak_fence"
+                    },
+                    {
+                        "position": [
+                            -6,
+                            0,
+                            0
+                        ],
+                        "name": "oak_fence"
+                    },
+                    {
+                        "position": [
+                            -7,
+                            0,
+                            0
+                        ],
+                        "name": "oak_fence"
+                    },
+                    {
+                        "position": [
+                            -8,
+                            0,
+                            0
+                        ],
+                        "name": "oak_fence"
+                    },
+                    {
+                        "position": [
+                            -9,
+                            0,
+                            0
+                        ],
+                        "name": "oak_fence"
+                    },
+                    {
+                        "position": [
+                            -10,
+                            0,
+                            0
+                        ],
+                        "name": "oak_fence"
+                    }
+                ],
+                "entities": [],
+                "size": [
+                    23,
+                    1,
+                    26
+                ]
+            }
+        }
+    },
+    {
+        "33_blueprint": {
+            "village_building": {
+                "blocks": [
+                    {
+                        "position": [
+                            0,
+                            0,
+                            0
+                        ],
+                        "name": "oak_log"
+                    },
+                    {
+                        "position": [
+                            0,
+                            0,
+                            1
+                        ],
+                        "name": "oak_log"
+                    },
+                    {
+                        "position": [
+                            0,
+                            0,
+                            2
+                        ],
+                        "name": "oak_log"
+                    },
+                    {
+                        "position": [
+                            0,
+                            0,
+                            3
+                        ],
+                        "name": "oak_log"
+                    },
+                    {
+                        "position": [
+                            1,
+                            0,
+                            0
+                        ],
+                        "name": "oak_log"
+                    },
+                    {
+                        "position": [
+                            1,
+                            0,
+                            3
+                        ],
+                        "name": "oak_log"
+                    },
+                    {
+                        "position": [
+                            2,
+                            0,
+                            0
+                        ],
+                        "name": "oak_log"
+                    },
+                    {
+                        "position": [
+                            2,
+                            0,
+                            3
+                        ],
+                        "name": "oak_log"
+                    },
+                    {
+                        "position": [
+                            3,
+                            0,
+                            0
+                        ],
+                        "name": "oak_log"
+                    },
+                    {
+                        "position": [
+                            3,
+                            0,
+                            1
+                        ],
+                        "name": "oak_log"
+                    },
+                    {
+                        "position": [
+                            3,
+                            0,
+                            2
+                        ],
+                        "name": "oak_log"
+                    },
+                    {
+                        "position": [
+                            3,
+                            0,
+                            3
+                        ],
+                        "name": "oak_log"
+                    },
+                    {
+                        "position": [
+                            0,
+                            1,
+                            0
+                        ],
+                        "name": "oak_log"
+                    },
+                    {
+                        "position": [
+                            0,
+                            1,
+                            3
+                        ],
+                        "name": "oak_log"
+                    },
+                    {
+                        "position": [
+                            1,
+                            1,
+                            0
+                        ],
+                        "name": "oak_planks"
+                    },
+                    {
+                        "position": [
+                            1,
+                            1,
+                            3
+                        ],
+                        "name": "oak_planks"
+                    },
+                    {
+                        "position": [
+                            2,
+                            1,
+                            0
+                        ],
+                        "name": "oak_planks"
+                    },
+                    {
+                        "position": [
+                            2,
+                            1,
+                            3
+                        ],
+                        "name": "oak_planks"
+                    },
+                    {
+                        "position": [
+                            3,
+                            1,
+                            0
+                        ],
+                        "name": "oak_log"
+                    },
+                    {
+                        "position": [
+                            3,
+                            1,
+                            3
+                        ],
+                        "name": "oak_log"
+                    },
+                    {
+                        "position": [
+                            0,
+                            2,
+                            0
+                        ],
+                        "name": "oak_log"
+                    },
+                    {
+                        "position": [
+                            0,
+                            2,
+                            3
+                        ],
+                        "name": "oak_log"
+                    },
+                    {
+                        "position": [
+                            1,
+                            2,
+                            0
+                        ],
+                        "name": "oak_planks"
+                    },
+                    {
+                        "position": [
+                            1,
+                            2,
+                            3
+                        ],
+                        "name": "oak_planks"
+                    },
+                    {
+                        "position": [
+                            2,
+                            2,
+                            0
+                        ],
+                        "name": "oak_planks"
+                    },
+                    {
+                        "position": [
+                            2,
+                            2,
+                            3
+                        ],
+                        "name": "oak_planks"
+                    },
+                    {
+                        "position": [
+                            3,
+                            2,
+                            0
+                        ],
+                        "name": "oak_log"
+                    },
+                    {
+                        "position": [
+                            3,
+                            2,
+                            3
+                        ],
+                        "name": "oak_log"
+                    },
+                    {
+                        "position": [
+                            0,
+                            3,
+                            0
+                        ],
+                        "name": "oak_log"
+                    },
+                    {
+                        "position": [
+                            0,
+                            3,
+                            1
+                        ],
+                        "name": "oak_log"
+                    },
+                    {
+                        "position": [
+                            0,
+                            3,
+                            2
+                        ],
+                        "name": "oak_log"
+                    },
+                    {
+                        "position": [
+                            0,
+                            3,
+                            3
+                        ],
+                        "name": "oak_log"
+                    },
+                    {
+                        "position": [
+                            1,
+                            3,
+                            0
+                        ],
+                        "name": "oak_log"
+                    },
+                    {
+                        "position": [
+                            1,
+                            3,
+                            3
+                        ],
+                        "name": "oak_log"
+                    },
+                    {
+                        "position": [
+                            2,
+                            3,
+                            0
+                        ],
+                        "name": "oak_log"
+                    },
+                    {
+                        "position": [
+                            2,
+                            3,
+                            3
+                        ],
+                        "name": "oak_log"
+                    },
+                    {
+                        "position": [
+                            3,
+                            3,
+                            0
+                        ],
+                        "name": "oak_log"
+                    },
+                    {
+                        "position": [
+                            3,
+                            3,
+                            1
+                        ],
+                        "name": "oak_log"
+                    },
+                    {
+                        "position": [
+                            3,
+                            3,
+                            2
+                        ],
+                        "name": "oak_log"
+                    },
+                    {
+                        "position": [
+                            3,
+                            3,
+                            3
+                        ],
+                        "name": "oak_log"
+                    },
+                    {
+                        "position": [
+                            1,
+                            1,
+                            1
+                        ],
+                        "name": "oak_planks"
+                    },
+                    {
+                        "position": [
+                            1,
+                            1,
+                            2
+                        ],
+                        "name": "oak_planks"
+                    },
+                    {
+                        "position": [
+                            2,
+                            1,
+                            1
+                        ],
+                        "name": "oak_planks"
+                    },
+                    {
+                        "position": [
+                            2,
+                            1,
+                            2
+                        ],
+                        "name": "oak_planks"
+                    },
+                    {
+                        "position": [
+                            1,
+                            2,
+                            1
+                        ],
+                        "name": "oak_planks"
+                    },
+                    {
+                        "position": [
+                            1,
+                            2,
+                            2
+                        ],
+                        "name": "oak_planks"
+                    },
+                    {
+                        "position": [
+                            2,
+                            2,
+                            1
+                        ],
+                        "name": "oak_planks"
+                    },
+                    {
+                        "position": [
+                            2,
+                            2,
+                            2
+                        ],
+                        "name": "oak_planks"
+                    },
+                    {
+                        "position": [
+                            1,
+                            0,
+                            1
+                        ],
+                        "name": "oak_planks"
+                    },
+                    {
+                        "position": [
+                            1,
+                            0,
+                            2
+                        ],
+                        "name": "oak_planks"
+                    },
+                    {
+                        "position": [
+                            2,
+                            0,
+                            1
+                        ],
+                        "name": "oak_planks"
+                    },
+                    {
+                        "position": [
+                            2,
+                            0,
+                            2
+                        ],
+                        "name": "oak_planks"
+                    },
+                    {
+                        "position": [
+                            1,
+                            3,
+                            1
+                        ],
+                        "name": "glass_pane"
+                    },
+                    {
+                        "position": [
+                            1,
+                            3,
+                            2
+                        ],
+                        "name": "glass_pane"
+                    },
+                    {
+                        "position": [
+                            2,
+                            3,
+                            1
+                        ],
+                        "name": "glass_pane"
+                    },
+                    {
+                        "position": [
+                            2,
+                            3,
+                            2
+                        ],
+                        "name": "glass_pane"
+                    },
+                    {
+                        "position": [
+                            1,
+                            0,
+                            1
+                        ],
+                        "name": "oak_door",
+                        "facing": "north"
+                    },
+                    {
+                        "position": [
+                            1,
+                            1,
+                            1
+                        ],
+                        "name": "oak_door",
+                        "facing": "north"
+                    }
+                ],
+                "entities": [
+                    {
+                        "position": [
+                            1.5,
+                            0,
+                            1.5
+                        ],
+                        "name": "villager"
+                    }
+                ],
+                "size": [
+                    4,
+                    4,
+                    4
+                ]
+            }
+        }
+    },
+    {
+        "17_blueprint": "```json\n{\"village\": {\"houses\": [{\"blocks\": [{\"position\": [-8, 0, 5], \"name\": \"oak_log\"}, {\"position\": [-8, 0, 6], \"name\": \"oak_log\"}, {\"position\": [-8, 0, 7], \"name\": \"oak_log\"}, {\"position\": [-7, 0, 5], \"name\": \"oak_log\"}, {\"position\": [-7, 0, 7], \"name\": \"oak_log\"}, {\"position\": [-6, 0, 5], \"name\": \"oak_log\"}, {\"position\": [-6, 0, 6], \"name\": \"oak_log\"}, {\"position\": [-6, 0, 7], \"name\": \"oak_log\"}, {\"position\": [-8, 1, 5], \"name\": \"oak_log\"}, {\"position\": [-8, 1, 7], \"name\": \"oak_log\"}, {\"position\": [-6, 1, 5], \"name\": \"oak_log\"}, {\"position\": [-6, 1, 7], \"name\": \"oak_log\"}, {\"position\": [-8, 2, 5], \"name\": \"oak_log\"}, {\"position\": [-8, 2, 7], \"name\": \"oak_log\"}, {\"position\": [-6, 2, 5], \"name\": \"oak_log\"}, {\"position\": [-6, 2, 7], \"name\": \"oak_log\"}, {\"position\": [-7, 3, 5], \"name\": \"oak_slab\"}, {\"position\": [-7, 3, 6], \"name\": \"oak_slab\"}, {\"position\": [-7, 3, 7], \"name\": \"oak_slab\"}, {\"position\": [-7, 0, 6], \"name\": \"oak_planks\"}, {\"position\": [-7, 1, 5], \"name\": \"oak_planks\"}, {\"position\": [-7, 1, 6], \"name\": \"oak_planks\"}, {\"position\": [-7, 1, 7], \"name\": \"oak_planks\"}, {\"position\": [-7, 2, 5], \"name\": \"oak_planks\"}, {\"position\": [-7, 2, 6], \"name\": \"oak_planks\"}, {\"position\": [-7, 2, 7], \"name\": \"oak_planks\"}, {\"position\": [-8, 0, 6], \"name\": \"oak_door\", \"facing\": \"south\", \"open\": \"false\"}, {\"position\": [-7, 0, 6], \"name\": \"oak_door\", \"facing\": \"south\", \"open\": \"false\"}], \"size\": [3, 4, 3]}, {\"blocks\": [{\"position\": [-3, 0, 5], \"name\": \"oak_log\"}, {\"position\": [-3, 0, 6], \"name\": \"oak_log\"}, {\"position\": [-3, 0, 7], \"name\": \"oak_log\"}, {\"position\": [-2, 0, 5], \"name\": \"oak_log\"}, {\"position\": [-2, 0, 7], \"name\": \"oak_log\"}, {\"position\": [-1, 0, 5], \"name\": \"oak_log\"}, {\"position\": [-1, 0, 6], \"name\": \"oak_log\"}, {\"position\": [-1, 0, 7], \"name\": \"oak_log\"}, {\"position\": [-3, 1, 5], \"name\": \"oak_log\"}, {\"position\": [-3, 1, 7], \"name\": \"oak_log\"}, {\"position\": [-1, 1, 5], \"name\": \"oak_log\"}, {\"position\": [-1, 1, 7], \"name\": \"oak_log\"}, {\"position\": [-3, 2, 5], \"name\": \"oak_log\"}, {\"position\": [-3, 2, 7], \"name\": \"oak_log\"}, {\"position\": [-1, 2, 5], \"name\": \"oak_log\"}, {\"position\": [-1, 2, 7], \"name\": \"oak_log\"}, {\"position\": [-2, 3, 5], \"name\": \"oak_slab\"}, {\"position\": [-2, 3, 6], \"name\": \"oak_slab\"}, {\"position\": [-2, 3, 7], \"name\": \"oak_slab\"}, {\"position\": [-2, 0, 6], \"name\": \"oak_planks\"}, {\"position\": [-2, 1, 5], \"name\": \"oak_planks\"}, {\"position\": [-2, 1, 6], \"name\": \"oak_planks\"}, {\"position\": [-2, 1, 7], \"name\": \"oak_planks\"}, {\"position\": [-2, 2, 5], \"name\": \"oak_planks\"}, {\"position\": [-2, 2, 6], \"name\": \"oak_planks\"}, {\"position\": [-2, 2, 7], \"name\": \"oak_planks\"}, {\"position\": [-3, 0, 6], \"name\": \"oak_door\", \"facing\": \"south\", \"open\": \"false\"}, {\"position\": [-2, 0, 6], \"name\": \"oak_door\", \"facing\": \"south\", \"open\": \"false\"}], \"size\": [3, 4, 3]}, {\"blocks\": [{\"position\": [2, 0, 5], \"name\": \"oak_log\"}, {\"position\": [2, 0, 6], \"name\": \"oak_log\"}, {\"position\": [2, 0, 7], \"name\": \"oak_log\"}, {\"position\": [3, 0, 5], \"name\": \"oak_log\"}, {\"position\": [3, 0, 7], \"name\": \"oak_log\"}, {\"position\": [4, 0, 5], \"name\": \"oak_log\"}, {\"position\": [4, 0, 6], \"name\": \"oak_log\"}, {\"position\": [4, 0, 7], \"name\": \"oak_log\"}, {\"position\": [2, 1, 5], \"name\": \"oak_log\"}, {\"position\": [2, 1, 7], \"name\": \"oak_log\"}, {\"position\": [4, 1, 5], \"name\": \"oak_log\"}, {\"position\": [4, 1, 7], \"name\": \"oak_log\"}, {\"position\": [2, 2, 5], \"name\": \"oak_log\"}, {\"position\": [2, 2, 7], \"name\": \"oak_log\"}, {\"position\": [4, 2, 5], \"name\": \"oak_log\"}, {\"position\": [4, 2, 7], \"name\": \"oak_log\"}, {\"position\": [3, 3, 5], \"name\": \"oak_slab\"}, {\"position\": [3, 3, 6], \"name\": \"oak_slab\"}, {\"position\": [3, 3, 7], \"name\": \"oak_slab\"}, {\"position\": [3, 0, 6], \"name\": \"oak_planks\"}, {\"position\": [3, 1, 5], \"name\": \"oak_planks\"}, {\"position\": [3, 1, 6], \"name\": \"oak_planks\"}, {\"position\": [3, 1, 7], \"name\": \"oak_planks\"}, {\"position\": [3, 2, 5], \"name\": \"oak_planks\"}, {\"position\": [3, 2, 6], \"name\": \"oak_planks\"}, {\"position\": [3, 2, 7], \"name\": \"oak_planks\"}, {\"position\": [2, 0, 6], \"name\": \"oak_door\", \"facing\": \"south\", \"open\": \"false\"}, {\"position\": [3, 0, 6], \"name\": \"oak_door\", \"facing\": \"south\", \"open\": \"false\"}], \"size\": [3, 4, 3]}, {\"blocks\": [{\"position\": [7, 0, 5], \"name\": \"oak_log\"}, {\"position\": [7, 0, 6], \"name\": \"oak_log\"}, {\"position\": [7, 0, 7], \"name\": \"oak_log\"}, {\"position\": [8, 0, 5], \"name\": \"oak_log\"}, {\"position\": [8, 0, 7], \"name\": \"oak_log\"}, {\"position\": [9, 0, 5], \"name\": \"oak_log\"}, {\"position\": [9, 0, 6], \"name\": \"oak_log\"}, {\"position\": [9, 0, 7], \"name\": \"oak_log\"}, {\"position\": [7, 1, 5], \"name\": \"oak_log\"}, {\"position\": [7, 1, 7], \"name\": \"oak_log\"}, {\"position\": [9, 1, 5], \"name\": \"oak_log\"}, {\"position\": [9, 1, 7], \"name\": \"oak_log\"}, {\"position\": [7, 2, 5], \"name\": \"oak_log\"}, {\"position\": [7, 2, 7], \"name\": \"oak_log\"}, {\"position\": [9, 2, 5], \"name\": \"oak_log\"}, {\"position\": [9, 2, 7], \"name\": \"oak_log\"}, {\"position\": [8, 3, 5], \"name\": \"oak_slab\"}, {\"position\": [8, 3, 6], \"name\": \"oak_slab\"}, {\"position\": [8, 3, 7], \"name\": \"oak_slab\"}, {\"position\": [8, 0, 6], \"name\": \"oak_planks\"}, {\"position\": [8, 1, 5], \"name\": \"oak_planks\"}, {\"position\": [8, 1, 6], \"name\": \"oak_planks\"}, {\"position\": [8, 1, 7], \"name\": \"oak_planks\"}, {\"position\": [8, 2, 5], \"name\": \"oak_planks\"}, {\"position\": [8, 2, 6], \"name\": \"oak_planks\"}, {\"position\": [8, 2, 7], \"name\": \"oak_planks\"}, {\"position\": [7, 0, 6], \"name\": \"oak_door\", \"facing\": \"south\", \"open\": \"false\"}, {\"position\": [8, 0, 6], \"name\": \"oak_door\", \"facing\": \"south\", \"open\": \"false\"}], \"size\": [3, 4, 3]}, {\"blocks\": [{\"position\": [-5, 0, 15], \"name\": \"oak_log\"}, {\"position\": [-5, 0, 16], \"name\": \"oak_log\"}, {\"position\": [-5, 0, 17], \"name\": \"oak_log\"}, {\"position\": [-4, 0, 15], \"name\": \"oak_log\"}, {\"position\": [-4, 0, 17], \"name\": \"oak_log\"}, {\"position\": [-3, 0, 15], \"name\": \"oak_log\"}, {\"position\": [-3, 0, 16], \"name\": \"oak_log\"}, {\"position\": [-3, 0, 17], \"name\": \"oak_log\"}, {\"position\": [-5, 1, 15], \"name\": \"oak_log\"}, {\"position\": [-5, 1, 17], \"name\": \"oak_log\"}, {\"position\": [-3, 1, 15], \"name\": \"oak_log\"}, {\"position\": [-3, 1, 17], \"name\": \"oak_log\"}, {\"position\": [-5, 2, 15], \"name\": \"oak_log\"}, {\"position\": [-5, 2, 17], \"name\": \"oak_log\"}, {\"position\": [-3, 2, 15], \"name\": \"oak_log\"}, {\"position\": [-3, 2, 17], \"name\": \"oak_log\"}, {\"position\": [-4, 3, 15], \"name\": \"oak_slab\"}, {\"position\": [-4, 3, 16], \"name\": \"oak_slab\"}, {\"position\": [-4, 3, 17], \"name\": \"oak_slab\"}, {\"position\": [-4, 0, 16], \"name\": \"oak_planks\"}, {\"position\": [-4, 1, 15], \"name\": \"oak_planks\"}, {\"position\": [-4, 1, 16], \"name\": \"oak_planks\"}, {\"position\": [-4, 1, 17], \"name\": \"oak_planks\"}, {\"position\": [-4, 2, 15], \"name\": \"oak_planks\"}, {\"position\": [-4, 2, 16], \"name\": \"oak_planks\"}, {\"position\": [-4, 2, 17], \"name\": \"oak_planks\"}, {\"position\": [-5, 0, 16], \"name\": \"oak_door\", \"facing\": \"south\", \"open\": \"false\"}, {\"position\": [-4, 0, 16], \"name\": \"oak_door\", \"facing\": \"south\", \"open\": \"false\"}], \"size\": [3, 4, 3]}], \"farm\": {\"blocks\": [{\"position\": [-8, 0, 10], \"name\": \"farmland\"}, {\"position\": [-8, 0, 11], \"name\": \"farmland\"}, {\"position\": [-8, 0, 12], \"name\": \"farmland\"}, {\"position\": [-7, 0, 10], \"name\": \"farmland\"}, {\"position\": [-7, 0, 11], \"name\": \"farmland\"}, {\"position\": [-7, 0, 12], \"name\": \"farmland\"}, {\"position\": [-6, 0, 10], \"name\": \"farmland\"}, {\"position\": [-6, 0, 11], \"name\": \"farmland\"}, {\"position\": [-6, 0, 12], \"name\": \"farmland\"}, {\"position\": [-5, 0, 10], \"name\": \"farmland\"}, {\"position\": [-5, 0, 11], \"name\": \"farmland\"}, {\"position\": [-5, 0, 12], \"name\": \"farmland\"}, {\"position\": [-4, 0, 10], \"name\": \"farmland\"}, {\"position\": [-4, 0, 11], \"name\": \"farmland\"}, {\"position\": [-4, 0, 12], \"name\": \"farmland\"}, {\"position\": [-3, 0, 10], \"name\": \"farmland\"}, {\"position\": [-3, 0, 11], \"name\": \"farmland\"}, {\"position\": [-3, 0, 12], \"name\": \"farmland\"}, {\"position\": [-2, 0, 10], \"name\": \"farmland\"}, {\"position\": [-2, 0, 11], \"name\": \"farmland\"}, {\"position\": [-2, 0, 12], \"name\": \"farmland\"}, {\"position\": [-1, 0, 10], \"name\": \"farmland\"}, {\"position\": [-1, 0, 11], \"name\": \"farmland\"}, {\"position\": [-1, 0, 12], \"name\": \"farmland\"}, {\"position\": [0, 0, 10], \"name\": \"farmland\"}, {\"position\": [0, 0, 11], \"name\": \"farmland\"}, {\"position\": [0, 0, 12], \"name\": \"farmland\"}, {\"position\": [1, 0, 10], \"name\": \"farmland\"}, {\"position\": [1, 0, 11], \"name\": \"farmland\"}, {\"position\": [1, 0, 12], \"name\": \"farmland\"}, {\"position\": [2, 0, 10], \"name\": \"farmland\"}, {\"position\": [2, 0, 11], \"name\": \"farmland\"}, {\"position\": [2, 0, 12], \"name\": \"farmland\"}, {\"position\": [3, 0, 10], \"name\": \"farmland\"}, {\"position\": [3, 0, 11], \"name\": \"farmland\"}, {\"position\": [3, 0, 12], \"name\": \"farmland\"}, {\"position\": [4, 0, 10], \"name\": \"farmland\"}, {\"position\": [4, 0, 11], \"name\": \"farmland\"}, {\"position\": [4, 0, 12], \"name\": \"farmland\"}, {\"position\": [5, 0, 10], \"name\": \"farmland\"}, {\"position\": [5, 0, 11], \"name\": \"farmland\"}, {\"position\": [5, 0, 12], \"name\": \"farmland\"}, {\"position\": [6, 0, 10], \"name\": \"farmland\"}, {\"position\": [6, 0, 11], \"name\": \"farmland\"}, {\"position\": [6, 0, 12], \"name\": \"farmland\"}, {\"position\": [7, 0, 10], \"name\": \"farmland\"}, {\"position\": [7, 0, 11], \"name\": \"farmland\"}, {\"position\": [7, 0, 12], \"name\": \"farmland\"}, {\"position\": [8, 0, 10], \"name\": \"farmland\"}, {\"position\": [8, 0, 11], \"name\": \"farmland\"}, {\"position\":"
+    },
+    {
+        "96_blueprint": "```json\n{\"village\": {\"blocks\": [{\"position\": [0, 0, 0], \"name\": \"oak_log\"}, {\"position\": [0, 0, 1], \"name\": \"oak_log\"}, {\"position\": [0, 0, 2], \"name\": \"oak_log\"}, {\"position\": [0, 0, 3], \"name\": \"oak_log\"}, {\"position\": [0, 0, 4], \"name\": \"oak_log\"}, {\"position\": [1, 0, 0], \"name\": \"oak_log\"}, {\"position\": [1, 0, 4], \"name\": \"oak_log\"}, {\"position\": [2, 0, 0], \"name\": \"oak_log\"}, {\"position\": [2, 0, 4], \"name\": \"oak_log\"}, {\"position\": [3, 0, 0], \"name\": \"oak_log\"}, {\"position\": [3, 0, 4], \"name\": \"oak_log\"}, {\"position\": [4, 0, 0], \"name\": \"oak_log\"}, {\"position\": [4, 0, 1], \"name\": \"oak_log\"}, {\"position\": [4, 0, 2], \"name\": \"oak_log\"}, {\"position\": [4, 0, 3], \"name\": \"oak_log\"}, {\"position\": [4, 0, 4], \"name\": \"oak_log\"}, {\"position\": [0, 1, 0], \"name\": \"oak_planks\"}, {\"position\": [0, 1, 1], \"name\": \"oak_planks\"}, {\"position\": [0, 1, 2], \"name\": \"oak_planks\"}, {\"position\": [0, 1, 3], \"name\": \"oak_planks\"}, {\"position\": [0, 1, 4], \"name\": \"oak_planks\"}, {\"position\": [1, 1, 0], \"name\": \"oak_planks\"}, {\"position\": [1, 1, 4], \"name\": \"oak_planks\"}, {\"position\": [2, 1, 0], \"name\": \"oak_planks\"}, {\"position\": [2, 1, 4], \"name\": \"oak_planks\"}, {\"position\": [3, 1, 0], \"name\": \"oak_planks\"}, {\"position\": [3, 1, 4], \"name\": \"oak_planks\"}, {\"position\": [4, 1, 0], \"name\": \"oak_planks\"}, {\"position\": [4, 1, 1], \"name\": \"oak_planks\"}, {\"position\": [4, 1, 2], \"name\": \"oak_planks\"}, {\"position\": [4, 1, 3], \"name\": \"oak_planks\"}, {\"position\": [4, 1, 4], \"name\": \"oak_planks\"}, {\"position\": [0, 2, 0], \"name\": \"oak_planks\"}, {\"position\": [0, 2, 1], \"name\": \"oak_planks\"}, {\"position\": [0, 2, 2], \"name\": \"oak_planks\"}, {\"position\": [0, 2, 3], \"name\": \"oak_planks\"}, {\"position\": [0, 2, 4], \"name\": \"oak_planks\"}, {\"position\": [1, 2, 0], \"name\": \"oak_planks\"}, {\"position\": [1, 2, 4], \"name\": \"oak_planks\"}, {\"position\": [2, 2, 0], \"name\": \"oak_planks\"}, {\"position\": [2, 2, 4], \"name\": \"oak_planks\"}, {\"position\": [3, 2, 0], \"name\": \"oak_planks\"}, {\"position\": [3, 2, 4], \"name\": \"oak_planks\"}, {\"position\": [4, 2, 0], \"name\": \"oak_planks\"}, {\"position\": [4, 2, 1], \"name\": \"oak_planks\"}, {\"position\": [4, 2, 2], \"name\": \"oak_planks\"}, {\"position\": [4, 2, 3], \"name\": \"oak_planks\"}, {\"position\": [4, 2, 4], \"name\": \"oak_planks\"}, {\"position\": [0, 3, 0], \"name\": \"oak_planks\"}, {\"position\": [0, 3, 1], \"name\": \"oak_planks\"}, {\"position\": [0, 3, 2], \"name\": \"oak_planks\"}, {\"position\": [0, 3, 3], \"name\": \"oak_planks\"}, {\"position\": [0, 3, 4], \"name\": \"oak_planks\"}, {\"position\": [1, 3, 0], \"name\": \"oak_planks\"}, {\"position\": [1, 3, 4], \"name\": \"oak_planks\"}, {\"position\": [2, 3, 0], \"name\": \"oak_planks\"}, {\"position\": [2, 3, 4], \"name\": \"oak_planks\"}, {\"position\": [3, 3, 0], \"name\": \"oak_planks\"}, {\"position\": [3, 3, 4], \"name\": \"oak_planks\"}, {\"position\": [4, 3, 0], \"name\": \"oak_planks\"}, {\"position\": [4, 3, 1], \"name\": \"oak_planks\"}, {\"position\": [4, 3, 2], \"name\": \"oak_planks\"}, {\"position\": [4, 3, 3], \"name\": \"oak_planks\"}, {\"position\": [4, 3, 4], \"name\": \"oak_planks\"}, {\"position\": [0, 4, 0], \"name\": \"oak_planks\"}, {\"position\": [0, 4, 1], \"name\": \"oak_planks\"}, {\"position\": [0, 4, 2], \"name\": \"oak_planks\"}, {\"position\": [0, 4, 3], \"name\": \"oak_planks\"}, {\"position\": [0, 4, 4], \"name\": \"oak_planks\"}, {\"position\": [1, 4, 0], \"name\": \"oak_planks\"}, {\"position\": [1, 4, 4], \"name\": \"oak_planks\"}, {\"position\": [2, 4, 0], \"name\": \"oak_planks\"}, {\"position\": [2, 4, 4], \"name\": \"oak_planks\"}, {\"position\": [3, 4, 0], \"name\": \"oak_planks\"}, {\"position\": [3, 4, 4], \"name\": \"oak_planks\"}, {\"position\": [4, 4, 0], \"name\": \"oak_planks\"}, {\"position\": [4, 4, 1], \"name\": \"oak_planks\"}, {\"position\": [4, 4, 2], \"name\": \"oak_planks\"}, {\"position\": [4, 4, 3], \"name\": \"oak_planks\"}, {\"position\": [4, 4, 4], \"name\": \"oak_planks\"}, {\"position\": [2, 0, 2], \"name\": \"chest\", \"facing\": \"north\"}, {\"position\": [2, 1, 2], \"name\": \"oak_door\", \"facing\": \"north\", \"open\": \"false\"}, {\"position\": [2, 2, 2], \"name\": \"oak_door\", \"facing\": \"north\", \"open\": \"false\"}, {\"position\": [1, 0, 2], \"name\": \"crafting_table\"}, {\"position\": [3, 0, 2], \"name\": \"furnace\", \"facing\": \"north\"}, {\"position\": [1, 0, 1], \"name\": \"oak_stairs\", \"facing\": \"east\"}, {\"position\": [1, 0, 3], \"name\": \"oak_stairs\", \"facing\": \"west\"}, {\"position\": [3, 0, 1], \"name\": \"oak_stairs\", \"facing\": \"east\"}, {\"position\": [3, 0, 3], \"name\": \"oak_stairs\", \"facing\": \"west\"}], \"entities\": [], \"size\": [5, 5, 5]}}\n```"
+    },
+    {
+        "96_blueprint": "```json\n{\"village_house\": {\"blocks\": [{\"position\": [-2, 0, 0], \"name\": \"oak_planks\"}, {\"position\": [-2, 0, 1], \"name\": \"oak_planks\"}, {\"position\": [-2, 0, 2], \"name\": \"oak_planks\"}, {\"position\": [-2, 0, 3], \"name\": \"oak_planks\"}, {\"position\": [-2, 0, 4], \"name\": \"oak_planks\"}, {\"position\": [-1, 0, 0], \"name\": \"oak_planks\"}, {\"position\": [-1, 0, 1], \"name\": \"oak_planks\"}, {\"position\": [-1, 0, 2], \"name\": \"oak_planks\"}, {\"position\": [-1, 0, 3], \"name\": \"oak_planks\"}, {\"position\": [-1, 0, 4], \"name\": \"oak_planks\"}, {\"position\": [0, 0, 0], \"name\": \"oak_planks\"}, {\"position\": [0, 0, 1], \"name\": \"oak_planks\"}, {\"position\": [0, 0, 2], \"name\": \"oak_planks\"}, {\"position\": [0, 0, 3], \"name\": \"oak_planks\"}, {\"position\": [0, 0, 4], \"name\": \"oak_planks\"}, {\"position\": [1, 0, 0], \"name\": \"oak_planks\"}, {\"position\": [1, 0, 1], \"name\": \"oak_planks\"}, {\"position\": [1, 0, 2], \"name\": \"oak_planks\"}, {\"position\": [1, 0, 3], \"name\": \"oak_planks\"}, {\"position\": [1, 0, 4], \"name\": \"oak_planks\"}, {\"position\": [2, 0, 0], \"name\": \"oak_planks\"}, {\"position\": [2, 0, 1], \"name\": \"oak_planks\"}, {\"position\": [2, 0, 2], \"name\": \"oak_planks\"}, {\"position\": [2, 0, 3], \"name\": \"oak_planks\"}, {\"position\": [2, 0, 4], \"name\": \"oak_planks\"}, {\"position\": [-2, 1, 0], \"name\": \"oak_planks\"}, {\"position\": [-2, 1, 1], \"name\": \"oak_planks\"}, {\"position\": [-2, 1, 2], \"name\": \"glass\"}, {\"position\": [-2, 1, 3], \"name\": \"oak_planks\"}, {\"position\": [-2, 1, 4], \"name\": \"oak_planks\"}, {\"position\": [-1, 1, 0], \"name\": \"oak_planks\"}, {\"position\": [-1, 1, 1], \"name\": \"oak_planks\"}, {\"position\": [-1, 1, 2], \"name\": \"oak_planks\"}, {\"position\": [-1, 1, 3], \"name\": \"oak_planks\"}, {\"position\": [-1, 1, 4], \"name\": \"oak_planks\"}, {\"position\": [0, 1, 0], \"name\": \"oak_planks\"}, {\"position\": [0, 1, 1], \"name\": \"oak_planks\"}, {\"position\": [0, 1, 2], \"name\": \"oak_planks\"}, {\"position\": [0, 1, 3], \"name\": \"oak_planks\"}, {\"position\": [0, 1, 4], \"name\": \"oak_planks\"}, {\"position\": [1, 1, 0], \"name\": \"oak_planks\"}, {\"position\": [1, 1, 1], \"name\": \"oak_planks\"}, {\"position\": [1, 1, 2], \"name\": \"glass\"}, {\"position\": [1, 1, 3], \"name\": \"oak_planks\"}, {\"position\": [1, 1, 4], \"name\": \"oak_planks\"}, {\"position\": [2, 1, 0], \"name\": \"oak_planks\"}, {\"position\": [2, 1, 1], \"name\": \"oak_planks\"}, {\"position\": [2, 1, 2], \"name\": \"oak_planks\"}, {\"position\": [2, 1, 3], \"name\": \"oak_planks\"}, {\"position\": [2, 1, 4], \"name\": \"oak_planks\"}, {\"position\": [-2, 2, 0], \"name\": \"oak_planks\"}, {\"position\": [-2, 2, 1], \"name\": \"oak_planks\"}, {\"position\": [-2, 2, 2], \"name\": \"oak_planks\"}, {\"position\": [-2, 2, 3], \"name\": \"oak_planks\"}, {\"position\": [-2, 2, 4], \"name\": \"oak_planks\"}, {\"position\": [-1, 2, 0], \"name\": \"oak_planks\"}, {\"position\": [-1, 2, 1], \"name\": \"oak_planks\"}, {\"position\": [-1, 2, 2], \"name\": \"oak_planks\"}, {\"position\": [-1, 2, 3], \"name\": \"oak_planks\"}, {\"position\": [-1, 2, 4], \"name\": \"oak_planks\"}, {\"position\": [0, 2, 0], \"name\": \"oak_planks\"}, {\"position\": [0, 2, 1], \"name\": \"oak_planks\"}, {\"position\": [0, 2, 2], \"name\": \"oak_planks\"}, {\"position\": [0, 2, 3], \"name\": \"oak_planks\"}, {\"position\": [0, 2, 4], \"name\": \"oak_planks\"}, {\"position\": [1, 2, 0], \"name\": \"oak_planks\"}, {\"position\": [1, 2, 1], \"name\": \"oak_planks\"}, {\"position\": [1, 2, 2], \"name\": \"oak_planks\"}, {\"position\": [1, 2, 3], \"name\": \"oak_planks\"}, {\"position\": [1, 2, 4], \"name\": \"oak_planks\"}, {\"position\": [2, 2, 0], \"name\": \"oak_planks\"}, {\"position\": [2, 2, 1], \"name\": \"oak_planks\"}, {\"position\": [2, 2, 2], \"name\": \"oak_planks\"}, {\"position\": [2, 2, 3], \"name\": \"oak_planks\"}, {\"position\": [2, 2, 4], \"name\": \"oak_planks\"}, {\"position\": [-2, 3, 0], \"name\": \"cobblestone\"}, {\"position\": [-2, 3, 1], \"name\": \"cobblestone\"}, {\"position\": [-2, 3, 2], \"name\": \"cobblestone\"}, {\"position\": [-2, 3, 3], \"name\": \"cobblestone\"}, {\"position\": [-2, 3, 4], \"name\": \"cobblestone\"}, {\"position\": [-1, 3, 0], \"name\": \"cobblestone\"}, {\"position\": [-1, 3, 1], \"name\": \"cobblestone\"}, {\"position\": [-1, 3, 2], \"name\": \"cobblestone\"}, {\"position\": [-1, 3, 3], \"name\": \"cobblestone\"}, {\"position\": [-1, 3, 4], \"name\": \"cobblestone\"}, {\"position\": [0, 3, 0], \"name\": \"cobblestone\"}, {\"position\": [0, 3, 1], \"name\": \"cobblestone\"}, {\"position\": [0, 3, 2], \"name\": \"cobblestone\"}, {\"position\": [0, 3, 3], \"name\": \"cobblestone\"}, {\"position\": [0, 3, 4], \"name\": \"cobblestone\"}, {\"position\": [1, 3, 0], \"name\": \"cobblestone\"}, {\"position\": [1, 3, 1], \"name\": \"cobblestone\"}, {\"position\": [1, 3, 2], \"name\": \"cobblestone\"}, {\"position\": [1, 3, 3], \"name\": \"cobblestone\"}, {\"position\": [1, 3, 4], \"name\": \"cobblestone\"}, {\"position\": [2, 3, 0], \"name\": \"cobblestone\"}, {\"position\": [2, 3, 1], \"name\": \"cobblestone\"}, {\"position\": [2, 3, 2], \"name\": \"cobblestone\"}, {\"position\": [2, 3, 3], \"name\": \"cobblestone\"}, {\"position\": [2, 3, 4], \"name\": \"cobblestone\"}, {\"position\": [0, 3, 2], \"name\": \"bricks\"}, {\"position\": [0, 4, 2], \"name\": \"bricks\"}, {\"position\": [0, 0, 2], \"name\": \"oak_door\", \"facing\": \"south\", \"open\": \"false\"}], \"entities\": [], \"size\": [5, 4, 5]}}\n```"
+    },
+    {
+        "69_blueprint": {
+            "village_house": {
+                "blocks": [
+                    {
+                        "position": [
+                            -5,
+                            0,
+                            0
+                        ],
+                        "name": "oak_log"
+                    },
+                    {
+                        "position": [
+                            -5,
+                            0,
+                            1
+                        ],
+                        "name": "oak_log"
+                    },
+                    {
+                        "position": [
+                            -5,
+                            0,
+                            2
+                        ],
+                        "name": "oak_log"
+                    },
+                    {
+                        "position": [
+                            -5,
+                            0,
+                            3
+                        ],
+                        "name": "oak_log"
+                    },
+                    {
+                        "position": [
+                            -5,
+                            0,
+                            4
+                        ],
+                        "name": "oak_log"
+                    },
+                    {
+                        "position": [
+                            -5,
+                            1,
+                            0
+                        ],
+                        "name": "oak_log"
+                    },
+                    {
+                        "position": [
+                            -5,
+                            1,
+                            1
+                        ],
+                        "name": "oak_log"
+                    },
+                    {
+                        "position": [
+                            -5,
+                            1,
+                            2
+                        ],
+                        "name": "oak_log"
+                    },
+                    {
+                        "position": [
+                            -5,
+                            1,
+                            3
+                        ],
+                        "name": "oak_log"
+                    },
+                    {
+                        "position": [
+                            -5,
+                            1,
+                            4
+                        ],
+                        "name": "oak_log"
+                    },
+                    {
+                        "position": [
+                            -5,
+                            2,
+                            0
+                        ],
+                        "name": "oak_log"
+                    },
+                    {
+                        "position": [
+                            -5,
+                            2,
+                            1
+                        ],
+                        "name": "oak_log"
+                    },
+                    {
+                        "position": [
+                            -5,
+                            2,
+                            2
+                        ],
+                        "name": "oak_log"
+                    },
+                    {
+                        "position": [
+                            -5,
+                            2,
+                            3
+                        ],
+                        "name": "oak_log"
+                    },
+                    {
+                        "position": [
+                            -5,
+                            2,
+                            4
+                        ],
+                        "name": "oak_log"
+                    },
+                    {
+                        "position": [
+                            5,
+                            0,
+                            0
+                        ],
+                        "name": "oak_log"
+                    },
+                    {
+                        "position": [
+                            5,
+                            0,
+                            1
+                        ],
+                        "name": "oak_log"
+                    },
+                    {
+                        "position": [
+                            5,
+                            0,
+                            2
+                        ],
+                        "name": "oak_log"
+                    },
+                    {
+                        "position": [
+                            5,
+                            0,
+                            3
+                        ],
+                        "name": "oak_log"
+                    },
+                    {
+                        "position": [
+                            5,
+                            0,
+                            4
+                        ],
+                        "name": "oak_log"
+                    },
+                    {
+                        "position": [
+                            5,
+                            1,
+                            0
+                        ],
+                        "name": "oak_log"
+                    },
+                    {
+                        "position": [
+                            5,
+                            1,
+                            1
+                        ],
+                        "name": "oak_log"
+                    },
+                    {
+                        "position": [
+                            5,
+                            1,
+                            2
+                        ],
+                        "name": "oak_log"
+                    },
+                    {
+                        "position": [
+                            5,
+                            1,
+                            3
+                        ],
+                        "name": "oak_log"
+                    },
+                    {
+                        "position": [
+                            5,
+                            1,
+                            4
+                        ],
+                        "name": "oak_log"
+                    },
+                    {
+                        "position": [
+                            5,
+                            2,
+                            0
+                        ],
+                        "name": "oak_log"
+                    },
+                    {
+                        "position": [
+                            5,
+                            2,
+                            1
+                        ],
+                        "name": "oak_log"
+                    },
+                    {
+                        "position": [
+                            5,
+                            2,
+                            2
+                        ],
+                        "name": "oak_log"
+                    },
+                    {
+                        "position": [
+                            5,
+                            2,
+                            3
+                        ],
+                        "name": "oak_log"
+                    },
+                    {
+                        "position": [
+                            5,
+                            2,
+                            4
+                        ],
+                        "name": "oak_log"
+                    },
+                    {
+                        "position": [
+                            -4,
+                            0,
+                            5
+                        ],
+                        "name": "oak_log"
+                    },
+                    {
+                        "position": [
+                            -3,
+                            0,
+                            5
+                        ],
+                        "name": "oak_log"
+                    },
+                    {
+                        "position": [
+                            -2,
+                            0,
+                            5
+                        ],
+                        "name": "oak_log"
+                    },
+                    {
+                        "position": [
+                            -1,
+                            0,
+                            5
+                        ],
+                        "name": "oak_log"
+                    },
+                    {
+                        "position": [
+                            0,
+                            0,
+                            5
+                        ],
+                        "name": "oak_log"
+                    },
+                    {
+                        "position": [
+                            1,
+                            0,
+                            5
+                        ],
+                        "name": "oak_log"
+                    },
+                    {
+                        "position": [
+                            2,
+                            0,
+                            5
+                        ],
+                        "name": "oak_log"
+                    },
+                    {
+                        "position": [
+                            3,
+                            0,
+                            5
+                        ],
+                        "name": "oak_log"
+                    },
+                    {
+                        "position": [
+                            4,
+                            0,
+                            5
+                        ],
+                        "name": "oak_log"
+                    },
+                    {
+                        "position": [
+                            -4,
+                            1,
+                            5
+                        ],
+                        "name": "oak_log"
+                    },
+                    {
+                        "position": [
+                            -3,
+                            1,
+                            5
+                        ],
+                        "name": "oak_log"
+                    },
+                    {
+                        "position": [
+                            -2,
+                            1,
+                            5
+                        ],
+                        "name": "oak_log"
+                    },
+                    {
+                        "position": [
+                            -1,
+                            1,
+                            5
+                        ],
+                        "name": "oak_log"
+                    },
+                    {
+                        "position": [
+                            0,
+                            1,
+                            5
+                        ],
+                        "name": "oak_log"
+                    },
+                    {
+                        "position": [
+                            1,
+                            1,
+                            5
+                        ],
+                        "name": "oak_log"
+                    },
+                    {
+                        "position": [
+                            2,
+                            1,
+                            5
+                        ],
+                        "name": "oak_log"
+                    },
+                    {
+                        "position": [
+                            3,
+                            1,
+                            5
+                        ],
+                        "name": "oak_log"
+                    },
+                    {
+                        "position": [
+                            4,
+                            1,
+                            5
+                        ],
+                        "name": "oak_log"
+                    },
+                    {
+                        "position": [
+                            -4,
+                            2,
+                            5
+                        ],
+                        "name": "oak_log"
+                    },
+                    {
+                        "position": [
+                            -3,
+                            2,
+                            5
+                        ],
+                        "name": "oak_log"
+                    },
+                    {
+                        "position": [
+                            -2,
+                            2,
+                            5
+                        ],
+                        "name": "oak_log"
+                    },
+                    {
+                        "position": [
+                            -1,
+                            2,
+                            5
+                        ],
+                        "name": "oak_log"
+                    },
+                    {
+                        "position": [
+                            0,
+                            2,
+                            5
+                        ],
+                        "name": "oak_log"
+                    },
+                    {
+                        "position": [
+                            1,
+                            2,
+                            5
+                        ],
+                        "name": "oak_log"
+                    },
+                    {
+                        "position": [
+                            2,
+                            2,
+                            5
+                        ],
+                        "name": "oak_log"
+                    },
+                    {
+                        "position": [
+                            3,
+                            2,
+                            5
+                        ],
+                        "name": "oak_log"
+                    },
+                    {
+                        "position": [
+                            4,
+                            2,
+                            5
+                        ],
+                        "name": "oak_log"
+                    },
+                    {
+                        "position": [
+                            -5,
+                            0,
+                            -5
+                        ],
+                        "name": "oak_log"
+                    },
+                    {
+                        "position": [
+                            -4,
+                            0,
+                            -5
+                        ],
+                        "name": "oak_log"
+                    },
+                    {
+                        "position": [
+                            -3,
+                            0,
+                            -5
+                        ],
+                        "name": "oak_log"
+                    },
+                    {
+                        "position": [
+                            -2,
+                            0,
+                            -5
+                        ],
+                        "name": "oak_log"
+                    },
+                    {
+                        "position": [
+                            -1,
+                            0,
+                            -5
+                        ],
+                        "name": "oak_log"
+                    },
+                    {
+                        "position": [
+                            0,
+                            0,
+                            -5
+                        ],
+                        "name": "oak_log"
+                    },
+                    {
+                        "position": [
+                            1,
+                            0,
+                            -5
+                        ],
+                        "name": "oak_log"
+                    },
+                    {
+                        "position": [
+                            2,
+                            0,
+                            -5
+                        ],
+                        "name": "oak_log"
+                    },
+                    {
+                        "position": [
+                            3,
+                            0,
+                            -5
+                        ],
+                        "name": "oak_log"
+                    },
+                    {
+                        "position": [
+                            4,
+                            0,
+                            -5
+                        ],
+                        "name": "oak_log"
+                    },
+                    {
+                        "position": [
+                            5,
+                            0,
+                            -5
+                        ],
+                        "name": "oak_log"
+                    },
+                    {
+                        "position": [
+                            -5,
+                            1,
+                            -5
+                        ],
+                        "name": "oak_log"
+                    },
+                    {
+                        "position": [
+                            -4,
+                            1,
+                            -5
+                        ],
+                        "name": "oak_log"
+                    },
+                    {
+                        "position": [
+                            -3,
+                            1,
+                            -5
+                        ],
+                        "name": "oak_log"
+                    },
+                    {
+                        "position": [
+                            -2,
+                            1,
+                            -5
+                        ],
+                        "name": "oak_log"
+                    },
+                    {
+                        "position": [
+                            -1,
+                            1,
+                            -5
+                        ],
+                        "name": "oak_log"
+                    },
+                    {
+                        "position": [
+                            0,
+                            1,
+                            -5
+                        ],
+                        "name": "oak_log"
+                    },
+                    {
+                        "position": [
+                            1,
+                            1,
+                            -5
+                        ],
+                        "name": "oak_log"
+                    },
+                    {
+                        "position": [
+                            2,
+                            1,
+                            -5
+                        ],
+                        "name": "oak_log"
+                    },
+                    {
+                        "position": [
+                            3,
+                            1,
+                            -5
+                        ],
+                        "name": "oak_log"
+                    },
+                    {
+                        "position": [
+                            4,
+                            1,
+                            -5
+                        ],
+                        "name": "oak_log"
+                    },
+                    {
+                        "position": [
+                            5,
+                            1,
+                            -5
+                        ],
+                        "name": "oak_log"
+                    },
+                    {
+                        "position": [
+                            -5,
+                            2,
+                            -5
+                        ],
+                        "name": "oak_log"
+                    },
+                    {
+                        "position": [
+                            -4,
+                            2,
+                            -5
+                        ],
+                        "name": "oak_log"
+                    },
+                    {
+                        "position": [
+                            -3,
+                            2,
+                            -5
+                        ],
+                        "name": "oak_log"
+                    },
+                    {
+                        "position": [
+                            -2,
+                            2,
+                            -5
+                        ],
+                        "name": "oak_log"
+                    },
+                    {
+                        "position": [
+                            -1,
+                            2,
+                            -5
+                        ],
+                        "name": "oak_log"
+                    },
+                    {
+                        "position": [
+                            0,
+                            2,
+                            -5
+                        ],
+                        "name": "oak_log"
+                    },
+                    {
+                        "position": [
+                            1,
+                            2,
+                            -5
+                        ],
+                        "name": "oak_log"
+                    },
+                    {
+                        "position": [
+                            2,
+                            2,
+                            -5
+                        ],
+                        "name": "oak_log"
+                    },
+                    {
+                        "position": [
+                            3,
+                            2,
+                            -5
+                        ],
+                        "name": "oak_log"
+                    },
+                    {
+                        "position": [
+                            4,
+                            2,
+                            -5
+                        ],
+                        "name": "oak_log"
+                    },
+                    {
+                        "position": [
+                            5,
+                            2,
+                            -5
+                        ],
+                        "name": "oak_log"
+                    },
+                    {
+                        "position": [
+                            -4,
+                            3,
+                            0
+                        ],
+                        "name": "oak_stairs",
+                        "facing": "north"
+                    },
+                    {
+                        "position": [
+                            -3,
+                            3,
+                            0
+                        ],
+                        "name": "oak_stairs",
+                        "facing": "north"
+                    },
+                    {
+                        "position": [
+                            -2,
+                            3,
+                            0
+                        ],
+                        "name": "oak_stairs",
+                        "facing": "north"
+                    },
+                    {
+                        "position": [
+                            -1,
+                            3,
+                            0
+                        ],
+                        "name": "oak_stairs",
+                        "facing": "north"
+                    },
+                    {
+                        "position": [
+                            0,
+                            3,
+                            0
+                        ],
+                        "name": "oak_stairs",
+                        "facing": "north"
+                    },
+                    {
+                        "position": [
+                            1,
+                            3,
+                            0
+                        ],
+                        "name": "oak_stairs",
+                        "facing": "north"
+                    },
+                    {
+                        "position": [
+                            2,
+                            3,
+                            0
+                        ],
+                        "name": "oak_stairs",
+                        "facing": "north"
+                    },
+                    {
+                        "position": [
+                            3,
+                            3,
+                            0
+                        ],
+                        "name": "oak_stairs",
+                        "facing": "north"
+                    },
+                    {
+                        "position": [
+                            4,
+                            3,
+                            0
+                        ],
+                        "name": "oak_stairs",
+                        "facing": "north"
+                    },
+                    {
+                        "position": [
+                            -4,
+                            3,
+                            1
+                        ],
+                        "name": "oak_planks"
+                    },
+                    {
+                        "position": [
+                            -3,
+                            3,
+                            1
+                        ],
+                        "name": "oak_planks"
+                    },
+                    {
+                        "position": [
+                            -2,
+                            3,
+                            1
+                        ],
+                        "name": "oak_planks"
+                    },
+                    {
+                        "position": [
+                            -1,
+                            3,
+                            1
+                        ],
+                        "name": "oak_planks"
+                    },
+                    {
+                        "position": [
+                            0,
+                            3,
+                            1
+                        ],
+                        "name": "oak_planks"
+                    },
+                    {
+                        "position": [
+                            1,
+                            3,
+                            1
+                        ],
+                        "name": "oak_planks"
+                    },
+                    {
+                        "position": [
+                            2,
+                            3,
+                            1
+                        ],
+                        "name": "oak_planks"
+                    },
+                    {
+                        "position": [
+                            3,
+                            3,
+                            1
+                        ],
+                        "name": "oak_planks"
+                    },
+                    {
+                        "position": [
+                            4,
+                            3,
+                            1
+                        ],
+                        "name": "oak_planks"
+                    },
+                    {
+                        "position": [
+                            -4,
+                            3,
+                            2
+                        ],
+                        "name": "oak_planks"
+                    },
+                    {
+                        "position": [
+                            -3,
+                            3,
+                            2
+                        ],
+                        "name": "oak_planks"
+                    },
+                    {
+                        "position": [
+                            -2,
+                            3,
+                            2
+                        ],
+                        "name": "oak_planks"
+                    },
+                    {
+                        "position": [
+                            -1,
+                            3,
+                            2
+                        ],
+                        "name": "oak_planks"
+                    },
+                    {
+                        "position": [
+                            0,
+                            3,
+                            2
+                        ],
+                        "name": "oak_planks"
+                    },
+                    {
+                        "position": [
+                            1,
+                            3,
+                            2
+                        ],
+                        "name": "oak_planks"
+                    },
+                    {
+                        "position": [
+                            2,
+                            3,
+                            2
+                        ],
+                        "name": "oak_planks"
+                    },
+                    {
+                        "position": [
+                            3,
+                            3,
+                            2
+                        ],
+                        "name": "oak_planks"
+                    },
+                    {
+                        "position": [
+                            4,
+                            3,
+                            2
+                        ],
+                        "name": "oak_planks"
+                    },
+                    {
+                        "position": [
+                            -4,
+                            3,
+                            3
+                        ],
+                        "name": "oak_planks"
+                    },
+                    {
+                        "position": [
+                            -3,
+                            3,
+                            3
+                        ],
+                        "name": "oak_planks"
+                    },
+                    {
+                        "position": [
+                            -2,
+                            3,
+                            3
+                        ],
+                        "name": "oak_planks"
+                    },
+                    {
+                        "position": [
+                            -1,
+                            3,
+                            3
+                        ],
+                        "name": "oak_planks"
+                    },
+                    {
+                        "position": [
+                            0,
+                            3,
+                            3
+                        ],
+                        "name": "oak_planks"
+                    },
+                    {
+                        "position": [
+                            1,
+                            3,
+                            3
+                        ],
+                        "name": "oak_planks"
+                    },
+                    {
+                        "position": [
+                            2,
+                            3,
+                            3
+                        ],
+                        "name": "oak_planks"
+                    },
+                    {
+                        "position": [
+                            3,
+                            3,
+                            3
+                        ],
+                        "name": "oak_planks"
+                    },
+                    {
+                        "position": [
+                            4,
+                            3,
+                            3
+                        ],
+                        "name": "oak_planks"
+                    },
+                    {
+                        "position": [
+                            -4,
+                            3,
+                            4
+                        ],
+                        "name": "oak_planks"
+                    },
+                    {
+                        "position": [
+                            -3,
+                            3,
+                            4
+                        ],
+                        "name": "oak_planks"
+                    },
+                    {
+                        "position": [
+                            -2,
+                            3,
+                            4
+                        ],
+                        "name": "oak_planks"
+                    },
+                    {
+                        "position": [
+                            -1,
+                            3,
+                            4
+                        ],
+                        "name": "oak_planks"
+                    },
+                    {
+                        "position": [
+                            0,
+                            3,
+                            4
+                        ],
+                        "name": "oak_planks"
+                    },
+                    {
+                        "position": [
+                            1,
+                            3,
+                            4
+                        ],
+                        "name": "oak_planks"
+                    },
+                    {
+                        "position": [
+                            2,
+                            3,
+                            4
+                        ],
+                        "name": "oak_planks"
+                    },
+                    {
+                        "position": [
+                            3,
+                            3,
+                            4
+                        ],
+                        "name": "oak_planks"
+                    },
+                    {
+                        "position": [
+                            4,
+                            3,
+                            4
+                        ],
+                        "name": "oak_planks"
+                    },
+                    {
+                        "position": [
+                            -4,
+                            3,
+                            5
+                        ],
+                        "name": "oak_stairs",
+                        "facing": "south"
+                    },
+                    {
+                        "position": [
+                            -3,
+                            3,
+                            5
+                        ],
+                        "name": "oak_stairs",
+                        "facing": "south"
+                    },
+                    {
+                        "position": [
+                            -2,
+                            3,
+                            5
+                        ],
+                        "name": "oak_stairs",
+                        "facing": "south"
+                    },
+                    {
+                        "position": [
+                            -1,
+                            3,
+                            5
+                        ],
+                        "name": "oak_stairs",
+                        "facing": "south"
+                    },
+                    {
+                        "position": [
+                            0,
+                            3,
+                            5
+                        ],
+                        "name": "oak_stairs",
+                        "facing": "south"
+                    },
+                    {
+                        "position": [
+                            1,
+                            3,
+                            5
+                        ],
+                        "name": "oak_stairs",
+                        "facing": "south"
+                    },
+                    {
+                        "position": [
+                            2,
+                            3,
+                            5
+                        ],
+                        "name": "oak_stairs",
+                        "facing": "south"
+                    },
+                    {
+                        "position": [
+                            3,
+                            3,
+                            5
+                        ],
+                        "name": "oak_stairs",
+                        "facing": "south"
+                    },
+                    {
+                        "position": [
+                            4,
+                            3,
+                            5
+                        ],
+                        "name": "oak_stairs",
+                        "facing": "south"
+                    },
+                    {
+                        "position": [
+                            -5,
+                            3,
+                            0
+                        ],
+                        "name": "oak_stairs",
+                        "facing": "west"
+                    },
+                    {
+                        "position": [
+                            -5,
+                            3,
+                            1
+                        ],
+                        "name": "oak_planks"
+                    },
+                    {
+                        "position": [
+                            -5,
+                            3,
+                            2
+                        ],
+                        "name": "oak_planks"
+                    },
+                    {
+                        "position": [
+                            -5,
+                            3,
+                            3
+                        ],
+                        "name": "oak_planks"
+                    },
+                    {
+                        "position": [
+                            -5,
+                            3,
+                            4
+                        ],
+                        "name": "oak_stairs",
+                        "facing": "east"
+                    },
+                    {
+                        "position": [
+                            5,
+                            3,
+                            0
+                        ],
+                        "name": "oak_stairs",
+                        "facing": "west"
+                    },
+                    {
+                        "position": [
+                            5,
+                            3,
+                            1
+                        ],
+                        "name": "oak_planks"
+                    },
+                    {
+                        "position": [
+                            5,
+                            3,
+                            2
+                        ],
+                        "name": "oak_planks"
+                    },
+                    {
+                        "position": [
+                            5,
+                            3,
+                            3
+                        ],
+                        "name": "oak_planks"
+                    },
+                    {
+                        "position": [
+                            5,
+                            3,
+                            4
+                        ],
+                        "name": "oak_stairs",
+                        "facing": "east"
+                    },
+                    {
+                        "position": [
+                            -4,
+                            3,
+                            -5
+                        ],
+                        "name": "oak_stairs",
+                        "facing": "north"
+                    },
+                    {
+                        "position": [
+                            -3,
+                            3,
+                            -5
+                        ],
+                        "name": "oak_stairs",
+                        "facing": "north"
+                    },
+                    {
+                        "position": [
+                            -2,
+                            3,
+                            -5
+                        ],
+                        "name": "oak_stairs",
+                        "facing": "north"
+                    },
+                    {
+                        "position": [
+                            -1,
+                            3,
+                            -5
+                        ],
+                        "name": "oak_stairs",
+                        "facing": "north"
+                    },
+                    {
+                        "position": [
+                            0,
+                            3,
+                            -5
+                        ],
+                        "name": "oak_stairs",
+                        "facing": "north"
+                    },
+                    {
+                        "position": [
+                            1,
+                            3,
+                            -5
+                        ],
+                        "name": "oak_stairs",
+                        "facing": "north"
+                    },
+                    {
+                        "position": [
+                            2,
+                            3,
+                            -5
+                        ],
+                        "name": "oak_stairs",
+                        "facing": "north"
+                    },
+                    {
+                        "position": [
+                            3,
+                            3,
+                            -5
+                        ],
+                        "name": "oak_stairs",
+                        "facing": "north"
+                    },
+                    {
+                        "position": [
+                            4,
+                            3,
+                            -5
+                        ],
+                        "name": "oak_stairs",
+                        "facing": "north"
+                    },
+                    {
+                        "position": [
+                            -5,
+                            3,
+                            -5
+                        ],
+                        "name": "oak_stairs",
+                        "facing": "west"
+                    },
+                    {
+                        "position": [
+                            5,
+                            3,
+                            -5
+                        ],
+                        "name": "oak_stairs",
+                        "facing": "east"
+                    },
+                    {
+                        "position": [
+                            0,
+                            0,
+                            0
+                        ],
+                        "name": "crafting_table"
+                    },
+                    {
+                        "position": [
+                            1,
+                            0,
+                            0
+                        ],
+                        "name": "furnace"
+                    },
+                    {
+                        "position": [
+                            0,
+                            0,
+                            1
+                        ],
+                        "name": "chest"
+                    },
+                    {
+                        "position": [
+                            1,
+                            0,
+                            1
+                        ],
+                        "name": "chest"
+                    },
+                    {
+                        "position": [
+                            0,
+                            0,
+                            2
+                        ],
+                        "name": "bed",
+                        "facing": "north"
+                    },
+                    {
+                        "position": [
+                            1,
+                            0,
+                            2
+                        ],
+                        "name": "bed",
+                        "facing": "north"
+                    },
+                    {
+                        "position": [
+                            0,
+                            0,
+                            3
+                        ],
+                        "name": "oak_stairs",
+                        "facing": "west"
+                    },
+                    {
+                        "position": [
+                            1,
+                            0,
+                            3
+                        ],
+                        "name": "oak_stairs",
+                        "facing": "east"
+                    },
+                    {
+                        "position": [
+                            -1,
+                            0,
+                            0
+                        ],
+                        "name": "oak_door",
+                        "facing": "east",
+                        "open": "false"
+                    },
+                    {
+                        "position": [
+                            -1,
+                            1,
+                            0
+                        ],
+                        "name": "oak_door",
+                        "facing": "east",
+                        "open": "false"
+                    }
+                ],
+                "entities": [],
+                "size": [
+                    11,
+                    4,
+                    11
+                ]
+            }
+        }
+    },
+    {
+        "61_blueprint": {
+            "blocks": [
+                {
+                    "type": "rectangle",
+                    "from": [
+                        3,
+                        0,
+                        18
+                    ],
+                    "to": [
+                        3,
+                        0,
+                        22
+                    ],
+                    "name": "cobblestone"
+                },
+                {
+                    "position": [
+                        3,
+                        0,
+                        20
+                    ],
+                    "name": "brewing_stand"
+                },
+                {
+                    "position": [
+                        3,
+                        0,
+                        18
+                    ],
+                    "name": "chest",
+                    "facing": "north",
+                    "items": [
+                        {
+                            "name": "nether_wart",
+                            "count": 10
+                        }
+                    ]
+                },
+                {
+                    "position": [
+                        3,
+                        0,
+                        22
+                    ],
+                    "name": "chest",
+                    "facing": "north",
+                    "items": [
+                        {
+                            "name": "glowstone_dust",
+                            "count": 10
+                        }
+                    ]
+                },
+                {
+                    "position": [
+                        6,
+                        0,
+                        20
+                    ],
+                    "name": "cauldron",
+                    "water_level": 3
+                },
+                {
+                    "type": "rectangle",
+                    "from": [
+                        5,
+                        0,
+                        19
+                    ],
+                    "to": [
+                        7,
+                        0,
+                        21
+                    ],
+                    "name": "water"
+                },
+                {
+                    "position": [
+                        3,
+                        0,
+                        24
+                    ],
+                    "name": "chest",
+                    "facing": "north"
+                },
+                {
+                    "position": [
+                        3,
+                        1,
+                        24
+                    ],
+                    "name": "oak_sign",
+                    "facing": "north",
+                    "text": "Potions"
+                }
+            ],
+            "entities": []
+        }
+    },
+    {
+        "67_blueprint": {
+            "blocks": [
+                {
+                    "type": "rectangle",
+                    "from": [
+                        3,
+                        0,
+                        7
+                    ],
+                    "to": [
+                        7,
+                        0,
+                        17
+                    ],
+                    "name": "cobblestone"
+                },
+                {
+                    "type": "rectangle",
+                    "from": [
+                        4,
+                        0,
+                        8
+                    ],
+                    "to": [
+                        6,
+                        0,
+                        16
+                    ],
+                    "name": "oak_planks"
+                },
+                {
+                    "position": [
+                        5,
+                        0,
+                        12
+                    ],
+                    "name": "furnace",
+                    "facing": "north"
+                },
+                {
+                    "position": [
+                        5,
+                        0,
+                        10
+                    ],
+                    "name": "chest",
+                    "facing": "north",
+                    "items": [
+                        {
+                            "name": "iron_ore",
+                            "count": 20
+                        }
+                    ]
+                },
+                {
+                    "position": [
+                        5,
+                        0,
+                        8
+                    ],
+                    "name": "chest",
+                    "facing": "north",
+                    "items": [
+                        {
+                            "name": "coal",
+                            "count": 20
+                        }
+                    ]
+                },
+                {
+                    "position": [
+                        5,
+                        0,
+                        14
+                    ],
+                    "name": "chest",
+                    "facing": "north",
+                    "items": [
+                        {
+                            "name": "iron_ingot",
+                            "count": 0
+                        }
+                    ]
+                }
+            ]
+        }
+    },
+    {
+        "9_blueprint": {
+            "blocks": [
+                {
+                    "type": "rectangle",
+                    "from": [
+                        5,
+                        0,
+                        5
+                    ],
+                    "to": [
+                        11,
+                        0,
+                        15
+                    ],
+                    "name": "cobblestone"
+                },
+                {
+                    "type": "rectangle",
+                    "from": [
+                        7,
+                        0,
+                        7
+                    ],
+                    "to": [
+                        9,
+                        1,
+                        9
+                    ],
+                    "name": "oak_planks"
+                },
+                {
+                    "position": [
+                        8,
+                        1,
+                        8
+                    ],
+                    "name": "furnace",
+                    "facing": "north"
+                },
+                {
+                    "position": [
+                        8,
+                        0,
+                        12
+                    ],
+                    "name": "chest",
+                    "facing": "north",
+                    "items": [
+                        {
+                            "name": "bread",
+                            "count": 30
+                        }
+                    ]
+                },
+                {
+                    "position": [
+                        8,
+                        0,
+                        8
+                    ],
+                    "name": "chest",
+                    "facing": "north",
+                    "items": [
+                        {
+                            "name": "charcoal",
+                            "count": 10
+                        }
+                    ]
+                },
+                {
+                    "type": "rectangle",
+                    "from": [
+                        6,
+                        0,
+                        14
+                    ],
+                    "to": [
+                        10,
+                        0,
+                        16
+                    ],
+                    "name": "oak_fence"
+                },
+                {
+                    "position": [
+                        7,
+                        0,
+                        10
+                    ],
+                    "name": "bed",
+                    "facing": "north"
+                },
+                {
+                    "position": [
+                        9,
+                        0,
+                        10
+                    ],
+                    "name": "bed",
+                    "facing": "north"
+                }
+            ],
+            "entities": []
+        }
+    },
+    {
+        "15_blueprint": {
+            "blocks": [
+                {
+                    "type": "rectangle",
+                    "from": [
+                        -11,
+                        0,
+                        0
+                    ],
+                    "to": [
+                        11,
+                        0,
+                        25
+                    ],
+                    "name": "cobblestone"
+                },
+                {
+                    "type": "rectangle",
+                    "from": [
+                        -10,
+                        1,
+                        1
+                    ],
+                    "to": [
+                        10,
+                        1,
+                        24
+                    ],
+                    "name": "oak_log"
+                },
+                {
+                    "type": "rectangle",
+                    "from": [
+                        -9,
+                        2,
+                        2
+                    ],
+                    "to": [
+                        9,
+                        2,
+                        23
+                    ],
+                    "name": "spruce_log"
+                },
+                {
+                    "type": "rectangle",
+                    "from": [
+                        -8,
+                        3,
+                        3
+                    ],
+                    "to": [
+                        8,
+                        3,
+                        22
+                    ],
+                    "name": "oak_planks"
+                },
+                {
+                    "type": "rectangle",
+                    "from": [
+                        -7,
+                        4,
+                        4
+                    ],
+                    "to": [
+                        7,
+                        4,
+                        21
+                    ],
+                    "name": "spruce_planks"
+                },
+                {
+                    "type": "rectangle",
+                    "from": [
+                        -6,
+                        5,
+                        5
+                    ],
+                    "to": [
+                        6,
+                        5,
+                        20
+                    ],
+                    "name": "oak_stairs",
+                    "facing": "north"
+                },
+                {
+                    "position": [
+                        5,
+                        0,
+                        15
+                    ],
+                    "name": "chest",
+                    "facing": "north",
+                    "items": [
+                        {
+                            "name": "oak_log",
+                            "count": 64
+                        },
+                        {
+                            "name": "spruce_log",
+                            "count": 64
+                        },
+                        {
+                            "name": "cobblestone",
+                            "count": 64
+                        }
+                    ]
+                },
+                {
+                    "position": [
+                        7,
+                        0,
+                        18
+                    ],
+                    "name": "chest",
+                    "facing": "north",
+                    "items": [
+                        {
+                            "name": "iron_sword",
+                            "count": 5
+                        },
+                        {
+                            "name": "bow",
+                            "count": 5
+                        },
+                        {
+                            "name": "arrow",
+                            "count": 64
+                        }
+                    ]
+                }
+            ],
+            "entities": []
+        }
+    },
+    {
+        "22_blueprint": {
+            "blocks": [
+                {
+                    "type": "rectangle",
+                    "from": [
+                        0,
+                        0,
+                        15
+                    ],
+                    "to": [
+                        0,
+                        0,
+                        20
+                    ],
+                    "name": "oak_planks"
+                },
+                {
+                    "type": "rectangle",
+                    "from": [
+                        -1,
+                        0,
+                        15
+                    ],
+                    "to": [
+                        1,
+                        0,
+                        20
+                    ],
+                    "name": "oak_planks"
+                },
+                {
+                    "position": [
+                        0,
+                        0,
+                        20
+                    ],
+                    "name": "chest",
+                    "facing": "north",
+                    "items": [
+                        {
+                            "name": "fishing_rod",
+                            "count": 2
+                        }
+                    ]
+                },
+                {
+                    "position": [
+                        1,
+                        0,
+                        20
+                    ],
+                    "name": "chest",
+                    "facing": "north",
+                    "items": [
+                        {
+                            "name": "cod",
+                            "count": 10
+                        }
+                    ]
+                },
+                {
+                    "type": "line",
+                    "from": [
+                        -1,
+                        0,
+                        15
+                    ],
+                    "to": [
+                        -1,
+                        0,
+                        20
+                    ],
+                    "name": "oak_fence"
+                },
+                {
+                    "type": "line",
+                    "from": [
+                        1,
+                        0,
+                        15
+                    ],
+                    "to": [
+                        1,
+                        0,
+                        20
+                    ],
+                    "name": "oak_fence"
+                }
+            ]
+        }
+    },
+    {
+        "5_blueprint": "```json\n{\"blocks\": [{\"type\": \"rectangle\", \"from\": [-4, 0, 1], \"to\": [4, 0, 9], \"name\": \"grass_block\"}, {\"type\": \"rectangle\", \"from\": [-4, -3, 5], \"to\": [4, 0, 5], \"name\": \"water\"}, {\"type\": \"rectangle\", \"from\": [-4, -3, 6], \"to\": [4, 0, 6], \"name\": \"water\"}, {\"type\": \"rectangle\", \"from\": [-4, -3, 7], \"to\": [4, 0, 7], \"name\": \"water\"}, {\"type\": \"rectangle\", \"from\": [-4, -3, 8], \"to\": [4, 0, 8], \"name\": \"water\"}, {\"type\": \"rectangle\", \"from\": [-4, -3, 9], \"to\": [4, 0, 9], \"name\": \"water\"}, {\"type\": \"rectangle\", \"from\": [-4, -3, 10], \"to\": [4, 0, 10], \"name\": \"water\"}, {\"type\": \"rectangle\", \"from\": [-4, -3, 11], \"to\": [4, 0, 11], \"name\": \"water\"}, {\"type\": \"rectangle\", \"from\": [-4, -3, 12], \"to\": [4, 0, 12], \"name\": \"water\"}, {\"position\": [5, 0, 2], \"name\": \"chest\", \"facing\": \"north\", \"items\": [{\"name\": \"oak_planks\", \"count\": 10}, {\"name\": \"stick\", \"count\": 5}]}, {\"position\": [5, 0, 3], \"name\": \"oak_log\"}, {\"position\": [5, 1, 3], \"name\": \"oak_log\"}, {\"position\": [5, 2, 3], \"name\": \"oak_log\"}, {\"position\": [5, 3, 3], \"name\": \"oak_log\"}, {\"position\": [5, 4, 3], \"name\": \"oak_leaves\"}, {\"position\": [4, 4, 2], \"name\": \"oak_leaves\"}, {\"position\": [4, 4, 3], \"name\": \"oak_leaves\"}, {\"position\": [4, 4, 4], \"name\": \"oak_leaves\"}, {\"position\": [5, 4, 2], \"name\": \"oak_leaves\"}, {\"position\": [5, 4, 4], \"name\": \"oak_leaves\"}, {\"position\": [6, 4, 2], \"name\": \"oak_leaves\"}, {\"position\": [6, 4, 3], \"name\": \"oak_leaves\"}, {\"position\": [6, 4, 4], \"name\": \"oak_leaves\"}, {\"position\": [4, 1, 3], \"name\": \"tall_grass\"}, {\"position\": [6, 1, 3], \"name\": \"tall_grass\"}, {\"position\": [5, 1, 4], \"name\": \"tall_grass\"}, {\"position\": [5, 1, 2], \"name\": \"tall_grass\"}, {\"position\": [4, 0, 1], \"name\": \"dandelion\"}, {\"position\": [3, 0, 9], \"name\": \"poppy\"}, {\"position\": [-3, 0, 1], \"name\": \"dandelion\"}, {\"position\": [-4, 0, 9], \"name\": \"poppy\"}]}\n```"
+    },
+    {
+        "46_blueprint": "```json\n{\"blocks\": [{\"type\": \"rectangle\", \"from\": [-11, 0, 0], \"to\": [11, 0, 25], \"name\": \"grass_block\"}, {\"type\": \"rectangle\", \"from\": [-4, 0, 1], \"to\": [4, 0, 9], \"name\": \"water\"}, {\"type\": \"rectangle\", \"from\": [-4, -1, 1], \"to\": [4, -3, 9], \"name\": \"dirt\"}, {\"type\": \"rectangle\", \"from\": [-11, 0, 0], \"to\": [-5, 0, 25], \"name\": \"grass_block\"}, {\"type\": \"rectangle\", \"from\": [5, 0, 0], \"to\": [11, 0, 25], \"name\": \"grass_block\"}, {\"type\": \"rectangle\", \"from\": [-4, 0, 10], \"to\": [4, 0, 25], \"name\": \"grass_block\"}, {\"position\": [5, 0, 2], \"name\": \"chest\", \"facing\": \"north\", \"items\": [{\"name\": \"oak_planks\", \"count\": 16}, {\"name\": \"stick\", \"count\": 8}]}, {\"position\": [5, 1, 2], \"name\": \"oak_log\"}, {\"type\": \"rectangle\", \"from\": [4, 1, 1], \"to\": [6, 3, 3], \"name\": \"oak_leaves\"}, {\"type\": \"rectangle\", \"from\": [-11, 0, 0], \"to\": [11, 0, 0], \"name\": \"tall_grass\"}, {\"type\": \"rectangle\", \"from\": [-11, 0, 25], \"to\": [11, 0, 25], \"name\": \"tall_grass\"}, {\"position\": [-6, 0, 5], \"name\": \"dandelion\"}, {\"position\": [6, 0, 7], \"name\": \"poppy\"}, {\"position\": [-7, 0, 15], \"name\": \"dandelion\"}, {\"position\": [7, 0, 20], \"name\": \"poppy\"}]}\n```"
+    },
+    {
+        "92_blueprint": "```json\n{\"blocks\": [{\"type\": \"rectangle\", \"from\": [-5, 0, 5], \"to\": [5, 0, 15], \"name\": \"grass_block\"}, {\"position\": [-3, 1, 3], \"name\": \"chest\", \"facing\": \"north\", \"items\": [{\"name\": \"wheat_seeds\", \"count\": 64}]}, {\"position\": [3, 1, 3], \"name\": \"chest\", \"facing\": \"north\", \"items\": [{\"name\": \"water_bucket\", \"count\": 3}]}, {\"position\": [0, 1, 10], \"name\": \"chest\", \"facing\": \"north\"}, {\"position\": [-7, 1, 8], \"name\": \"oak_planks\"}, {\"position\": [-7, 1, 9], \"name\": \"oak_planks\"}, {\"position\": [-7, 1, 10], \"name\": \"oak_planks\"}, {\"position\": [-6, 1, 8], \"name\": \"oak_planks\"}, {\"position\": [-6, 1, 10], \"name\": \"oak_planks\"}, {\"position\": [-5, 1, 8], \"name\": \"oak_planks\"}, {\"position\": [-5, 1, 9], \"name\": \"oak_planks\"}, {\"position\": [-5, 1, 10], \"name\": \"oak_planks\"}, {\"position\": [-6, 2, 8], \"name\": \"spruce_fence\"}, {\"position\": [-6, 2, 10], \"name\": \"spruce_fence\"}, {\"position\": [-7, 2, 8], \"name\": \"spruce_fence\"}, {\"position\": [-7, 2, 9], \"name\": \"spruce_fence\"}, {\"position\": [-7, 2, 10], \"name\": \"spruce_fence\"}, {\"position\": [-5, 2, 8], \"name\": \"spruce_fence\"}, {\"position\": [-5, 2, 9], \"name\": \"spruce_fence\"}, {\"position\": [-5, 2, 10], \"name\": \"spruce_fence\"}, {\"position\": [-6, 1, 9], \"name\": \"oak_door\", \"facing\": \"north\"}, {\"position\": [-4, 0, 12], \"name\": \"oak_log\"}, {\"position\": [-2, 0, 18], \"name\": \"oak_log\"}, {\"position\": [4, 0, 7], \"name\": \"oak_log\"}]}\n```"
+    },
+    {
+        "17_blueprint": "```json\n{\"blocks\": [{\"type\": \"rectangle\", \"from\": [-11, 0, 0], \"to\": [11, 0, 25], \"name\": \"grass_block\"}, {\"type\": \"rectangle\", \"from\": [-5, 0, 8], \"to\": [-5, 3, 8], \"name\": \"stone\"}, {\"type\": \"rectangle\", \"from\": [-6, 0, 7], \"to\": [-4, 0, 9], \"name\": \"cobblestone\"}, {\"position\": [5, 0, 16], \"name\": \"chest\", \"facing\": \"north\", \"items\": [{\"name\": \"water_bucket\", \"count\": 4}]}, {\"type\": \"rectangle\", \"from\": [2, 0, 19], \"to\": [4, 0, 21], \"name\": \"grass_block\"}, {\"position\": [3, 0, 20], \"name\": \"poppy\"}, {\"position\": [3, 0, 21], \"name\": \"dandelion\"}, {\"position\": [4, 0, 20], \"name\": \"poppy\"}, {\"position\": [4, 0, 21], \"name\": \"dandelion\"}, {\"type\": \"rectangle\", \"from\": [-1, 0, 10], \"to\": [1, 0, 14], \"name\": \"cobblestone\"}]}\n```"
+    },
+    {
+        "8_blueprint": "```json\n{\"blocks\": [{\"type\": \"rectangle\", \"from\": [-11, 0, 0], \"to\": [11, 0, 25], \"name\": \"grass_block\"}, {\"type\": \"rectangle\", \"from\": [-8, 0, 5], \"to\": [-6, 0, 7], \"name\": \"cobblestone\"}, {\"type\": \"rectangle\", \"from\": [6, 0, 5], \"to\": [8, 0, 7], \"name\": \"cobblestone\"}, {\"type\": \"rectangle\", \"from\": [-2, 0, 20], \"to\": [2, 0, 22], \"name\": \"cobblestone\"}, {\"position\": [5, 0, 15], \"name\": \"chest\", \"facing\": \"north\", \"items\": [{\"name\": \"oak_log\", \"count\": 32}, {\"name\": \"spruce_log\", \"count\": 32}, {\"name\": \"cobblestone\", \"count\": 64}]}, {\"position\": [7, 0, 18], \"name\": \"chest\", \"facing\": \"north\", \"items\": [{\"name\": \"iron_sword\", \"count\": 4}, {\"name\": \"bow\", \"count\": 4}, {\"name\": \"arrow\", \"count\": 32}]}], \"entities\": []}\n```"
+    },
+    {
+        "71_blueprint": "```json\n{\"blocks\": [{\"type\": \"rectangle\", \"from\": [3, 0, 5], \"to\": [13, 0, 25], \"name\": \"grass_block\"}, {\"type\": \"rectangle\", \"from\": [6, 0, 8], \"to\": [10, 0, 12], \"name\": \"cobblestone\"}, {\"position\": [8, 0, 10], \"name\": \"furnace\", \"facing\": \"north\"}, {\"type\": \"rectangle\", \"from\": [3, 0, 10], \"to\": [5, 0, 20], \"name\": \"oak_fence\"}, {\"type\": \"rectangle\", \"from\": [11, 0, 10], \"to\": [13, 0, 20], \"name\": \"oak_fence\"}, {\"type\": \"rectangle\", \"from\": [6, 0, 15], \"to\": [10, 0, 25], \"name\": \"farmland\"}, {\"type\": \"rectangle\", \"from\": [7, 0, 15], \"to\": [9, 0, 25], \"name\": \"wheat\", \"age\": 7}, {\"position\": [8, 0, 20], \"name\": \"water\"}, {\"position\": [8, 0, 8], \"name\": \"chest\", \"facing\": \"north\", \"items\": [{\"name\": \"charcoal\", \"count\": 64}]}, {\"position\": [8, 0, 12], \"name\": \"chest\", \"facing\": \"north\"}, {\"position\": [8, 1, 12], \"name\": \"oak_sign\", \"facing\": \"north\", \"text\": \"Bread Storage\"}, {\"position\": [7, 0, 10], \"name\": \"bed\", \"facing\": \"north\"}, {\"position\": [9, 0, 10], \"name\": \"bed\", \"facing\": \"north\"}, {\"type\": \"rectangle\", \"from\": [6, 1, 9], \"to\": [10, 3, 11], \"name\": \"oak_planks\"}, {\"type\": \"rectangle\", \"from\": [6, 4, 9], \"to\": [10, 4, 11], \"name\": \"hay_block\"}]}\n```"
+    },
+    {
+        "97_blueprint": "```json\n{\"blocks\": [{\"type\": \"rectangle\", \"from\": [-11, 0, 0], \"to\": [11, 0, 25], \"name\": \"grass_block\"}, {\"type\": \"rectangle\", \"from\": [-11, 0, 15], \"to\": [11, 0, 25], \"name\": \"water\"}, {\"type\": \"rectangle\", \"from\": [-10, 0, 0], \"to\": [10, 15, 10], \"name\": \"oak_log\"}, {\"type\": \"rectangle\", \"from\": [-9, 0, 0], \"to\": [9, 14, 9], \"name\": \"oak_leaves\"}, {\"position\": [0, 0, 12], \"name\": \"crafting_table\"}, {\"position\": [5, 0, 10], \"name\": \"oak_log\"}, {\"position\": [7, 0, 8], \"name\": \"stone\"}, {\"position\": [-1, 0, 20], \"name\": \"chest\", \"facing\": \"north\", \"items\": [{\"name\": \"stick\", \"count\": 3}, {\"name\": \"string\", \"count\": 2}]}, {\"position\": [1, 0, 20], \"name\": \"chest\", \"facing\": \"north\"}], \"entities\": [{\"position\": [0, 1, 15], \"name\": \"cod\"}, {\"position\": [1, 1, 16], \"name\": \"salmon\"}, {\"position\": [-1, 1, 17], \"name\": \"cod\"}, {\"position\": [2, 1, 18], \"name\": \"salmon\"}]}\n```"
+    },
+    {
+        "100_blueprint": {
+            "blocks": [
+                {
+                    "type": "rectangle",
+                    "from": [
+                        -5,
+                        0,
+                        5
+                    ],
+                    "to": [
+                        5,
+                        0,
+                        15
+                    ],
+                    "name": "grass_block"
+                },
+                {
+                    "type": "rectangle",
+                    "from": [
+                        -3,
+                        0,
+                        7
+                    ],
+                    "to": [
+                        -1,
+                        0,
+                        9
+                    ],
+                    "name": "dirt"
+                },
+                {
+                    "type": "rectangle",
+                    "from": [
+                        2,
+                        0,
+                        10
+                    ],
+                    "to": [
+                        4,
+                        0,
+                        12
+                    ],
+                    "name": "dirt"
+                },
+                {
+                    "position": [
+                        -2,
+                        0,
+                        8
+                    ],
+                    "name": "poppy"
+                },
+                {
+                    "position": [
+                        3,
+                        0,
+                        11
+                    ],
+                    "name": "dandelion"
+                },
+                {
+                    "type": "line",
+                    "from": [
+                        4,
+                        0,
+                        8
+                    ],
+                    "to": [
+                        4,
+                        2,
+                        8
+                    ],
+                    "name": "oak_log"
+                },
+                {
+                    "type": "rectangle",
+                    "from": [
+                        3,
+                        3,
+                        7
+                    ],
+                    "to": [
+                        5,
+                        3,
+                        9
+                    ],
+                    "name": "oak_leaves"
+                },
+                {
+                    "position": [
+                        5,
+                        0,
+                        10
+                    ],
+                    "name": "chest",
+                    "facing": "north",
+                    "items": [
+                        {
+                            "name": "oak_planks",
+                            "count": 64
+                        },
+                        {
+                            "name": "oak_fence",
+                            "count": 32
+                        },
+                        {
+                            "name": "oak_fence_gate",
+                            "count": 4
+                        }
+                    ]
+                },
+                {
+                    "position": [
+                        3,
+                        0,
+                        12
+                    ],
+                    "name": "chest",
+                    "facing": "north",
+                    "items": [
+                        {
+                            "name": "wheat_seeds",
+                            "count": 32
+                        }
+                    ]
+                }
+            ]
+        }
+    },
+    {
+        "49_blueprint": "```json\n{\"blocks\": [{\"type\": \"rectangle\", \"from\": [-11, 0, 0], \"to\": [11, 0, 25], \"name\": \"grass_block\"}, {\"type\": \"rectangle\", \"from\": [1, 0, 18], \"to\": [5, 0, 22], \"name\": \"oak_planks\"}, {\"type\": \"line\", \"from\": [3, 1, 18], \"to\": [3, 1, 22], \"name\": \"oak_log\"}, {\"type\": \"line\", \"from\": [1, 1, 20], \"to\": [5, 1, 20], \"name\": \"oak_log\"}, {\"position\": [3, 0, 22], \"name\": \"furnace\", \"facing\": \"north\"}, {\"position\": [3, 0, 18], \"name\": \"chest\", \"facing\": \"north\", \"items\": [{\"name\": \"stick\", \"count\": 8}, {\"name\": \"string\", \"count\": 6}]}, {\"position\": [3, 0, 16], \"name\": \"chest\", \"facing\": \"north\"}, {\"type\": \"rectangle\", \"from\": [4, 0, 21], \"to\": [6, 0, 23], \"name\": \"sand\"}, {\"type\": \"rectangle\", \"from\": [5, 0, 22], \"to\": [5, 0, 22], \"name\": \"water\"}, {\"type\": \"rectangle\", \"from\": [1, 0, 19], \"to\": [5, 0, 21], \"name\": \"oak_leaves\"}, {\"type\": \"rectangle\", \"from\": [2, 0, 17], \"to\": [4, 0, 19], \"name\": \"oak_leaves\"}], \"entities\": []}\n```"
+    }
+]

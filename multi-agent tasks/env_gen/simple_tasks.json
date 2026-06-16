@@ -1,0 +1,17 @@
+[
+  {
+    "instruction": "**Task:**  \n- Cooperate to smelt 20 iron ingots using the furnace located at [45, 70, -12].  \n- Retrieve the necessary iron ore from the chest at [45, 70, -10] and fuel (coal) from the chest at [45, 70, -8].  \n- Store the smelted iron ingots in the chest at [45, 70, -14]."
+  },
+  {
+    "instruction": "**Task:**  \n- Cooperate to construct a fully functional village with at least 5 houses, a farm, and a communal storage area.  \n- Use the materials provided in the central chest at [10, 70, -15], which includes wood, stone, seeds, and tools.  \n- Assign roles among agents (e.g., builders, farmers, resource gatherers) to ensure efficient completion.  \n- Store all harvested crops and surplus materials in the communal storage chest at [15, 70, -10].  \n- Ensure the village is completed before nightfall by coordinating tasks and sharing resources as needed."
+  },
+  {
+    "instruction": "**Task:**  \n\n- Cooperate to defend the village from a zombie raid by building barricades and equipping weapons.  \n- Use the wood and stone materials from the chest at [10, 70, -15] to construct barriers around the village perimeter.  \n- Equip swords and bows from the armory chest at [12, 70, -18] and distribute them among the agents.  \n- Ensure all villagers are safely inside their houses by interacting with doors to close them.  \n- Eliminate at least 15 zombies before they breach the village defenses."
+  },
+  {
+    "instruction": "**Task:**  \n- Collaborate to construct a small village well using the materials from the chest at [10, 64, 15]. The well should be 3 blocks deep and 5 blocks wide, with a bucket placed inside for decoration.  \n- One agent must gather water from the nearby lake at [20, 64, 30] using empty buckets, while another agent assembles the well structure using the cobblestone and wooden planks provided.  \n- Ensure all unused materials are returned to the chest upon completion."
+  },
+  {
+    "instruction": "**Task:**  \n- Collaborate to construct a functional wheat farm with the following requirements:  \n  - Plow the land in a 10x10 area centered at [50, 70, 100].  \n  - Plant seeds from the chest located at [48, 70, 102].  \n  - Harvest the fully grown wheat and store it in the chest at [52, 70, 98].  \n- Ensure one agent waters the crops using a bucket from the tool chest at [45, 70, 105], while another agent monitors growth and replants seeds as needed."
+  }
+]

@@ -1,0 +1,213 @@
+[
+    {
+        "blocks": [
+            {
+                "type": "rectangle",
+                "from": [
+                    -5,
+                    1,
+                    8
+                ],
+                "to": [
+                    5,
+                    7,
+                    16
+                ],
+                "name": "stone"
+            },
+            {
+                "type": "rectangle",
+                "from": [
+                    -5,
+                    1,
+                    8
+                ],
+                "to": [
+                    5,
+                    7,
+                    16
+                ],
+                "name": "andesite",
+                "probability": 0.2
+            },
+            {
+                "type": "rectangle",
+                "from": [
+                    -5,
+                    1,
+                    8
+                ],
+                "to": [
+                    5,
+                    7,
+                    16
+                ],
+                "name": "granite",
+                "probability": 0.2
+            },
+            {
+                "type": "rectangle",
+                "from": [
+                    -7,
+                    -1,
+                    10
+                ],
+                "to": [
+                    7,
+                    0,
+                    14
+                ],
+                "name": "air"
+            },
+            {
+                "position": [
+                    2,
+                    1,
+                    10
+                ],
+                "name": "crafting_table"
+            },
+            {
+                "position": [
+                    3,
+                    1,
+                    10
+                ],
+                "name": "furnace"
+            },
+            {
+                "position": [
+                    2,
+                    1,
+                    9
+                ],
+                "name": "chest",
+                "facing": "north",
+                "items": [
+                    {
+                        "name": "wooden_pickaxe",
+                        "count": 2
+                    },
+                    {
+                        "name": "wooden_shovel",
+                        "count": 2
+                    }
+                ]
+            },
+            {
+                "position": [
+                    0,
+                    1,
+                    8
+                ],
+                "name": "chest",
+                "facing": "north",
+                "items": [
+                    {
+                        "name": "paper",
+                        "count": 12
+                    },
+                    {
+                        "name": "gunpowder",
+                        "count": 6
+                    },
+                    {
+                        "name": "stick",
+                        "count": 16
+                    },
+                    {
+                        "name": "string",
+                        "count": 8
+                    }
+                ]
+            },
+            {
+                "type": "rectangle",
+                "from": [
+                    -4,
+                    1,
+                    17
+                ],
+                "to": [
+                    -2,
+                    3,
+                    19
+                ],
+                "name": "stone"
+            },
+            {
+                "type": "rectangle",
+                "from": [
+                    -3,
+                    1,
+                    18
+                ],
+                "to": [
+                    -3,
+                    1,
+                    18
+                ],
+                "name": "redstone_ore"
+            },
+            {
+                "type": "rectangle",
+                "from": [
+                    -4,
+                    1,
+                    18
+                ],
+                "to": [
+                    -4,
+                    1,
+                    18
+                ],
+                "name": "redstone_ore"
+            },
+            {
+                "type": "rectangle",
+                "from": [
+                    -3,
+                    2,
+                    17
+                ],
+                "to": [
+                    -3,
+                    2,
+                    17
+                ],
+                "name": "redstone_ore"
+            },
+            {
+                "position": [
+                    -3,
+                    2,
+                    18
+                ],
+                "name": "torch"
+            },
+            {
+                "position": [
+                    -4,
+                    2,
+                    18
+                ],
+                "name": "torch"
+            },
+            {
+                "type": "rectangle",
+                "from": [
+                    -1,
+                    1,
+                    11
+                ],
+                "to": [
+                    1,
+                    1,
+                    13
+                ],
+                "name": "oak_planks"
+            }
+        ],
+        "entities": []
+    }
+]
