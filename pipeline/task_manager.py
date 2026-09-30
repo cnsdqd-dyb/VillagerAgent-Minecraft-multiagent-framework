@@ -214,7 +214,11 @@ class TaskManager:
         result = extract_info(response, guard_keys=["description", "milestones"])
         omit_keys = [("assigned agents", "list"), ("required subtasks", "list"), ("retrieval paths", "list")]
         result = self.fill_keys_omit(result, omit_keys) # fill the result with empty data
-        result = self.fill_agents(result, self.agent_list)
+        try:
+            result = self.fill_agents(result, self.agent_list)
+        except ValueError:
+            self.status = TaskManager.idle
+            raise
         self.logger.warning(result)
 
         subtask_list = []
@@ -303,6 +307,12 @@ class TaskManager:
         return result
     
     def fill_agents(self, result:[dict], agents:list):
+        """Split assignments while preserving dependencies on planner tasks.
+
+        Planner IDs refer to tasks before expansion, so a dependency on a task
+        assigned to several agents must wait for every resulting agent task.
+        Missing IDs retain the original one-based positional convention.
+        """
         self.logger.debug(f"fill agents:")
         for res in result:
             description = str(res["description"]) + str(res["milestones"])
@@ -312,15 +322,55 @@ class TaskManager:
                     if agent.name.lower() in description.lower() \
                         and agent.name not in res["assigned agents"]:
                         res["assigned agents"].append(agent.name)
-        # for subtask node assigned with multiple agents, split the agents with the same task
+        def task_id(value):
+            # Do not silently truncate floats or treat True as task 1.
+            if isinstance(value, bool) or not isinstance(value, (int, str)):
+                raise ValueError(f"Task IDs must be positive integers, got {value!r}")
+            try:
+                value = int(value)
+            except ValueError as exc:
+                raise ValueError("Task IDs must be positive integers") from exc
+            if value <= 0:
+                raise ValueError(f"Task IDs must be positive integers, got {value!r}")
+            return value
+
+        original_ids = [task_id(res.get("id", idx)) for idx, res in enumerate(result, 1)]
+        if len(set(original_ids)) != len(original_ids):
+            raise ValueError("Planner task IDs must be unique before agent expansion")
+        original_positions = {original_id: idx for idx, original_id in enumerate(original_ids)}
+        expanded_ids = {}
+
+        # Keep one task per assigned agent and record the original-to-expanded IDs.
         new_result = []
-        for res in result:
+        for original_id, res in zip(original_ids, result):
+            expanded_ids[original_id] = []
             for agent in res["assigned agents"]:
                 new_res = res.copy()
                 new_res["assigned agents"] = [agent]
                 new_res["id"] = len(new_result) + 1
+                expanded_ids[original_id].append(new_res["id"])
                 self.logger.debug(f"new_res: {new_res}")
                 new_result.append(new_res)
+
+        for original_id, res in zip(original_ids, result):
+            required = []
+            for predecessor in res["required subtasks"]:
+                predecessor = task_id(predecessor)
+                if predecessor not in original_positions:
+                    raise ValueError(f"Task {original_id} requires unknown task {predecessor}")
+                # The planner contract is a chronologically ordered DAG. Reject
+                # self/forward references before Graph's recursive traversal.
+                if original_positions[predecessor] >= original_positions[original_id]:
+                    raise ValueError(f"Task {original_id} must depend only on earlier tasks")
+                if not expanded_ids[predecessor]:
+                    raise ValueError(f"Required task {predecessor} has no assigned agents")
+                for expanded_id in expanded_ids[predecessor]:
+                    if expanded_id not in required:
+                        required.append(expanded_id)
+            for expanded_id in expanded_ids[original_id]:
+                # Independent lists prevent one agent's dependencies changing
+                # its siblings or the original planner response.
+                new_result[expanded_id - 1]["required subtasks"] = required.copy()
         
         # replace unvalid agent with random agent in the agent list
         for res in new_result:
@@ -530,7 +580,11 @@ class TaskManager:
         result = extract_info(response, guard_keys=["description", "milestones", "assigned agents"])
         omit_keys = [("assigned agents", "list"), ("required subtasks", "list"), ("retrieval paths", "list")]
         result = self.fill_keys_omit(result, omit_keys)
-        result = self.fill_agents(result, self.agent_list)
+        try:
+            result = self.fill_agents(result, self.agent_list)
+        except ValueError:
+            self.status = TaskManager.idle
+            raise
         self.logger.warning(result)
 
         subtask_list = []
@@ -545,10 +599,7 @@ class TaskManager:
             subtask.milestones = subtask_data["milestones"]
             subtask.candidate_list = subtask_data["assigned agents"]
             subtask.number = len(subtask_data["assigned agents"])
-            _pre_idxs = [int(idx) for idx in subtask_data["required subtasks"]]
-            for idx in _pre_idxs:
-                if idx > 0 and idx < len(subtask_list):
-                    subtask._pre_idxs.append(idx)
+            subtask._pre_idxs = [int(idx) for idx in subtask_data["required subtasks"]]
             subtask_list.append(subtask)
 
         self.graph = self.query_graph(subtask_list)
