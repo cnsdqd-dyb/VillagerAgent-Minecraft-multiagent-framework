@@ -22,9 +22,28 @@ Click here to view the [English version of the README](README.md).
 ---
 
 ## 最新进展
+
+\[2026.10.07\] 新增后续研究使用情况与来源：MultiAgentBench、CausalMACE 和 Gated Coordination，见[后续研究](#使用本项目的后续研究)。
+
 我们正在尝试使用经过微调的开源LLM来代替VillagerAgent中的LLM以提升智能体执行任务的性能和效率。
 
 论文VillagerAgent被ACL2024接收。
+
+## 使用本项目的后续研究
+
+核查日期：**2026 年 10 月 7 日**。VillagerBench 的任务与 VillagerAgent 框架已被用于基准设计、因果规划和选择性通信研究。
+
+| 工作 | 发表信息 | 已核实的使用方式 |
+|---|---|---|
+| [MultiAgentBench / MARBLE](https://aclanthology.org/2025.acl-long.421/) | ACL 2025 | 改编我们的 Minecraft 环境和 11 个建筑工具，复用同一批 **100 个建筑目标**。[代码](https://github.com/ulab-uiuc/MARBLE) |
+| [CausalMACE](https://aclanthology.org/2025.findings-emnlp.777/) | EMNLP 2025 | 在**建筑、烹饪、密室逃脱**三类任务上评测因果多智能体规划，沿用 VillagerBench 的设置和指标。 |
+| [Gated Coordination](https://arxiv.org/abs/2604.18975) | arXiv，2026 年 4 月 | 在 VillagerAgent 上集成门控通信；使用原生建筑任务，并保留蓝图类别构建新的强协作设置。 |
+
+### 基线比较与相关研究
+
+[DeMAC](https://aclanthology.org/2025.findings-emnlp.757/)（EMNLP 2025）在 Overcooked 中与 VillagerAgent 比较（表 1）。[PillagerBench](https://arxiv.org/abs/2509.06235)（IEEE CoG 2025）与 [TickingCollabBench](https://arxiv.org/abs/2606.15684)（arXiv，2026 年 6 月）分别在竞争团队和时间敏感协作研究中讨论了我们的工作。此类关系与已确认的任务复用、框架集成分别列出。
+
+具体章节和核查依据见[后续研究记录](doc/research_adoption.md)。这是一份经核实的精选列表，不是完整引用统计。欢迎通过 issue 补充论文或代码链接，并注明使用了本项目的哪一部分。
 
 ## 设置和配置 🛠️
 
@@ -49,7 +68,8 @@ Click here to view the [English version of the README](README.md).
 ### 安装步骤
 1. 克隆仓库以获取项目 📦：
    ```bash
-   git clone https://github.com/cnsdqd-dyb/VillagerAgent.git
+   git clone https://github.com/cnsdqd-dyb/VillagerAgent-Minecraft-multiagent-framework.git
+   cd VillagerAgent-Minecraft-multiagent-framework
    ```
 2. 选择使用虚拟环境 🧹：
    ```bash

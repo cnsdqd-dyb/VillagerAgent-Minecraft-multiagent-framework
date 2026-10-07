@@ -115,6 +115,9 @@ Customize your private tasks in your Minecraft server with our VillagerAgent mul
 ---
 
 ## News
+
+\[2026.10.07\] Added a sourced overview of research using VillagerBench and VillagerAgent: MultiAgentBench, CausalMACE, and Gated Coordination. See [Research adoption](#research-using-villagerbench-and-villageragent).
+
 \[2024.12.18\] We've added new attributes. VillagerBaseAgent LLM 8b v1 will be released soon.
 
 \[2024.12.11\] Support LLM api ranking with PPO method.
@@ -130,6 +133,22 @@ Customize your private tasks in your Minecraft server with our VillagerAgent mul
 \[2024.10.23\] We are trying to replace the LLM in VillagerAgent with finetuned open source LLMs to improve the performance and efficiency of the agent's task execution.
 
 \[2024.10.04\] 🎉Our minecraft multi-agent framework VillagerAgent has been accepted by ACL 2024.
+## Research using VillagerBench and VillagerAgent
+
+Last checked: **October 7, 2026**. VillagerBench tasks and the VillagerAgent framework support research on benchmark design, causal planning, and selective communication.
+
+| Work | Publication | Verified use |
+|---|---|---|
+| [MultiAgentBench / MARBLE](https://aclanthology.org/2025.acl-long.421/) | ACL 2025 | Adapts our Minecraft environment and 11 building tools; reuses the same **100 target structures**. [Code](https://github.com/ulab-uiuc/MARBLE) |
+| [CausalMACE](https://aclanthology.org/2025.findings-emnlp.777/) | EMNLP 2025 | Evaluates causal multi-agent planning on our **construction, cooking, and escape-room tasks**, following VillagerBench settings and metrics. |
+| [Gated Coordination](https://arxiv.org/abs/2604.18975) | arXiv, April 2026 | Integrates gated communication into VillagerAgent; evaluates native construction tasks and a custom collaboration split preserving blueprint families. |
+
+### Baseline comparisons and related research
+
+[DeMAC](https://aclanthology.org/2025.findings-emnlp.757/) (EMNLP 2025) compares against VillagerAgent in Overcooked (Table 1). [PillagerBench](https://arxiv.org/abs/2509.06235) (IEEE CoG 2025) and [TickingCollabBench](https://arxiv.org/abs/2606.15684) (arXiv, June 2026) discuss our work in the context of competitive teams and time-sensitive collaboration. These relationships are listed separately from confirmed task reuse and framework integration.
+
+See the [research evidence and source locations](doc/research_adoption.md). This is a curated list, not a complete citation count. To suggest an addition, open an issue with the paper/code link and the section explaining what was used.
+
 ## Setup and Configuration 🛠️
 
 ### Requirements
@@ -150,7 +169,8 @@ Customize your private tasks in your Minecraft server with our VillagerAgent mul
 ### Installation Steps
 1. Clone the repository 📦:
    ```bash
-   git clone https://github.com/cnsdqd-dyb/VillagerAgent.git
+   git clone https://github.com/cnsdqd-dyb/VillagerAgent-Minecraft-multiagent-framework.git
+   cd VillagerAgent-Minecraft-multiagent-framework
    ```
 2. Opt for a virtual environment 🧹:
    ```bash
